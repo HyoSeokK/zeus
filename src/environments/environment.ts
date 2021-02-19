@@ -3,7 +3,28 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  production: false
+  production: false,
+
+  //KeyCloak 설정
+  keycloak: {
+    issuer : 'http://192.168.0.118:8080/auth/realms/grafana',
+
+    redirectUri: 'http://localhost:4400/app',
+
+    clientId: 'zeus',
+
+    dummyClientSecret: '6ce00618-1360-411e-af35-ad079941c78e',
+
+    responseType: 'code',
+
+    scope: 'email roles',
+
+    requireHttps: false,
+
+    showDebugInformation: true,
+
+    disableAtHashCheck:true
+  }
 };
 
 /*
