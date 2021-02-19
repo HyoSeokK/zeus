@@ -1,0 +1,21 @@
+<p class="listTitle">Project</p>
+<clr-datagrid>
+    <clr-dg-column class="columnTop">Manufacturer</clr-dg-column>
+    <clr-dg-column class="columnTop">DeviceCode</clr-dg-column>
+    <clr-dg-column class="columnTop">SerialNumber</clr-dg-column>
+    <clr-dg-column class="columnTop">TunnelNumber</clr-dg-column>
+    <clr-dg-column class="columnTop">TunnelName</clr-dg-column>
+    <clr-dg-column class="columnTop">ModelStatus</clr-dg-column>
+  
+    <clr-dg-row *ngFor="let project of projectList">
+      <clr-dg-cell>{{project.Manufacturer}}</clr-dg-cell>
+      <clr-dg-cell>{{project.DeviceCode}}</clr-dg-cell>
+      <clr-dg-cell>{{project.ProductSerialNumber}}</clr-dg-cell>
+      <clr-dg-cell>{{project.TunnelNumber}}</clr-dg-cell>
+      <clr-dg-cell>{{project.TunnelName}}</clr-dg-cell>
+      <clr-dg-cell>{{project.ModelStatus}}</clr-dg-cell>
+    </clr-dg-row> 
+  
+    <clr-dg-footer>{{projectList.length}} devices</clr-dg-footer>
+
+  </clr-datagrid>
