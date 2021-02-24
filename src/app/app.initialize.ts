@@ -7,7 +7,7 @@ export function initializeKeycloak(keycloak: KeycloakService) {
         config: {
           url: 'http://192.168.0.118:8080/auth/',
           realm: 'grafana',
-          clientId: 'zeus',
+          clientId: 'zeus_server',
         },
         initOptions : {
           onLoad: 'check-sso',
