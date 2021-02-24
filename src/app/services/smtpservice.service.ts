@@ -8,7 +8,7 @@ import { catchError } from 'rxjs/operators';
 })
 export class SmtpService {
 
-  private Uri : string = "http://localhost:3001/get/smtp";
+  private Uri : string = "http://localhost:3000/get/smtp";
 
   constructor(private http: HttpClient) { }
 

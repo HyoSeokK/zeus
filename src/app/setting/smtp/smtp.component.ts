@@ -1,9 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
-import { SmtpService } from '../../../service/smtpservice.service' 
-import { Form, FormGroup } from '@angular/forms';
-import { HttpClient } from '@angular/common/http';
-import { SmtpInfo } from './smtpInfo';
+import { SmtpService } from '../../services/smtpservice.service' 
+import { smtpInfo } from './smtpInfo';
 
 @Component({
   selector: 'app-smtptest',
@@ -12,7 +10,7 @@ import { SmtpInfo } from './smtpInfo';
 })
 
 export class SmtptestComponent implements OnInit {
-  smtpInfo: SmtpInfo = new SmtpInfo();
+  smtpInfo: smtpInfo = new smtpInfo();
   constructor(private smtpservice: SmtpService) {
     
    }

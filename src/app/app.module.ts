@@ -7,7 +7,7 @@ import { BaseModule } from './base/base.module';
 import { SharedModule } from './shared/shared.module'
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { SmtptestComponent } from './setting/smtptest/smtptest.component';
+import { SmtptestComponent } from './setting/smtp/smtp.component';
 import { ClarityModule } from '@clr/angular';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { KeycloakAngularModule, KeycloakService } from 'keycloak-angular';

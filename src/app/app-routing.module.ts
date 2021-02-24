@@ -4,8 +4,8 @@ import { AppLayoutComponent } from '../app/base/layout/app-layout';
 import { ProjectListComponent } from '../app/projects/list/projects.list';
 import { TargetMenuComponent } from '../app/projects/target-menu/target-menu.component';
 import { SettingComponent } from '../app/setting/setting.component';
-import { SmtpComponent } from './setting/smtp/setting.smtp'
-import { SmtptestComponent } from './setting/smtptest/smtptest.component'
+import { SmtpComponent } from './setting/smtpSample/setting.smtp'
+import { SmtptestComponent } from './setting/smtp/smtp.component'
 import { UserComponent } from './setting/user/user.component'
 import { DataStorageComponent } from './setting/data-storage/data-storage.component'
 import { YamlComponent } from './setting/yaml/yaml.component'

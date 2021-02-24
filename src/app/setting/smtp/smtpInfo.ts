@@ -1,4 +1,4 @@
-export class SmtpInfo{
+export class smtpInfo{
     AdminAddress: string;
     SmtpAddress: string;
     Port: string;

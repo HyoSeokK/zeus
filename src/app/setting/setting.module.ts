@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { SharedModule } from '../shared/shared.module'
-import { SmtpComponent } from './smtp/setting.smtp'
+import { SmtpComponent } from './smtpSample/setting.smtp'
 import { ClarityModule } from '@clr/angular';
 import { UserComponent } from './user/user.component';
 import { DataStorageComponent } from './data-storage/data-storage.component';
