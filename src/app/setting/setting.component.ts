@@ -1,5 +1,12 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';     
+import { ThemeService } from '../services/app-theme.service';
+import { THEME_ARRAY, ThemeInterface } from '../services/theme';
+import { clone } from '../utils/utils';
+
+import '@cds/core/toggle/register.js';
+
+const HAS_STYLE_MODE: string = 'theme';
 
 @Component({
     selector: 'setting.component',
@@ -7,10 +14,30 @@ import { Router, ActivatedRoute } from '@angular/router';
     styleUrls: ["setting.component.css"]
 })
 
-export class SettingComponent {
+export class SettingComponent implements OnInit {
+
+    themeArray: ThemeInterface[] = clone(THEME_ARRAY);
+    styleMode: string = this.themeArray[0].showStyle;
 
     constructor(
-        private router:Router) {}
+        private router:Router,
+        public theme:ThemeService
+        ) {}
+
+    ngOnInit() {
+        // set local in app
+        if (localStorage) {
+            this.styleMode = localStorage.getItem(HAS_STYLE_MODE);
+        }
+    }
+
+    themeChanged(theme) {
+        this.styleMode = theme.mode;
+        this.theme.loadStyle(theme.toggleFileName);
+        if (localStorage) {
+            localStorage.setItem(HAS_STYLE_MODE, this.styleMode);
+        }
+    }
 
     goToDataUserManugeLink(): void {
             this.router.navigateByUrl("/app/setting/user");

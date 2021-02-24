@@ -14,15 +14,15 @@ import { RefreshComponent } from './setting/refresh/refresh.component'
 import { KeycloakGuard } from './keycloak.guard';
 
 const routes: Routes = [
-  { path:'', redirectTo:'app',pathMatch:'full'},
+  { path:'', redirectTo:'app',pathMatch:'full', },
   {
     path:'app',
     component:AppLayoutComponent,
+    canActivate: [KeycloakGuard],
     children:[
       {
         path:'projects',
         component:ProjectListComponent,
-        canActivate: [KeycloakGuard],
       },
       {
         path:'grafana',

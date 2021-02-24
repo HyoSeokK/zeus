@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 
+import '@cds/core/toggle/register.js';
 import { ClarityIcons, userIcon, checkboxListIcon, calendarIcon, folderOpenIcon, administratorIcon } from '@cds/core/icon';
 ClarityIcons.addIcons(userIcon, checkboxListIcon, calendarIcon, folderOpenIcon, administratorIcon);
 

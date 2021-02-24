@@ -26,7 +26,17 @@
             "styles": [
               "node_modules/@clr/icons/clr-icons.min.css",
               "node_modules/@clr/ui/clr-ui.min.css",
-              "src/styles.css"
+              "src/styles.css",
+              {
+                "input": "src/css/dark-theme.css",
+                "bundleName": "dark-theme",
+                "inject": false
+              },
+              {
+                "input": "src/css/light-theme.css",
+                "bundleName": "light-theme",
+                "inject": false
+              }
             ],
             "scripts": [
               "node_modules/@webcomponents/webcomponentsjs/custom-elements-es5-adapter.js",

@@ -1,0 +1,8 @@
+@import "../../node_modules/@clr/ui/clr-ui.min.css";
+
+.topMenu {
+    background-color:#B2EBF4
+}
+.sideMenu {
+    background-color:#EAEAEA
+}
