@@ -6,12 +6,14 @@ import { BaseModule } from './base/base.module';
 import { SharedModule } from './shared/shared.module'
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { SmtptestComponent } from './setting/smtptest/smtptest.component';
 import { ClarityModule } from '@clr/angular';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    SmtptestComponent
   ],
   imports: [
     SharedModule,

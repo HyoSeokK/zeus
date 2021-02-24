@@ -1,9 +1,10 @@
 import { NgModule } from '@angular/core';
-import { RouterModule } from '@angular/router';
 import { BrowserModule } from '@angular/platform-browser';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { RouterModule } from '@angular/router';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ClarityModule } from '@clr/angular';
-import { FormsModule } from '@angular/forms';
+
 
 @NgModule({
     imports: [
@@ -11,13 +12,16 @@ import { FormsModule } from '@angular/forms';
         BrowserAnimationsModule,
         RouterModule,
         ClarityModule,
-        FormsModule
+        FormsModule,
+        ReactiveFormsModule
     ],
     declarations:[],
     exports:[
         BrowserModule,
         ClarityModule, 
         BrowserAnimationsModule,
+        FormsModule,
+        ReactiveFormsModule
     ]
 })
 export class SharedModule {
