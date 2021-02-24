@@ -5,8 +5,8 @@ import { smtpInfo } from './smtpInfo';
 
 @Component({
   selector: 'app-smtptest',
-  templateUrl: './smtptest.component.html',
-  styleUrls: ['./smtptest.component.css']
+  templateUrl: './smtp.component.html',
+  styleUrls: ['./smtp.component.css']
 })
 
 export class SmtptestComponent implements OnInit {
