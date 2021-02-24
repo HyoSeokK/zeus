@@ -1,0 +1,33 @@
+<form class="clr-form clr-form-horizontal">
+    <div class="clr-form-control">
+        <label>담당자 메일주소</label>
+        <input  type = "text" class="clr-input" name="AdminAddress" [(ngModel)]="smtpInfo.AdminAddress" required>
+    </div>
+    <div class="clr-form-control">
+        <label>SMTP서버주소</label>
+        <input type = "text" class="clr-input" name = "SmtpAddress" [(ngModel)] = "smtpInfo.SmtpAddress" required>
+    </div>
+    <div class="clr-form-control">
+        <label>접속포트</label>
+        <input type = "text" class="clr-input" name = "Port" [(ngModel)] = "smtpInfo.Port" required>
+    </div>
+    <div class="clr-form-control">
+        <label>비밀번호</label>
+        <input type = "password" class="clr-input" name = "Password" [(ngModel)] = "smtpInfo.Password" required>
+    </div>
+    <div class="clr-form-control">
+        <clr-combobox-container>
+            <label>인증방식</label>
+            <clr-combobox [(ngModel)] = "smtpInfo.Authentication" name = "Authentication" required>
+              <clr-options>
+                <clr-option clrValue="TLS">TLS</clr-option>
+                <clr-option clrValue="SSL">SSL</clr-option>
+              </clr-options>
+            </clr-combobox>
+        </clr-combobox-container>
+    </div>
+        <div class="clr-form-control">
+            <button type = "button" class = "btn btn-success" (click) = "onSubmit()">연결테스트</button>
+            <button type = "button" class = "btn btn-primary">저장</button>
+        </div>
+</form>

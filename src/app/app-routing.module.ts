@@ -5,6 +5,7 @@ import { ProjectListComponent } from '../app/projects/list/projects.list';
 import { TargetMenuComponent } from '../app/projects/target-menu/target-menu.component';
 import { SettingComponent } from '../app/setting/setting.component';
 import { SmtpComponent } from './setting/smtp/setting.smtp'
+import { SmtptestComponent } from './setting/smtptest/smtptest.component'
 import { UserComponent } from './setting/user/user.component'
 import { DataStorageComponent } from './setting/data-storage/data-storage.component'
 import { YamlComponent } from './setting/yaml/yaml.component'
@@ -39,7 +40,7 @@ const routes: Routes = [
       },
       {
         path:'setting/smtp',
-        component:SmtpComponent
+        component:SmtptestComponent
       },
       {
         path:'setting/dataStorage',
