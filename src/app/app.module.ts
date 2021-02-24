@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { APP_INITIALIZER, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { HttpClientModule } from '@angular/common/http';
 
@@ -9,6 +9,24 @@ import { AppComponent } from './app.component';
 import { SmtptestComponent } from './setting/smtptest/smtptest.component';
 import { ClarityModule } from '@clr/angular';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { KeycloakAngularModule, KeycloakService } from 'keycloak-angular';
+
+function initializeKeycloak(keycloak: KeycloakService) {
+  return () => 
+    keycloak.init({
+      config: {
+        url: 'http://192.168.0.118:8080/auth/',
+        realm: 'grafana',
+        clientId: 'zeus',
+      },
+      initOptions : {
+        onLoad: 'check-sso',
+        silentCheckSsoRedirectUri:
+          window.location.origin + '/assets/silent-check-sso.html',
+      },
+      loadUserProfileAtStartUp:true
+    })
+}
 
 @NgModule({
   declarations: [
@@ -22,9 +40,18 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     HttpClientModule,
     BrowserModule,
     ClarityModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    KeycloakAngularModule
   ],
-  providers: [],
+  providers: [
+    {
+      provide: APP_INITIALIZER,
+      useFactory: initializeKeycloak,
+      multi: true,
+      deps: [KeycloakService],
+
+    }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

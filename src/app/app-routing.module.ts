@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AppLayoutComponent } from '../app/base/layout/app-layout';
 import { ProjectListComponent } from '../app/projects/list/projects.list';
+import { TargetMenuComponent } from '../app/projects/target-menu/target-menu.component';
 import { SettingComponent } from '../app/setting/setting.component';
 import { SmtpComponent } from './setting/smtp/setting.smtp'
 import { SmtptestComponent } from './setting/smtptest/smtptest.component'
@@ -11,6 +12,7 @@ import { YamlComponent } from './setting/yaml/yaml.component'
 import { MenuComponent } from './setting/menu/menu.component'
 import { UrlComponent } from './setting/url/url.component'
 import { RefreshComponent } from './setting/refresh/refresh.component'
+import { KeycloakGuard } from './keycloak.guard';
 
 const routes: Routes = [
   { path:'', redirectTo:'app',pathMatch:'full'},
@@ -20,7 +22,13 @@ const routes: Routes = [
     children:[
       {
         path:'projects',
-        component:ProjectListComponent
+        component:ProjectListComponent,
+        canActivate: [KeycloakGuard],
+      },
+      {
+        path:'grafana',
+        component:TargetMenuComponent,
+        canActivate: [KeycloakGuard],
       },
       {
         path:'setting',

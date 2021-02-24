@@ -9,6 +9,7 @@ import { YamlComponent } from './yaml/yaml.component';
 import { MenuComponent } from './menu/menu.component';
 import { UrlComponent } from './url/url.component';
 import { RefreshComponent } from './refresh/refresh.component';
+import { SettingComponent } from './setting.component';
 
 @NgModule({
     imports:[
@@ -23,11 +24,10 @@ import { RefreshComponent } from './refresh/refresh.component';
         YamlComponent,
         MenuComponent,
         UrlComponent,
-        RefreshComponent
+        RefreshComponent,
+        SettingComponent
     ],
     exports:[
-        SmtpComponent,
-        ClarityModule
     ],
     providers:[]
 })
