@@ -3,15 +3,9 @@ import { HttpClient } from  "@angular/common/http";
 import { map } from 'rxjs/operators';
 import { BASE_URL, HTTP_GET_OPTIONS } from '../utils/utils';
 import { Observable } from 'rxjs';
+import { EnvSetting } from '../utils/utils.env';
 
 const systemInfoEndpoint = BASE_URL + "/systemInfo";
-
-class EnvSetting {
-  ThemeSettingVal : string;
-  LangSettingVal : string;
-  AutoLogoutVal : boolean;
-  PortalVersion : string;
-}
 
 @Injectable({
   providedIn: 'root'

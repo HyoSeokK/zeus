@@ -1,7 +1,7 @@
 import { Observable } from "rxjs";
 
-import { HttpHeaders } from '@angular/common/http';
-import { HttpOptionInterface } from './RequestQueryParams'
+import { HttpHeaders, HttpParams } from '@angular/common/http';
+import { HttpOptionInterface, RequestQueryParams } from './RequestQueryParams'
 
 export const BASE_URL = "/api";
 
@@ -15,7 +15,23 @@ export const HTTP_GET_OPTIONS: HttpOptionInterface = {
     responseType: 'json'
 };
 
-export function buildHttpRequestOptionsWithObserveResponse(): HttpOptionInterface {
+export function buildHttpRequestOption(params: HttpParams) : HttpOptionInterface {
+    let reqOptions: HttpOptionInterface = {
+        headers: new HttpHeaders({
+            "Content-Type": 'application/json',
+            "Accept": 'application/json',
+            "Cache-Control": 'no-cache',
+            "Pragma": 'no-cache'
+        }),
+        responseType: 'json'
+    };
+    if (params) {
+        reqOptions.params = params;
+    }
+    return reqOptions;
+}
+
+export function buildHttpRequestOptionsWithObserveResponse(params: RequestQueryParams): HttpOptionInterface {
     let reqOptions: HttpOptionInterface = {
         headers: new HttpHeaders({
             "Content-Type": 'application/json',
@@ -26,6 +42,9 @@ export function buildHttpRequestOptionsWithObserveResponse(): HttpOptionInterfac
         responseType: 'json',
         observe: 'response' as 'body'
     };
+    if (params) {
+        reqOptions.params = params;
+    }
     return reqOptions;
 }
 

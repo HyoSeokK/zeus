@@ -1,12 +1,15 @@
 import { Component, OnInit } from '@angular/core';
-import { Router, ActivatedRoute } from '@angular/router';     
+import { Router } from '@angular/router';
+import { HttpClient } from  "@angular/common/http";
 import { ThemeService } from '../services/app-theme.service';
 import { THEME_ARRAY, ThemeInterface } from '../services/theme';
-import { clone } from '../utils/utils';
+import { clone, BASE_URL } from '../utils/utils';
+import { EnvSetting } from '../utils/utils.env';
 
 import '@cds/core/toggle/register.js';
 
-const HAS_STYLE_MODE: string = 'theme';
+const THEME_STORAGE_NM: string = 'env';
+const changeThemeEndpoint = BASE_URL + "/changeTheme";
 
 @Component({
     selector: 'setting.component',
@@ -16,26 +19,38 @@ const HAS_STYLE_MODE: string = 'theme';
 
 export class SettingComponent implements OnInit {
 
+    env : EnvSetting;
+    themeRst : string;
     themeArray: ThemeInterface[] = clone(THEME_ARRAY);
     styleMode: string = this.themeArray[0].showStyle;
 
     constructor(
+        private  httpClient:HttpClient,
         private router:Router,
         public theme:ThemeService
         ) {}
 
     ngOnInit() {
-        // set local in app
         if (localStorage) {
-            this.styleMode = localStorage.getItem(HAS_STYLE_MODE);
+            var env = JSON.parse(localStorage.getItem('env')) as EnvSetting;
+            this.styleMode = env.ThemeSettingVal;
         }
     }
 
     themeChanged(theme) {
+        var env = JSON.parse(localStorage.getItem('env')) as EnvSetting;
+
         this.styleMode = theme.mode;
         this.theme.loadStyle(theme.toggleFileName);
         if (localStorage) {
-            localStorage.setItem(HAS_STYLE_MODE, this.styleMode);
+            env.ThemeSettingVal = this.styleMode;
+            localStorage.setItem(THEME_STORAGE_NM, JSON.stringify(env));
+            
+            this.theme.updateTheme().subscribe(res => {
+                if(res.status == 200) {
+                    console.log("success")
+                }
+            })
         }
     }
 

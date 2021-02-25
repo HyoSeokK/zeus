@@ -3,6 +3,7 @@ import { FormControl } from '@angular/forms';
 import { ThemeService } from './services/app-theme.service';
 import { THEME_ARRAY, ThemeInterface } from './services/theme';
 import { clone } from './utils/utils';
+import { EnvSetting } from './utils/utils.env';
 
 const HAS_STYLE_MODE: string = 'theme';
 
@@ -21,29 +22,30 @@ export class AppComponent implements OnInit {
   }
 
   setTheme () {
-    let styleMode = this.themeArray[0].showStyle;
-    console.log("styleMode : " + styleMode);
+    var env = JSON.parse(localStorage.getItem("env")) as EnvSetting;
 
-    const localHasStyle = localStorage && localStorage.getItem(HAS_STYLE_MODE);
-    console.log("localHasStyle : " + localHasStyle);
+    let styleMode = this.themeArray[0].showStyle;
+
+    const localHasStyle = localStorage && env.ThemeSettingVal;
 
     if (localHasStyle) {
-        styleMode = localStorage.getItem(HAS_STYLE_MODE);
+        //styleMode = localStorage.getItem(HAS_STYLE_MODE);
+        styleMode = env.ThemeSettingVal;
     } else {
-        localStorage.setItem(HAS_STYLE_MODE, styleMode);
+        //localStorage.setItem(HAS_STYLE_MODE, styleMode);
+        env.ThemeSettingVal = styleMode;
+        localStorage.setItem("env", JSON.stringify(env));
     }
-    this.themeArray.forEach((themeItem) => {
-        
 
+    this.themeArray.forEach((themeItem) => {
         if (themeItem.showStyle === styleMode) {
-          console.log("themeItme.showStyle : " + themeItem.showStyle);
             this.theme.loadStyle(themeItem.currentFileName);
         }
     });
 }
 
   ngOnInit() {
-    //console.log("appcomponent : " + localStorage.getItem("theme"))  
+    
   }
 
 }
