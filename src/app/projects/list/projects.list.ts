@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { HttpClient, HttpResponse } from  "@angular/common/http";
+import { HttpClient, HttpResponse, HttpParams } from  "@angular/common/http";
 import { throwError as observableThrowError, of, Observable } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 import { KeycloakService } from 'keycloak-angular';
@@ -32,17 +32,11 @@ export class ProjectListComponent implements OnInit {
         private keycloakService : KeycloakService) {}
 
     ngOnInit() {
-        console.log(this.keycloakService.getUserRoles());
-        console.log(this.keycloakService.getUsername());
-
-        /*
-        this.roles = this.keycloakService.getUserRoles();
-        this.username = this.keycloakService.();
-*/
+        let params = new HttpParams();
         this.httpClient
         .get<HttpResponse<Project[]>>(
             "/get/project"
-            , buildHttpRequestOptionsWithObserveResponse()
+            , buildHttpRequestOptionsWithObserveResponse(params)
             )
         .pipe(
             catchError(error => observableThrowError(error)),
