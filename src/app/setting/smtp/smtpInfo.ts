@@ -3,5 +3,4 @@ export class smtpInfo{
     SmtpAddress: string;
     Port: string;
     Password: string
-    Authentication: string;
 }
