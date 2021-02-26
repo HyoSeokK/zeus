@@ -4,8 +4,10 @@ import { HttpHeaders, HttpParams } from '@angular/common/http';
 import { HttpOptionInterface, RequestQueryParams } from './RequestQueryParams'
 
 export const BASE_URL = "/api";
+export const SMTP_BASE_URL = "/smtp";
+export const USER_BASE_URL = "/user";
 
-export const HTTP_GET_OPTIONS: HttpOptionInterface = {
+export const HTTP_OPTIONS: HttpOptionInterface = {
     headers: new HttpHeaders({
         "Content-Type": 'application/json',
         "Accept": 'application/json',

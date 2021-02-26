@@ -2,15 +2,16 @@ import { Injectable } from '@angular/core';
 import { throwError as observableThrowError, Observable, of } from "rxjs";
 import { HttpClient } from '@angular/common/http';
 import { catchError } from 'rxjs/operators';
+import { SMTP_BASE_URL } from '../utils/utils';
 
 @Injectable({
   providedIn: 'root'
 })
 export class SmtpService {
 
-  private Uri : string = "http://localhost:3000/get/smtp";
+  private Uri : string = SMTP_BASE_URL + "/register_smtp";
 
-  private saveUri : string = "http://localhost:3000/get/smtp";
+  private saveUri : string = SMTP_BASE_URL + "/register_smtp";
 
   constructor(private http: HttpClient) { }
 

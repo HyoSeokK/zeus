@@ -1,1 +1,37 @@
-<p>user works!</p>
+<form class="clr-form clr-form-horizontal"
+        [formGroup]="userForm">
+
+    <div class="clr-form-control">
+        <label>사용자 ID</label>
+        <input type = "text" class="clr-input" formControlName="userId" required>
+    </div>
+    <div class="clr-form-control">
+        <label>First Name</label>
+        <input type = "text" class="clr-input" formControlName="userFirstname" required >
+    </div>
+    <div class="clr-form-control">
+        <label>Last Name</label>
+        <input type = "text" class="clr-input" formControlName="userLastName" required >
+    </div>
+    <div class="clr-form-control">
+        <label>부서명</label>
+        <input type = "text" class="clr-input" formControlName="userPosition" required >
+    </div>
+    <div class="clr-form-control">
+        <label>직급</label>
+        <input type = "text" class="clr-input" formControlName="userDepartmentNm" required >
+    </div>
+    <div class="clr-form-control">
+        <label>Email 주소</label>
+        <input type = "text" class="clr-input" formControlName="userEmail" required >
+    </div>
+    <div class="clr-form-control">
+        <label>전화번호(선택)</label>
+        <input type = "text" class="clr-input" formControlName="userPhoneNumber" required >
+    </div>
+    
+    <div class="clr-form-control">
+        <button type = "button" (click)="onSubmit()" class = "btn btn-success">저장</button>
+    </div>
+
+</form>
