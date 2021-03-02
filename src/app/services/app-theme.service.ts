@@ -3,7 +3,7 @@ import { DOCUMENT } from '@angular/common';
 import { HttpClient, HttpResponse, HttpParams } from  "@angular/common/http";
 import { throwError as observableThrowError, of, Observable } from 'rxjs'; 
 import { EnvSetting } from '../utils/utils.env';
-import { buildHttpRequestOption, HTTP_GET_OPTIONS, buildHttpRequestOptionsWithObserveResponse} from '../utils/utils'
+import { buildHttpRequestOption, HTTP_OPTIONS, buildHttpRequestOptionsWithObserveResponse} from '../utils/utils'
 import { map } from 'rxjs/operators';
 import { BASE_URL} from '../utils/utils';
 
@@ -47,7 +47,7 @@ export class ThemeService {
         .post<HttpResponse<any>>(
             changeThemeEndpoint, 
             env,
-            HTTP_GET_OPTIONS
+            HTTP_OPTIONS
         ).pipe(map(res=>{
             return res;
         }));
