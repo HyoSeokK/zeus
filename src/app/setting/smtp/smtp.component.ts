@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 
 import { SmtpService } from '../../services/smtpservice.service' 
 import { smtpInfo } from './smtpInfo';
-import  {Router } from '@angular/router';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-smtptest',

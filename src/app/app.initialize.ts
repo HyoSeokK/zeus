@@ -5,9 +5,9 @@ export function initializeKeycloak(keycloak: KeycloakService) {
     return () => 
       keycloak.init({
         config: {
-          url: 'http://192.168.0.118:8080/auth/',
-          realm: 'grafana',
-          clientId: 'zeus_yc',
+          url: 'http://192.168.0.118:9090/auth/',
+          realm: 'master',
+          clientId: 'zeus_portal',
 
         },
         initOptions : {
