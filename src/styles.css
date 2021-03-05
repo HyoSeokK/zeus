@@ -1,1 +1,153 @@
 /* You can add global styles to this file, and also import other style files */
+
+.mr-20{ margin-right:20px  !important}
+.mb-20{margin-bottom:20px  !important}
+.mt-15{margin-top:.75rem !important}
+.mt-20{margin-top:1rem !important}
+.custom-h1{font-size: 1.3rem !important}
+.custom-h2{font-weight: 300 !important }
+.custom-h5{font-weight: 600 !important }
+.mtb10 { margin:10px 0 !important;}
+.mt3 { margin-top:3px !important;}
+.mr10 { margin-right: 10px !important;}
+.mt0 {margin-top:0 !important;}
+.mb5 { margin-bottom: 5px !important;}
+.mr30 { margin-right: 1.5rem;}
+
+.content-area { background-color: var(--color-abg); }
+.clr-vertical-nav .nav-group-text,
+.clr-vertical-nav .nav-link { padding-left: 1.8rem; }
+.clr-form { padding: 0; width: 125px;}
+
+hr {
+margin: 100px 0;
+}
+
+/* LOGIN PAGE CSS =====================================================================================================================================*/
+.loginWrap { width:100vw; height:100vh; background-color: #EFF0F2; display: flex; justify-content: center; align-items: center;}
+.loginWrap .loginBox { display:flex; flex-direction:row; justify-content: space-between; width:78%; border-radius: 15px; overflow: hidden; border:1px solid #DEDEDE;}
+.loginWrap .loginBox .loginInfo-img {  width:45%; }
+.loginWrap .loginBox .loginInfo-img > img {  width:100%; -webkit-user-drag: none;}
+.loginWrap .loginBox .loginInfo { width:55%;  background:#fff; padding:7.5% 15% 7.5% 10%; transition-duration: .4s;}
+.loginWrap .loginBox .loginInfo .loginForm {  height:100%; display: flex; flex-flow: column; justify-content: space-between;}
+.loginWrap .loginBox .loginInfo .loginForm h3 { font-size:2.5rem; margin-bottom:1rem;}
+.loginWrap .loginBox .loginInfo .loginForm input { max-width: 100%; width:100%; font-size:1.0526rem; }
+.loginWrap .loginBox .loginInfo .loginForm button { max-width: 100%; width:100%; margin-top:35px;}
+.loginWrap .loginBox .loginInfo .loginForm .loginToggle .clr-form-control { flex-direction: row; height:30px;}
+.loginWrap .loginBox .loginInfo .loginForm .loginToggle .clr-control-label:first-of-type { margin-right:10px; }
+.loginWrap .loginBox .loginInfo .loginForm .loginToggle .clr-control-label { width:auto; font-size: 16px; font-weight: normal;}
+.loginWrap .loginBox .loginInfo .loginForm .loginIdPw .clr-control-container { max-width: 100% !important;width:95% !important; margin-bottom: 40px;}
+.loginWrap .loginBox .loginInfo .loginForm .loginIdPw .clr-control-container .clr-input-group { width: 100% !important; }
+.loginWrap .loginBox .loginInfo .loginForm .loginIdPw button { margin-top:0; max-width:20px;}
+.loginWrap .loginBox .loginInfo .loginForm .loginIdPw .clr-input-group .clr-input-group-icon-action cds-icon { transform:translate(-1.5rem,-0.2rem); }
+.loginWrap .clr-toggle-wrapper input[type=checkbox]+label::before { width:30px; height:12px; top:50%; transform:translateY(-50%); background-color: #cccc; border:none;}
+.loginWrap .clr-toggle-wrapper input[type=checkbox]:checked+label::before { background-color: #ccc; border:none;}
+.loginWrap .clr-toggle-wrapper input[type=checkbox]+label::after { width:20px; height:20px; background-color: #00567A; top:50%; transform:translateY(-50%); left:-2.4rem;}
+.loginWrap .clr-toggle-wrapper input[type=checkbox]:checked+label::after { left:-1.2rem;}
+@media (max-width: 1140px) {
+.loginWrap .loginBox .loginInfo { padding:3% 10% 3% 5% !important;}
+}
+@media (max-width: 900px) {
+.loginWrap .loginBox { flex-direction: column;  }
+.loginWrap .loginBox .loginInfo { padding:10% 10% !important; width: 100% !important;}
+.loginWrap .loginBox .loginInfo-img {display: none;}
+.loginWrap .loginBox .loginInfo .loginForm > h3 { font-size:2.5rem; margin-bottom:1rem !important;}
+.loginWrap .loginBox .loginInfo .loginForm input { }
+.loginWrap .loginBox .loginInfo .loginForm .loginIdPw .clr-control-container { max-width: 100% !important;width:95% !important; margin-bottom: 20px;}
+.loginWrap .loginBox .loginInfo .loginForm .loginIdPw .clr-control-container .clr-input-group { width: 100% !important; }
+.loginWrap .loginBox .loginInfo .loginForm .loginToggle .clr-form-control { margin-top:0 !important;}
+}
+
+.clr-form-horizontal .clr-input-group { min-width: 110px; width:35%; padding-right: 0; }
+/* // LOGIN PAGE CSS END ===================================================================================================================================*/
+
+/* BUTTON AND BTN ICON */
+.btn { letter-spacing: 0px !important;}
+.btn-sm { height: 35px !important; padding:8px 5px 8px 8px !important;  width:40px; border: none; }
+/* .btn:focus { outline: none; border: none; } */
+.btn clr-icon { margin-right: 6px; }
+.modal-btn { width:150px; height:40px; }
+
+/* BUTTON RIGHT BOTTOM */
+.btn-left { display:flex; justify-content: flex-end;}
+.btn-left button:last-child { margin-right:0;}
+.btn-layer { position:absolute; right:22px; top:40px; }
+
+/* FORM STYLE CSS */
+.formBox { width: 100%; background-color:var(--color-bg); padding:1.5rem 2rem; border-radius: 5px; margin: 10px 0; border:1px solid var(--color-line);}
+.formBox label { display: inline-block; width: 150px; /*color: #0072a3;*/ font-size: 15px; }
+.formBox clr-input-container,.formBox clr-toggle-container, .formBox clr-password-container, .formBox clr-datalist-container { margin-bottom: 15px; }
+
+/*  INPUT STYLE CSS */
+.clr-combobox-wrapper { min-height: 1.83rem !important; padding:4px ​1.2rem 0 0.3rem !important;}
+.clr-combobox-options { min-width: 9.2rem !important; }
+.formBox .clr-input { width:35% !important; min-width: 180px;}
+.formBox input[name="password"] { width:100%!important; min-width: 130px;}
+.formBox  ::-webkit-input-placeholder {
+  color:var(--clr-forms-placeholder-color, #8c8c8c) !important;
+  opacity: 0.54 !important;
+}
+
+.list-form { display: flex; align-items: center; }
+.list-form > clr-select-containe > select { width: 100px !important; height: 1.7rem !important; margin: 10px !important; }
+
+/* 데이터 기간 설정 수집 기간 (인풋 셀렉)*/
+.custom-table th{padding: 0.6rem 0.6rem 0.6rem !;}
+.custom-table td{font-size:0.7rem !important}
+.data-array { height:100%;}
+.data-array .clr-form-control { flex-direction: row !important; justify-content: center;}
+.data-array .clr-control-container { margin-top:-2px !important;}
+.data-array .clr-control-label {font-size:0.7rem; margin-right:5px; color:var(--color-font-basic); font-weight: 400;}
+
+/* URL 메뉴 박스 */
+.con-box { display: flex; justify-content: space-between; flex-wrap: wrap; }
+.con-box > .con-box-item { width:100%; position:relative; }
+.con-box-h2-line { border-bottom: 1px solid #ccc; margin-top:1rem !important; margin-bottom: 0.6rem !important;}
+
+@media (min-width: 768px) {
+.con-box .clr-col-md-2 { max-width: 100%; flex:0 0 50%;}
+.con-box > .con-box-item { width:49.5%;}
+}
+
+/* TEXTBOX STYLE CSS */
+.textBox { padding:25px 30px; overflow: hidden;  background-color:var(--color-bg); border-radius:5px; border:1px solid var(--color-line); margin-bottom: 20px;}
+.textBox > clr-icon { float:left;   margin-top:3px; margin-right:10px;}
+.textBox > p { display: inline-block;}
+.textBox p:not([cds-text]) {margin-top: 0;}
+
+/*  SETTING MAIN STYLE CSS */
+.setBox { display:flex; flex-direction: row; justify-content: space-between; align-items: center; margin-bottom: 10px !important;}
+.setBox > div > h3 { font-size: 15px; margin-bottom: 7px !important; font-weight: 500;}
+.setBox > div > p { font-size: 14px !important; font-weight: 400;}
+.setBox .clr-form-control { flex-direction: row !important;}
+.setBox label { font-size: 0.7rem !important; font-weight: normal; line-height: 1.2rem; margin:0 1rem;}
+.setBox > div > button { width:140px; height:40px;}
+
+/* TOGGLE BUTTON CSS  */
+.clr-toggle-wrapper input[type=checkbox] + label::after { border:none !important;}
+
+/* input */
+.clr-input-group .clr-input:not([readonly]):focus { width:100% !important;}
+.clr-input-group .clr-input { width:100% !important;}
+.clr-input-group .clr-input::placeholder { color:var(--color-toggle-bg); opacity: 1;}
+
+/* H1 TITLE BOX STYLE  */
+.titleBox { display: flex; width:100%; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--color-line-border); padding-bottom: 0.3rem; margin-bottom: 1.525rem;}
+.titleBox > div > a { color:var(--color-sublink); }
+.titleBox > div > clr-icon { color:var(--color-sublink); }
+.titleBox > div > a.link{ color:var(--color-sublink-span); }
+
+/*  */
+.floating-wrap { position:relative;}
+.floating { position:absolute; top:25px; right:0; z-index: 1;}
+.floating-select .clr-select-wrapper select { height:38px !important; margin-right: 10px;}
+.floating-select .clr-select-wrapper::after { top:60% !important;}
+
+/* 모달창 */
+.modalBox { display: flex; flex-direction: column; justify-content: space-between; align-items: center; padding:2.2rem 4.4rem!important; width:500px; position: relative;}
+.modalBox > p { font-weight: bold !important; margin-bottom: 30px !important;}
+.col-red { color: var(--color-modal-icon);}
+.modal-btn-close { position: absolute; top:0; right:0; border-radius: 50%; width:25px; height:25px; cursor: pointer; transition: .6s;}
+.modal-btn-close:hover { transform:rotate(359deg); }
+
+

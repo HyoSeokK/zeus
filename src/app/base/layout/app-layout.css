@@ -1,0 +1,19 @@
+.main-container { font-size: 15px; font-family: 'notosans'; }
+.topMenu { background-color:#2B3940; width:100%; max-height:65px; }
+.main-container header, .main-container .header { flex : 0 0 5rem; }
+.sideMenu { background-color:var(--clr-color-bg-nav); max-width: 12rem; }
+
+.nav-logo {
+    background-color:var(--color-logo);
+    width:12rem;
+    height:100%;
+    line-height: 60px;
+    font-size: 21px;
+    border-bottom: 1px solid #1B272D;
+}
+
+.nav-logo > img { margin:0 18px 0 50px; }
+
+.dropdown .dropdown-toggle > * { margin-right:10px;}
+a:hover { background-color:#0072a3 !important; color: #fff !important;}
+.clr-vertical-nav .nav-group-content:hover { color: var(--color-nav-hover); }

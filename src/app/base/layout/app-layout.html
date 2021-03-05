@@ -1,18 +1,37 @@
-<clr-main-container>
-    <clr-header class="header-5 header topMenu">
-    </clr-header>
-    <nav class="subnav">
-    </nav>
+<div class="main-container">
+    <header class="header header-6 topMenu">
+        <div class="nav-logo">
+            <img src="../assets/logo.png" alt="main logo 메인 로고">ZEUS
+        </div>
+
+        <div class="header-actions">
+            <div class="nav-divider"></div>
+            <clr-dropdown class="mr30">
+                <button class="" clrDropdownTrigger>
+                    <clr-icon shape="user" size="21" class="icon-left mr10"></clr-icon>
+                    <span>JOINTREE</span>
+                    <clr-icon shape="caret down"></clr-icon>
+                </button>
+                <clr-dropdown-menu clrPosition="bottom-right" *clrIfOpen>
+                    <div aria-label="Dropdown header Action 1" clrDropdownItem>정보변경</div>
+                    <div class="dropdown-divider" role="separator" aria-hidden="true"></div>
+                    <div clrDropdownItem>로그아웃</div>
+                </clr-dropdown-menu>
+            </clr-dropdown>
+        </div>
+    </header>
+
     <div class="content-container">
         <clr-vertical-nav [clrVerticalNavCollapsible]="true" *ngIf="isUserExisting" class="sideMenu">
-            <clr-vertical-nav-group routerLinkActive="active">
-                <clr-icon clrVerticalNavIcon shape="user"></clr-icon>
+
+            <div>
+            <clr-vertical-nav-group class="dropMeun nav-btn-list" routerLinkActive="active">
                 파르테논 운용 현황
                 <clr-vertical-nav-group-children>
-                    <a clrVerticalNavLink routerLink="/app/projects" routerLinkActive="active">
+                    <a clrVerticalNavLink routerLink="/app/projects" routerLinkActive="active"> 
                         서버 모니터링
                     </a>
-                    <a clrVerticalNavLink routerLink="/app/grafana" routerLinkActive="active">
+                    <a clrVerticalNavLink routerLink="./normal/snorlax" routerLinkActive="active">
                         쿠버네티스 모니터링
                     </a>
                     <a clrVerticalNavLink routerLink="./normal/snorlax" routerLinkActive="active">
@@ -21,30 +40,36 @@
                 </clr-vertical-nav-group-children>
             </clr-vertical-nav-group>
 
-            <clr-vertical-nav-group routerLinkActive="active">
+            <a clrVerticalNavLink routerLink="/app/grafana" routerLinkActive="">
+                워크로드
+            </a>
+            <a clrVerticalNavLink routerLink="" routerLinkActive="">
+                서비스맵
+            </a>
+            <a clrVerticalNavLink routerLink="" routerLinkActive="">
+                카타로그
+            </a>
+            <a clrVerticalNavLink routerLink="" routerLinkActive="">
+                클래스터
+            </a>
+            <a clrVerticalNavLink routerLink="" routerLinkActive="">
+                도커허브
+            </a>
+
+            <a clrVerticalNavLink routerLink="" routerLinkActive="">
+                마이메뉴
+            </a>
+
+            <a clrVerticalNavLink routerLinkActive="active" routerLink="/app/setting">
                 설정
-                <clr-vertical-nav-group-children>
-                    <a clrVerticalNavLink routerLinkActive="active" routerLink="/app/setting">
-                        <clr-icon shape="administrator" clrVerticalNavIcon></clr-icon>
-                        Setting
-                    </a>
-                    <a clrVerticalNavLink routerLink="./normal/snorlax" routerLinkActive="active">
-                        <clr-icon shape="bars" clrVerticalNavIcon></clr-icon>
-                        쿠버네티스 모니터링
-                    </a>
-                    <a clrVerticalNavLink routerLink="./normal/snorlax" routerLinkActive="active">
-                        <clr-icon shape="bars" clrVerticalNavIcon></clr-icon>
-                        APM 모니터링
-                    </a>
-                </clr-vertical-nav-group-children>
-            </clr-vertical-nav-group>
+            </a>
+            </div>
         </clr-vertical-nav>
-         
 
         <div class="content-area">
             <router-outlet></router-outlet>
         </div>
 
-        
     </div>
-</clr-main-container>
+
+</div>

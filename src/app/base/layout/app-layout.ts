@@ -12,4 +12,5 @@ ClarityIcons.addIcons(userIcon, checkboxListIcon, calendarIcon, folderOpenIcon, 
 
 export class AppLayoutComponent {
     isUserExisting = true;
+     
 }

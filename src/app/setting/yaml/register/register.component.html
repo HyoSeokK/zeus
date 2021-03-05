@@ -1,0 +1,52 @@
+<div class="titleBox">
+    <div>
+        <h1>YAML 관리</h1>
+    </div>
+    <div>
+        <a href="#">설정</a> &gt;<a href="#" class="link">YAML 관리</a>
+    </div>
+  </div>
+  
+  <div class="textBox">
+    <clr-icon shape="bell"></clr-icon>
+    <p>YAML 파일 관리시스템 입니다.<br>
+      POD 구성의 편의성을 위해 YAML Template을 등록, 수정 삭제를 지원합니다.<br>
+      등록된 YAML 파일은 쿠버네티스 대시보드에서 사용할 수 있습니다.</p>
+  </div>
+  
+  
+  <form clrForm class="formBox">
+    <clr-input-container>
+      <label>YAML 명</label>
+      <input clrInput placeholder="" />
+    </clr-input-container>
+    <clr-input-container>
+      <label>YMML 파일 설명 및 용도</label>
+      <input clrInput placeholder="" />
+    </clr-input-container>
+    <clr-input-container>
+      <label>생성자</label>
+      <input clrInput placeholder="" />
+    </clr-input-container>
+    <clr-input-container>
+      <label>YMLA 파일 버젼</label>
+      <input clrInput placeholder="" />
+    </clr-input-container>
+  
+    <clr-textarea-container>
+      <label>YMLA 파일 내용</label>
+      <textarea clrTextarea  name="description" required></textarea>
+    </clr-textarea-container>
+  </form>
+  
+  <div class="btn-left">
+  
+    <button class="btn btn-primary">
+      <clr-icon shape="plus"></clr-icon>등록
+    </button>
+    <button class="btn btn-primary">
+      <clr-icon shape="sync"></clr-icon>수정
+    </button>
+  </div>
+  
+  

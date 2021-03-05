@@ -1,1 +1,99 @@
-<p>yaml works!</p>
+<div>
+  <div class="titleBox">
+    <div>
+      <h1>개발자 / 일반 사용자 등록-2 </h1>
+    </div>
+    <div>
+      <a href="#">설정 ></a><a href="#" class="link"> SMTP 설정</a>
+    </div>
+  </div>
+
+  <div class="textBox">
+    <clr-icon shape="bell"></clr-icon>
+    <p>YAML 파일 관리시스템 입니다.<br>
+      POD 구성의 편의성을 위해 YAML Template을 등록, 수정 삭제를 지원합니다.<br>
+      등록된 YAML 파일은 쿠버네티스 대시보드에서 사용할 수 있습니다.</p>
+  </div>
+  <div style="display: flex; justify-content: space-between;">
+    <div>
+      <button class="btn btn-primary" (click)="goToRegisterYaml()">
+        <clr-icon shape="plus"></clr-icon>등록
+      </button>
+      <button class="btn btn-primary">
+        <clr-icon shape="sync"></clr-icon>수정
+      </button>
+      <button class="btn btn-line">
+        <clr-icon shape="ban"></clr-icon>삭제
+      </button>
+    </div>
+    <div class="list-form">
+      <button type="button" class="btn btn-sm btn-icon btn-line" aria-label="settings">
+        <clr-icon shape="search"></clr-icon>
+      </button>
+      <button type="button" class="btn btn-sm btn-icon btn-line" aria-label="settings">
+        <clr-icon shape="refresh"></clr-icon>
+      </button>
+    </div>
+
+  </div>
+  <table class="table custom-table">
+    <caption>
+    </caption>
+    <thead>
+      <tr>
+        <th>
+          <clr-checkbox-wrapper>
+            <input type="checkbox" clrCheckbox name="options" required value="option1" />
+            <label>YAML 명</label>
+          </clr-checkbox-wrapper>
+        </th>
+        <th>YMML 파일 설명 및 용도</th>
+        <th>생성자</th>
+        <th>YAML 파일 생성일</th>
+        <th>YAML 파일 수정일</th>
+        <th>YAML 파일 버전</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>
+          <clr-checkbox-wrapper>
+            <input type="checkbox" clrCheckbox name="options" required value="option1" />
+            <label>NameNode.yml</label>
+          </clr-checkbox-wrapper>
+        </td>
+        <td>네임노드 설정에 필요한 Docker 정보</td>
+        <td>joinadmin</td>
+        <td>2020.10.12 13:10</td>
+        <td>2020.10.12 13:10</td>
+        <td>partenon_20120203_v1.0</td>
+      </tr>
+      <tr>
+        <td>
+          <clr-checkbox-wrapper>
+            <input type="checkbox" clrCheckbox name="options" required value="option1" />
+            <label>NameNode.yml</label>
+          </clr-checkbox-wrapper>
+        </td>
+        <td>네임노드 설정에 필요한 Docker 정보</td>
+        <td>joinadmin</td>
+        <td>2020.10.12 13:10</td>
+        <td>2020.10.12 13:10</td>
+        <td>partenon_20120203_v1.0</td>
+      </tr>
+      <tr>
+        <td>
+          <clr-checkbox-wrapper>
+            <input type="checkbox" clrCheckbox name="options" required value="option1" />
+            <label>NameNode.yml</label>
+          </clr-checkbox-wrapper>
+        </td>
+        <td>네임노드 설정에 필요한 Docker 정보</td>
+        <td>joinadmin</td>
+        <td>2020.10.12 13:10</td>
+        <td>2020.10.12 13:10</td>
+        <td>partenon_20120203_v1.0</td>
+      </tr>
+    </tbody>
+  </table>
+</div>

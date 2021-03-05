@@ -1,1 +1,105 @@
-<p>refresh works!</p>
+<div class="titleBox">
+    <div>
+      <h1>Refresh time 설정</h1>
+    </div>
+    <div>
+        <a href="#">설정</a> &gt;<a href="#" class="link"> Refresh time 설정</a>
+    </div>
+  </div>
+
+  <div class="textBox">
+    <clr-icon shape="bell"></clr-icon>
+    <p>브라우징 메뉴와 쿠버네티스 대시보드 URL Link를 설정합니다.</p>
+  </div>
+
+  <div class="con-box">
+    <div class="con-box-item">
+      <form clrForm class="formBox">
+        <clr-input-container>
+          <label>Menu URL</label>
+          <input clrInput placeholder="" />
+        </clr-input-container>
+
+        <clr-datalist-container>
+          <label>검색기간</label>
+          <input clrDatalistInput placeholder="Search period" />
+          <datalist>
+            <option>option1</option>
+            <option>option2</option>
+            <option>option3</option>
+          </datalist>
+        </clr-datalist-container>
+        <clr-datalist-container>
+          <label>화면 Refresh 주기</label>
+          <input clrDatalistInput placeholder="Refresh" />
+          <datalist>
+            <option>option1</option>
+            <option>option2</option>
+            <option>option3</option>
+          </datalist>
+        </clr-datalist-container>
+
+      </form>
+      <button class="btn btn-primary">
+        <clr-icon shape="download"></clr-icon>저장
+      </button>
+      <button class="btn">
+        <clr-icon shape="ban"></clr-icon>삭제
+      </button>
+    </div>
+    <div class="con-box-item textBox mtb10">
+      <h2 class="con-box-h2-line">메뉴리스트</h2>
+      <button class="btn btn-primary btn-layer">
+        <clr-icon shape="download"></clr-icon>URL 적용
+      </button>
+      <clr-tree>
+        <clr-tree-node [clrExpanded]="true">
+          David Wallace (CFO)
+          <clr-tree-node [clrExpanded]="true">
+            Michael Scott (Regional Manager)
+
+            <clr-tree-node>Dwight K. Schrute (Assistant to the Regional Manager)</clr-tree-node>
+
+            <clr-tree-node>
+              Jim Halpert (Head of Sales)
+              <clr-tree-node>Andy Bernard</clr-tree-node>
+              <clr-tree-node>Stanley Hudson</clr-tree-node>
+              <clr-tree-node>Phyllis Vance</clr-tree-node>
+              <clr-tree-node>Todd Packer</clr-tree-node>
+            </clr-tree-node>
+
+            <clr-tree-node>
+              Angela Martin (Head of Accounting)
+              <clr-tree-node>Kevin Malone</clr-tree-node>
+              <clr-tree-node>Oscar Martinez</clr-tree-node>
+            </clr-tree-node>
+
+            <clr-tree-node>
+              Kelly Kapoor (Head of Customer Service)
+              <clr-tree-node>Ryan Howard (Temp)</clr-tree-node>
+            </clr-tree-node>
+
+            <clr-tree-node>
+              Creed Bratton (Quality Assurance)
+            </clr-tree-node>
+
+            <clr-tree-node>
+              Meredith Palmer (Supplier Relations)
+            </clr-tree-node>
+
+            <clr-tree-node>
+              Toby Flenderson (Human Resources)
+            </clr-tree-node>
+
+            <clr-tree-node>
+              Pam Beesly (Reception)
+            </clr-tree-node>
+
+            <clr-tree-node>
+              Darryl Philbin (Warehouse)
+            </clr-tree-node>
+          </clr-tree-node>
+        </clr-tree-node>
+      </clr-tree>
+    </div>
+  </div>

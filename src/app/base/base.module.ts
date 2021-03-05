@@ -4,6 +4,7 @@ import { SharedModule } from '../shared/shared.module';
 
 import { ProjectModule } from '../projects/projects.module'
 import { SettingModule } from '../setting/setting.module'
+import { UserModule } from '../setting/user/user.module'
 
 import { AppLayoutComponent } from '../base/layout/app-layout'
 
@@ -12,7 +13,8 @@ import { AppLayoutComponent } from '../base/layout/app-layout'
         SharedModule,
         RouterModule,
         ProjectModule,
-        SettingModule
+        SettingModule,
+        UserModule
     ],
     declarations:[
         AppLayoutComponent

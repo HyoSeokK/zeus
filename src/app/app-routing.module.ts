@@ -14,6 +14,9 @@ import { UrlComponent } from './setting/url/url.component'
 import { RefreshComponent } from './setting/refresh/refresh.component'
 import { KeycloakGuard } from './keycloak.guard';
 
+import { RegisterComponent as UserRegister} from './setting/user/register/register.component';
+import { RegisterComponent as YamlRegister} from './setting/yaml/register/register.component';
+
 const routes: Routes = [
   { path:'', redirectTo:'app',pathMatch:'full', },
   {
@@ -36,7 +39,11 @@ const routes: Routes = [
       },
       {
         path:'setting/user',
-        component:UserComponent
+        component:UserComponent,
+      },
+      {
+        path:'setting/user/register',
+        component:UserRegister,
       },
       {
         path:'setting/smtp',
@@ -49,6 +56,10 @@ const routes: Routes = [
       {
         path:'setting/yaml',
         component:YamlComponent
+      },
+      {
+        path:'setting/yaml/register',
+        component:YamlRegister
       },
       {
         path:'setting/menu',
