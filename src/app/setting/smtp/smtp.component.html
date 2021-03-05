@@ -32,8 +32,8 @@
         <label>접속포트</label>
         <select clrSelect [(ngModel)] = "smtpInfo.Port" name = "Port" required>
           <option value="" disabled selected hidden>Please Choose...</option>
-          <option value="one">465</option>
-          <option value="two">587</option>
+          <option value="465">465</option>
+          <option value="587">587</option>
         </select>
       </clr-select-container>
   </form>
@@ -45,7 +45,7 @@
     <button class="btn btn-primary" (click) = "onSubmit()">
       <clr-icon shape="wifi"></clr-icon>연결테스트
     </button>
-    <button class="btn btn-primary" (click) = "onSave()">
+    <button class="btn btn-primary" (click) = "onSave()" [disabled] = "click">
       <clr-icon shape="download"></clr-icon>저장
     </button>
   </div>

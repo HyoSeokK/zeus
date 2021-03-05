@@ -11,7 +11,7 @@ export class SmtpService {
 
   private Uri : string = SMTP_BASE_URL + "/register_smtp";
 
-  private saveUri : string = SMTP_BASE_URL + "/register_smtp";
+  private saveUri : string = SMTP_BASE_URL + "/smtpsave";
 
   constructor(private http: HttpClient) { }
 
