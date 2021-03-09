@@ -1,14 +1,15 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
-import { User, UserAttribute, UserCredentials } from '../user';
-import { UserService } from '../user.service';
+import { User, UserAttribute, UserCredentials } from '../../user';
+import { UserService } from '../../user.service';
 
 @Component({
-  selector: 'app-register',
+  selector: 'admin-register',
   templateUrl: './register.component.html',
   styleUrls: ['./register.component.css']
 })
 export class RegisterComponent implements OnInit {
+
   userInfo : User = new User();
   userAttribute : UserAttribute = new UserAttribute();
   userCredentials : UserCredentials[] = new Array<UserCredentials>();
@@ -53,6 +54,5 @@ export class RegisterComponent implements OnInit {
       }
     });
   }
-
 
 }

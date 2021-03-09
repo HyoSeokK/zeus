@@ -50,7 +50,7 @@
       
       <div class="textBox setBox">
         <div>
-          <h3>개발자 그룹 관리</h3>
+          <h3>그룹 관리</h3>
           <p>헤파이토스 DevOps 플랫폼에 대한 그룹 및 개발자 등록 메뉴을 지원합니다.</p>
         </div>
         <div>
@@ -62,13 +62,26 @@
       
       <div class="textBox setBox">
         <div>
-          <h3>사용자 관리</h3>
-          <p>AnyLogge 사용자 등록, 삭제 및 비밀 번호 변경 등 계정 관리 작업을<br>
-            지원 합니다. 시스템 관리자 1명, 일반 사용자는 최대 5명까지 등록 할 수 있습니다</p>
+          <h3>관리자 관리</h3>
+          <p>파르테논 관리자 등록, 수정, 삭제를 제공합니다.<br>
+            관리자는 제우스, 헤파이토스, 헤라 등 모든 시스템에 관리자로 접속할 수 있습니다.</p>
         </div>
         <div>
-          <button class="btn btn-primary" (click)="goToDataUserManugeLink()">
-            <clr-icon shape="recycle"></clr-icon>사용자 관리
+          <button class="btn btn-primary" (click)="goToAdminUserManageLink()">
+            <clr-icon shape="recycle"></clr-icon>관리자 관리
+          </button>
+        </div>
+      </div>
+
+      <div class="textBox setBox">
+        <div>
+          <h3>개발자 관리</h3>
+          <p>파르테논 개발자 등록, 수정, 삭제를 제공합니다.<br>
+            개발자는 자식이 속한 프로젝트 그룹에 대한 개발 권한을 가지고 있습니다. </p>
+        </div>
+        <div>
+          <button class="btn btn-primary" (click)="goToDevUserManageLink()">
+            <clr-icon shape="recycle"></clr-icon>개발자 관리
           </button>
         </div>
       </div>
