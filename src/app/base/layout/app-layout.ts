@@ -4,9 +4,17 @@ import { subMenu } from '../../setting/menu/submenu'
 import {topMenuIcon} from '../../setting/menu/topmenuicon'
 import { TopmenuserviceService } from '../../services/topmenuservice.service'
 import { SubmenuserviceService } from '../../services/submenuservice.service'
+<<<<<<< HEAD
 import { CustomIconService } from '../../services/custom-icon.service'
 import '@cds/core/toggle/register.js';
 import { ClarityIcons, userIcon, checkboxListIcon, calendarIcon, folderOpenIcon, administratorIcon } from '@cds/core/icon';
+=======
+import { IconService } from './app-layout.service'
+import '@cds/core/toggle/register.js';
+import { ClarityIcons, userIcon, checkboxListIcon, calendarIcon, folderOpenIcon, administratorIcon } from '@cds/core/icon';
+
+
+>>>>>>> 6c38ddf3e36f828ef7d13f81b035f58b18c4fcd7
 ClarityIcons.addIcons(userIcon, checkboxListIcon, calendarIcon, folderOpenIcon, administratorIcon);
 
 @Component({
@@ -27,9 +35,15 @@ export class AppLayoutComponent implements OnInit{
     constructor(
         private topmenuservice: TopmenuserviceService,
         private submenuservice: SubmenuserviceService,
+<<<<<<< HEAD
         private customIcon: CustomIconService
         ){
             customIcon.load();
+=======
+        private iconService : IconService,
+        ){
+            iconService.load();
+>>>>>>> 6c38ddf3e36f828ef7d13f81b035f58b18c4fcd7
         }
 
     ngOnInit(){

@@ -1,0 +1,43 @@
+
+> zeus@0.0.0 start /root/Zeus/zeus
+> ng serve --host  --port 4200 --proxy-config proxy.conf.json
+
+- Generating browser application bundles...
+[HPM] Proxy created: /get  ->  http://192.168.0.214:30035
+[HPM] Subscribed to http-proxy events:  [ 'error', 'close' ]
+[HPM] Proxy created: /api  ->  http://192.168.0.214:30035
+[HPM] Subscribed to http-proxy events:  [ 'error', 'close' ]
+[HPM] Proxy created: /smtp  ->  http://192.168.0.214:30035
+[HPM] Subscribed to http-proxy events:  [ 'error', 'close' ]
+[HPM] Proxy created: /user  ->  http://192.168.0.214:30035
+[HPM] Subscribed to http-proxy events:  [ 'error', 'close' ]
+[HPM] Proxy created: /menu  ->  http://192.168.0.214:30035
+[HPM] Subscribed to http-proxy events:  [ 'error', 'close' ]
+✔ Browser application bundle generation complete.
+
+Initial Chunk Files | Names         |      Size
+vendor.js           | vendor        |   6.82 MB
+scripts.js          | scripts       | 789.54 kB
+light-theme.css     | light-theme   | 664.73 kB
+styles.css          | styles        | 556.32 kB
+dark-theme.css      | dark-theme    | 511.03 kB
+main.js             | main          | 295.73 kB
+polyfills.js        | polyfills     | 128.73 kB
+runtime.js          | runtime       |   6.15 kB
+
+| Initial Total |   9.70 MB
+
+Build at: 2021-03-09T02:00:51.473Z - Hash: 617350c37c1218b8430f - Time: 15158ms
+
+Warning: /root/Zeus/zeus/node_modules/keycloak-angular/__ivy_ngcc__/fesm2015/keycloak-angular.js depends on 'keycloak-js'. CommonJS or AMD dependencies can cause optimization bailouts.
+For more info see: https://angular.io/guide/build#configuring-commonjs-dependencies
+
+
+
+** Angular Live Development Server is listening on :4200, open your browser on http:/ **
+
+
+✔ Compiled successfully.
+[HPM] GET /api/systemInfo -> http://192.168.0.214:30035
+[HPM] GET /menu/topmenu -> http://192.168.0.214:30035
+[HPM] GET /menu/submenu -> http://192.168.0.214:30035

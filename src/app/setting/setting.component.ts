@@ -54,8 +54,12 @@ export class SettingComponent implements OnInit {
         }
     }
 
-    goToDataUserManugeLink(): void {
-            this.router.navigateByUrl("/app/setting/user");
+    goToAdminUserManageLink(): void {
+            this.router.navigateByUrl("/app/setting/user/admin");
+    }
+
+    goToDevUserManageLink() : void {
+        this.router.navigateByUrl("/app/setting/user/developer")
     }
 
     goToSmtpLink(): void {

@@ -4,9 +4,10 @@ import { AppLayoutComponent } from '../app/base/layout/app-layout';
 import { ProjectListComponent } from '../app/projects/list/projects.list';
 import { TargetMenuComponent } from '../app/projects/target-menu/target-menu.component';
 import { SettingComponent } from '../app/setting/setting.component';
-import { SmtpComponent } from './setting/smtpSample/setting.smtp'
 import { SmtptestComponent } from './setting/smtp/smtp.component'
-import { UserComponent } from './setting/user/user.component'
+import { AdministratorUserComponent } from './setting/user/administrator-user/administrator-user.component';
+import { DeveloperUserComponent } from './setting/user/developer-user/developer-user.component';
+
 import { DataStorageComponent } from './setting/data-storage/data-storage.component'
 import { YamlComponent } from './setting/yaml/yaml.component'
 import { MenuComponent } from './setting/menu/menu.component'
@@ -14,7 +15,8 @@ import { UrlComponent } from './setting/url/url.component'
 import { RefreshComponent } from './setting/refresh/refresh.component'
 import { KeycloakGuard } from './keycloak.guard';
 
-import { RegisterComponent as UserRegister} from './setting/user/register/register.component';
+import { RegisterComponent as AdminRegister} from './setting/user/administrator-user/register/register.component';
+import { RegisterComponent as DevRegister } from './setting/user/developer-user/register/register.component';
 import { RegisterComponent as YamlRegister} from './setting/yaml/register/register.component';
 
 const routes: Routes = [
@@ -39,11 +41,23 @@ const routes: Routes = [
       },
       {
         path:'setting/user',
-        component:UserComponent,
+        component:AdministratorUserComponent,
       },
       {
-        path:'setting/user/register',
-        component:UserRegister,
+        path:'setting/user/admin',
+        component:AdministratorUserComponent,
+      },
+      {
+        path:'setting/user/admin/register',
+        component:AdminRegister,
+      },
+      {
+        path:'setting/user/developer',
+        component:DeveloperUserComponent,
+      },
+      {
+        path:'setting/user/developer/register',
+        component:DevRegister,
       },
       {
         path:'setting/smtp',
