@@ -13,7 +13,8 @@ import { ClarityModule } from '@clr/angular';
         RouterModule,
         ClarityModule,
         FormsModule,
-        ReactiveFormsModule
+        ReactiveFormsModule,
+
     ],
     declarations:[],
     exports:[
@@ -21,7 +22,8 @@ import { ClarityModule } from '@clr/angular';
         ClarityModule, 
         BrowserAnimationsModule,
         FormsModule,
-        ReactiveFormsModule
+        ReactiveFormsModule,
+
     ]
 })
 export class SharedModule {

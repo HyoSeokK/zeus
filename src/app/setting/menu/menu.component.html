@@ -18,16 +18,29 @@
       <form clrForm class="formBox">
         <clr-input-container>
           <label>Top Menu Name</label>
-          <input clrInput placeholder="Name" name="top_menu_name" [(ngModel)] = "topMenu.top_menu_name"/>
+          <input clrInput placeholder="Name" name="top_menu_name" [(ngModel)] = "topMenu.top_menu_name" required/>
         </clr-input-container>
         <clr-input-container>
           <label>Top Menu Code</label>
-          <input clrInput placeholder="Code" name="top_menu_code" [(ngModel)] = "topMenu.top_menu_code"/>
+          <input clrInput placeholder="Code" name="top_menu_code" [(ngModel)] = "topMenu.top_menu_code" required/>
         </clr-input-container>
         <clr-input-container>
           <label>Menu Order</label>
-          <input clrInput placeholder="Order" name="top_menu_order" [(ngModel)] = "topMenu.top_menu_order"/>
+          <input clrInput placeholder="Order" name="top_menu_order" [(ngModel)] = "topMenu.top_menu_order" required/>
         </clr-input-container>
+        <clr-combobox-container>
+          <label>Top Menu Icon</label>
+          <clr-combobox [(ngModel)] = "topMenu.icon_code" name = "top_menu_icon" required>
+            <clr-options> 
+              <ng-container *ngFor = "let topMenuIcon of topMenuIcon">       
+            <clr-option clrValue="{{topMenuIcon.icon_code}}">
+              <clr-icon [attr.shape]="topMenuIcon.icon_name"></clr-icon> {{topMenuIcon.icon_description}}
+            </clr-option>
+            </ng-container>
+          </clr-options>
+        </clr-combobox>
+        </clr-combobox-container>
+        
         <button class="btn btn-primary" (click) = "onTopMenuSave()">
           <clr-icon shape="download"></clr-icon>저장
         </button>
@@ -38,11 +51,11 @@
       <form clrForm class="formBox">
         <clr-input-container>
           <label>Sub Menu Name</label>
-          <input clrInput placeholder="Name" name="sub_menu_code" [(ngModel)] = "subMenu.sub_menu_code"/>
+          <input clrInput placeholder="Name" name="sub_menu_name" [(ngModel)] = "subMenu.sub_menu_name" required/>
         </clr-input-container>
         <clr-input-container>
           <label>Sub Menu Code</label>
-          <input clrInput placeholder="SubCode" name="sub_menu_name" [(ngModel)] = "subMenu.sub_menu_name"/>
+          <input clrInput placeholder="SubCode" name="sub_menu_code" [(ngModel)] = "subMenu.sub_menu_code" required/>
         </clr-input-container>
         <clr-combobox-container>
           <label>Top Menu Code</label>
@@ -56,8 +69,20 @@
         </clr-combobox-container>
         <clr-input-container>
           <label>Menu Order</label>
-          <input clrInput placeholder="Order" name="sub_menu_order" [(ngModel)] = "subMenu.sub_menu_order"/>
+          <input clrInput placeholder="Order" name="sub_menu_order" [(ngModel)] = "subMenu.sub_menu_order" required/>
         </clr-input-container>
+        <clr-combobox-container>
+          <label>Sub Menu Icon</label>
+          <clr-combobox [(ngModel)] = "subMenu.icon_code" name = "sub_menu_icon" required>
+            <clr-options> 
+              <ng-container *ngFor = "let topMenuIcon of topMenuIcon">
+            <clr-option clrValue="{{topMenuIcon.icon_code}}">
+              <clr-icon [attr.shape]="topMenuIcon.icon_name"></clr-icon> {{topMenuIcon.icon_description}}
+            </clr-option>
+            </ng-container>
+          </clr-options>
+        </clr-combobox>
+        </clr-combobox-container>
         <button class="btn btn-primary" (click) = "onSubMenuSave()">
           <clr-icon shape="download"></clr-icon>저장
         </button>
@@ -74,14 +99,24 @@
       </button>
       <clr-tree>
         <ng-container *ngFor = "let TopMenu of TopMenuList">
-          <clr-tree-node [clrExpanded]="true" (click) = "onTopMenuGet(TopMenu)">
-            {{TopMenu.top_menu_name}}           
+          <clr-tree-node (click) = "onTopMenuGet(TopMenu)">
+            <ng-container *ngFor = "let topMenuIcon of topMenuIcon">
+            <ng-container *ngIf = "TopMenu.icon_code == topMenuIcon.icon_code">
+              <clr-icon [attr.shape]="topMenuIcon.icon_name"></clr-icon>
+            </ng-container> 
+          </ng-container>  
+            {{TopMenu.top_menu_name}} 
             <clr-tree-node *ngFor = "let SubMenu of SubMenuList" (click) = "onSubMenuGet(SubMenu)">
               <ng-container *ngIf = "TopMenu.top_menu_code == SubMenu.top_menu_code">
+                <ng-container *ngFor = "let topMenuIcon of topMenuIcon">
+                <ng-container *ngIf = "SubMenu.icon_code == topMenuIcon.icon_code">
+                  <clr-icon [attr.shape]="topMenuIcon.icon_name"></clr-icon>
+                </ng-container>
+              </ng-container>
               {{SubMenu.sub_menu_name}}
             </ng-container>
-            </clr-tree-node> 
-            </clr-tree-node>
+            </clr-tree-node>    
+            </clr-tree-node>        
           </ng-container>
           </clr-tree>
 

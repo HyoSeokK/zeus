@@ -21,11 +21,10 @@
         </div>
     </header>
 
-    <div class="content-container">
+    <div class="content-container">      
         <clr-vertical-nav [clrVerticalNavCollapsible]="true" *ngIf="isUserExisting" class="sideMenu">
-
             <div>
-            <clr-vertical-nav-group class="dropMeun nav-btn-list" routerLinkActive="active">
+            <!-- <clr-vertical-nav-group routerLinkActive="active">
                 파르테논 운용 현황
                 <clr-vertical-nav-group-children>
                     <a clrVerticalNavLink routerLink="/app/projects" routerLinkActive="active"> 
@@ -38,53 +37,40 @@
                         APM 모니터링
                     </a>
                 </clr-vertical-nav-group-children>
-            </clr-vertical-nav-group>
-
-            <a clrVerticalNavLink routerLink="/app/grafana" routerLinkActive="">
-                워크로드
-            </a>
-            <a clrVerticalNavLink routerLink="" routerLinkActive="">
-                서비스맵
-            </a>
-            <a clrVerticalNavLink routerLink="" routerLinkActive="">
-                카타로그
-            </a>
-            <a clrVerticalNavLink routerLink="" routerLinkActive="">
-                클래스터
-            </a>
-            <a clrVerticalNavLink routerLink="" routerLinkActive="">
-                도커허브
-            </a>
-
-            <a clrVerticalNavLink routerLink="" routerLinkActive="">
-                마이메뉴
-            </a>
-
-            <a clrVerticalNavLink routerLinkActive="active" routerLink="/app/setting">
-                설정
-            </a>
-            <ng-container *ngFor = "let topmenu of topMenu">                
-                <clr-vertical-nav-group routerLinkActive="active">      
-                    <clr-icon clrVerticalNavIcon shape="user"></clr-icon>
-                    {{topmenu.top_menu_name}}
+            </clr-vertical-nav-group> -->
+            <ng-container *ngFor = "let topmenu of topMenu"> 
+                <ng-container *ngFor = "let topMenuIcon of topMenuIcon">
+                    <ng-container *ngIf = "topmenu.icon_code == topMenuIcon.icon_code">
+                    <clr-vertical-nav-group routerLinkActive="active">
+                     <a clrVerticalNavLink routerLinkActive="active" routerLink="/app/projects">
+                       <clr-icon [attr.shape]="topMenuIcon.icon_name" clrVerticalNavIcon></clr-icon>
+                        {{topmenu.top_menu_name}}  
+                    </a>
                     <clr-vertical-nav-group-children>
-                        <ng-container *ngFor = "let submenu of subMenu"> 
-                        <ng-container *ngIf= "topmenu.top_menu_code == submenu.top_menu_code"> 
+                        <ng-container *ngFor = "let submenu of subMenu">   
+                             <ng-container *ngIf= "topmenu.top_menu_code == submenu.top_menu_code"> 
                         <a clrVerticalNavLink routerLink="/app/projects" routerLinkActive="active">
+                            <ng-contianer *ngFor = "let subMenuIcon of subMenuIcon">
+                            <ng-container *ngIf = "submenu.icon_code == subMenuIcon.icon_code">
+                            <clr-icon [attr.shape]="subMenuIcon.icon_name"></clr-icon>
+                            </ng-container>
+                            </ng-contianer>
                             {{submenu.sub_menu_name}}
                         </a>
-                    </ng-container>
-                </ng-container>
+                        </ng-container>
+                        </ng-container>
                     </clr-vertical-nav-group-children>
                     </clr-vertical-nav-group>
                 </ng-container>
+                </ng-container>
+            </ng-container>  
+            <a clrVerticalNavLink routerLinkActive="active" routerLink="/app/setting">
+                설정
+            </a>
             </div>
         </clr-vertical-nav>
-
         <div class="content-area">
             <router-outlet></router-outlet>
         </div>
-
     </div>
-
 </div>

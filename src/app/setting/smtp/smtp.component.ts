@@ -12,16 +12,24 @@ import  {Router } from '@angular/router';
 
 export class SmtptestComponent implements OnInit {
   click : boolean = true;
-  smtpInfo: smtpInfo = new smtpInfo();
+
+  smtpInfo: smtpInfo[]
+
   constructor(private smtpservice: SmtpService, private router:Router) {
     
    }
 
   ngOnInit(): void {
+    this.smtpservice.getSmtp()
+    .subscribe(resp => {
+      this.smtpInfo = resp.body as smtpInfo[]
+      this.smtpInfo[0].Password = "";
+    })
+    
   }
   onSubmit(){
-    this.smtpservice.postSmtp(this.smtpInfo.AdminAddress,this.smtpInfo.SmtpAddress,this.smtpInfo.Port,
-      this.smtpInfo.Password)
+    this.smtpservice.postSmtp(this.smtpInfo[0].AdminAddress,this.smtpInfo[0].SmtpAddress,this.smtpInfo[0].Port,
+      this.smtpInfo[0].Password)
       .subscribe(() =>{
         alert("테스트 성공")
         this.click = false;
@@ -36,8 +44,8 @@ export class SmtptestComponent implements OnInit {
   }
 
   onSave(){
-    this.smtpservice.saveSmtp(this.smtpInfo.AdminAddress,this.smtpInfo.SmtpAddress,this.smtpInfo.Port,
-      this.smtpInfo.Password)
+    this.smtpservice.saveSmtp(this.smtpInfo[0].AdminAddress,this.smtpInfo[0].SmtpAddress,this.smtpInfo[0].Port,
+      this.smtpInfo[0].Password)
       .subscribe(() =>{
         alert("저장 성공")
         this.router.navigateByUrl("/app/setting")
