@@ -1,8 +1,9 @@
 import { Injectable } from '@angular/core';
 import { throwError as observableThrowError, Observable, of } from "rxjs";
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams, HttpResponse } from '@angular/common/http';
 import { catchError } from 'rxjs/operators';
-import { SMTP_BASE_URL } from '../utils/utils';
+import { buildHttpRequestOptionsWithObserveResponse, SMTP_BASE_URL } from '../utils/utils';
+import {smtpInfo} from '../setting/smtp/smtpInfo'
 
 @Injectable({
   providedIn: 'root'
@@ -13,7 +14,20 @@ export class SmtpService {
 
   private saveUri : string = SMTP_BASE_URL + "/smtpsave";
 
+  private smtpGetUri : string = SMTP_BASE_URL + "/smtpget";
+
   constructor(private http: HttpClient) { }
+
+  public getSmtp() {
+    let params = new HttpParams();
+    return this.http.get<HttpResponse<smtpInfo[]>>(
+      this.smtpGetUri
+      ,buildHttpRequestOptionsWithObserveResponse(params)
+    )
+    .pipe(
+      catchError(error => observableThrowError(error)),
+    );
+  }
 
   public postSmtp(AdminAddress:string,SmtpAddress: string, Port: string, Password: string) {
     return this.http.post(this.Uri,JSON.stringify({

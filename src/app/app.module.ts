@@ -1,5 +1,6 @@
 import { APP_INITIALIZER, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+
 import { HttpClientModule } from '@angular/common/http';
 
 import { AppConfigService } from './services/app-config.service';
@@ -12,6 +13,7 @@ import { ClarityModule } from '@clr/angular';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { KeycloakAngularModule, KeycloakService } from 'keycloak-angular';
 import { initializeKeycloak, initConfig } from './app.initialize';
+
 
 @NgModule({
   declarations: [
@@ -26,7 +28,7 @@ import { initializeKeycloak, initConfig } from './app.initialize';
     BrowserModule,
     ClarityModule,
     BrowserAnimationsModule,
-    KeycloakAngularModule
+    KeycloakAngularModule,
   ],
   providers: [
     {

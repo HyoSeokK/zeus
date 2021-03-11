@@ -14,6 +14,7 @@
 </div>
 
 <form clrForm class="formBox">
+  <ng-container *ngFor = "let smtpInfo of smtpInfo">
     <clr-input-container>
       <label>담당자 메일주소</label>
       <input clrInput placeholder="E-mail" name="AdminAddress" [(ngModel)]="smtpInfo.AdminAddress" required />
@@ -36,6 +37,7 @@
           <option value="587">587</option>
         </select>
       </clr-select-container>
+    </ng-container>
   </form>
 
   <div class="btn-left">
