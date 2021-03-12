@@ -21,7 +21,16 @@ import { RegisterComponent as DevRegister } from './setting/user/developer-user/
 import { RegisterComponent as YamlRegister} from './setting/yaml/register/register.component';
 
 const routes: Routes = [
-  { path:'', redirectTo:'app',pathMatch:'full', },
+  { 
+    path:'', 
+    redirectTo:'app/main',
+    pathMatch:'full', 
+  },
+  { 
+    path:'app', 
+    redirectTo:'app/main',
+    pathMatch:'full', 
+  },
   {
     path:'app',
     component:AppLayoutComponent,

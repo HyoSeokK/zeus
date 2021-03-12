@@ -7,7 +7,6 @@
  *
  */
 /*! normalize.css v4.2.0 | MIT License | github.com/necolas/normalize.css */
-
 html {
   font-family: sans-serif;
   line-height: 1.15;
@@ -13002,7 +13001,7 @@ select[size] option {
 }
 
 .clr-textarea {
-  max-width: calc(100% - 0.3rem);
+  max-width: 100%;
   height: auto;
   resize: vertical;
   /* clr-forms-textarea-background-color */
@@ -18514,3 +18513,7 @@ _:-ms-fullscreen .tab-content,
 }
 
 /*# sourceMappingURL=clr-ui.css.map */
+
+@media (min-width: 768px){
+  .flex-box-item .clr-col-md-2 { flex:0 0 100% !important;}
+}

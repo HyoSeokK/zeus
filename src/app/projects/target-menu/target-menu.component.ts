@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { Router, ActivatedRoute } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
+import { DomSanitizer, SafeResourceUrl, SafeUrl} from '@angular/platform-browser';
 import { TargetService } from './target-menu.service';
 
 @Component({
@@ -9,26 +10,25 @@ import { TargetService } from './target-menu.service';
 })
 export class TargetMenuComponent implements OnInit {
 
-  url : string = "";
+  url:SafeResourceUrl;
   topCode : string = "";
   subCode : string = "";
 
   constructor(
+    private sanitizer: DomSanitizer,
     private activatedRoute:ActivatedRoute, 
     private targetService:TargetService) {
       
     this.activatedRoute.params.subscribe(params =>{
       this.topCode = params['topCode']
       this.subCode = params['subCode']
-      
+      this.targetService.getTargetUrlLink(this.topCode, this.subCode).subscribe(res=>{
+        this.url = this.sanitizer.bypassSecurityTrustResourceUrl(res.data);
+      });
+
     })
    }
 
-  ngOnInit(): void {
-    this.targetService.getTargetUrlLink(this.topCode, this.subCode).subscribe(res=>{
-      this.url = res.data as string;
-      console.log("this url : " + this.url)
-    });
-  }
+  ngOnInit(): void {}
 
 }
