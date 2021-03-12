@@ -48,7 +48,7 @@ export class SubmenuserviceService {
    )
   }
 
-  public saveSubUrlLink(sub_menu_code:string,sub_menu_target_url:string,new_window:boolean){
+  public saveSubUrlLink(sub_menu_code:string,sub_menu_target_url:string,new_window:string){
     return this.http.post(this.saveSubUrl,JSON.stringify({
       'sub_menu_code':sub_menu_code, 'sub_menu_target_url':sub_menu_target_url,
       'new_window':new_window

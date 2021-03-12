@@ -30,7 +30,7 @@
         </clr-input-container>
         <clr-combobox-container>
           <label>Top Menu Icon</label>
-          <clr-combobox [(ngModel)] = "topMenu.icon_code" name = "top_menu_icon" required>
+          <clr-combobox [(ngModel)] = "topMenu.icon_code" name = "top_menu_icon" fi required>
             <clr-options> 
               <ng-container *ngFor = "let topMenuIcon of topMenuIcon">       
             <clr-option clrValue="{{topMenuIcon.icon_code}}">

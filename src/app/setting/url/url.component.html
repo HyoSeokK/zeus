@@ -18,7 +18,7 @@
         <form clrForm class="formBox">
           <clr-combobox-container>
             <label>Top Menu</label>
-            <clr-combobox  name = "top_menu_code" [(ngModel)] = "topMenu.top_menu_code" required>
+            <clr-combobox  name = "top_menu_code" [(ngModel)] = "topMenu.top_menu_code">
               <clr-options>
                 <ng-container *ngFor = "let topMenuList of TopMenuList">
               <clr-option clrValue="{{topMenuList.top_menu_code}}">{{topMenuList.top_menu_name}}</clr-option>
@@ -27,7 +27,7 @@
           </clr-combobox>
 
           <label>Sub Menu</label>
-            <clr-combobox  name = "sub_menu_code"  [(ngModel)] = "subMenu.sub_menu_code" required>
+            <clr-combobox  name = "sub_menu_code"  [(ngModel)] = "subMenu.sub_menu_code">
               <clr-options>
                 <ng-container *ngFor = "let subMenuList of SubMenuList">
               <clr-option clrValue="{{subMenuList.sub_menu_code}}">{{subMenuList.sub_menu_name}}</clr-option>
@@ -42,7 +42,7 @@
           <clr-toggle-container>
             <label>New Window</label>
             <clr-toggle-wrapper>
-                <input type="checkbox" clrToggle name="new_window" value="option1" [(ngModel)] = "topMenu.new_window"/>
+                <input type="checkbox" clrToggle name="new_window_check" value="option1" [(ngModel)] = "topMenu.new_window_check"/>
                 <label>Yes</label>
             </clr-toggle-wrapper>
         </clr-toggle-container>

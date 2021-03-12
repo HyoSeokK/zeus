@@ -62,7 +62,7 @@ export class TopmenuserviceService {
     );
   }
 
-  public saveTopUrlLink(top_menu_code:string,top_menu_target_url:string,new_window:boolean){
+  public saveTopUrlLink(top_menu_code:string,top_menu_target_url:string,new_window:string){
     return this.http.post(this.saveTopUrl,JSON.stringify({
       'top_menu_code':top_menu_code, 'top_menu_target_url':top_menu_target_url,
       'new_window':new_window

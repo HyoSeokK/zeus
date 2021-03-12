@@ -8,5 +8,6 @@ export class subMenu {
     created_dt: Date;
     updated_dt: Date;
     icon_code: string;
-    new_window: boolean;
+    new_window_check: boolean;
+    new_window: string;
 }

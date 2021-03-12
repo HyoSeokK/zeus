@@ -46,15 +46,18 @@ export class UrlComponent implements OnInit {
       this.SubMenuList = resp.body as subMenu[]
     })
 
-    this.topMenu.new_window = false;
+    this.topMenu.new_window_check = false;
   }
   onTopMenuSave(){
     if(this.topMenu.top_menu_code != null && this.subMenu.sub_menu_code == null){
     this.TopMenuobj = new topMenu();
     this.TopMenuobj.top_menu_code = this.topMenu.top_menu_code
     this.TopMenuobj.top_menu_target_url = this.topMenu.top_menu_target_url
-    this.TopMenuobj.new_window = this.topMenu.new_window
-    
+    if(this.topMenu.new_window_check == true){
+      this.TopMenuobj.new_window = "_blank"
+    } else if(this.topMenu.new_window_check == false){
+      this.TopMenuobj.new_window = "_self"
+    }
     if(this.TopMenuobj.top_menu_code != null && this.TopMenuobj.top_menu_target_url != null && this.TopMenuobj.new_window != null){
     this.TopMenuAddList.push(this.TopMenuobj);
     this.click = false;
@@ -65,9 +68,11 @@ export class UrlComponent implements OnInit {
     this.SubMenuobj = new subMenu();
     this.SubMenuobj.sub_menu_code = this.subMenu.sub_menu_code
     this.SubMenuobj.sub_menu_target_url = this.topMenu.top_menu_target_url
-    this.SubMenuobj.new_window = this.topMenu.new_window
-    console.log(this.SubMenuobj)
-
+    if(this.topMenu.new_window_check == true){
+      this.SubMenuobj.new_window = "_blank"
+    } else if(this.topMenu.new_window_check == false){
+      this.SubMenuobj.new_window = "_self"
+    }
     if(this.SubMenuobj.sub_menu_code != null && this.SubMenuobj.sub_menu_target_url != null && this.SubMenuobj.new_window != null){
     this.SubMenuAddList.push(this.SubMenuobj);
     this.click = false;
@@ -96,7 +101,7 @@ export class UrlComponent implements OnInit {
           alert("TopMenuUrl 저장 성공")
          this.topcheck = 0;
          this.click = true;
-         this.topMenu.new_window = false;
+         this.topMenu.new_window_check = false;
         }else {
           alert("TopMenuUrl 저장 실패")
         }
@@ -118,7 +123,7 @@ export class UrlComponent implements OnInit {
       alert("SubMenuUrl 저장 성공")
       this.subcheck = 0;
       this.click = true;
-      this.topMenu.new_window = false;
+      this.topMenu.new_window_check = false;
     }else {
       alert("SubMenuUrl 저장 실패")
     }
