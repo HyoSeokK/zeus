@@ -34,11 +34,6 @@ export class AppLayoutComponent implements OnInit{
             customIcon.load();
         }
 
-    goToTargetLink(topCode : string, subCode) : void {
-        console.log("go target menu : " + topCode)
-        this.router.navigate([`app/target/${topCode}/${subCode}`]);
-    }
-
     ngOnInit() {
         this.topmenuservice.getTopMenu()
         .subscribe(resp => {

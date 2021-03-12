@@ -9,24 +9,26 @@ import { TargetService } from './target-menu.service';
 })
 export class TargetMenuComponent implements OnInit {
 
-  url : string;
+  url : string = "";
+  topCode : string = "";
+  subCode : string = "";
+
   constructor(
     private activatedRoute:ActivatedRoute, 
     private targetService:TargetService) {
       
     this.activatedRoute.params.subscribe(params =>{
-      let topCode = params['topCode']
-      let subCode = params['subCode']
-
-      targetService.getTargetUrlLink(topCode, subCode).subscribe(res=>{
-        this.url = res.data as string;
-        console.log("this url : " + this.url)
-      });
+      this.topCode = params['topCode']
+      this.subCode = params['subCode']
+      
     })
    }
 
   ngOnInit(): void {
-    
+    this.targetService.getTargetUrlLink(this.topCode, this.subCode).subscribe(res=>{
+      this.url = res.data as string;
+      console.log("this url : " + this.url)
+    });
   }
 
 }
