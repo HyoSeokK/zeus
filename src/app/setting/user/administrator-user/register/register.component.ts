@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { User, UserAttribute, UserCredentials } from '../../user';
 import { UserService } from '../../user.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'admin-register',
@@ -14,7 +15,11 @@ export class RegisterComponent implements OnInit {
   userAttribute : UserAttribute = new UserAttribute();
   userCredentials : UserCredentials[] = new Array<UserCredentials>();
 
-  constructor(public userService : UserService) { console.log("adfsdf")}
+  constructor(
+    private router:Router,
+    public userService : UserService) { 
+      console.log("adfsdf")
+    }
 
   ngOnInit(): void {}
 
@@ -47,9 +52,13 @@ export class RegisterComponent implements OnInit {
     console.log("Create User Json : " + JSON.stringify(this.userInfo));
   
     this.userService.createUser(this.userInfo).subscribe(res=> {
-      if(res.status == 201) {
+      
+      if(res.data == "") {
         console.log("Success User created")
+        alert("관리자를 등록했습니다.")
+        this.router.navigateByUrl("/app/setting/user/admin");
       } else {
+        alert("관리자를 등록 실패했습니다.")
         console.log("Failed Create USer");
       }
     });

@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { UserService } from '../user.service';
+import { User } from '../user';
 
 @Component({
   selector: 'app-administrator-user',
@@ -8,9 +10,21 @@ import { Router } from '@angular/router';
 })
 export class AdministratorUserComponent implements OnInit {
 
-  constructor(private router:Router,) { }
+  user : User = new User();
+  userInfoList : User[]
 
-  ngOnInit(): void {}
+  constructor(
+    private router:Router,
+    public userService : UserService) { }
+
+  ngOnInit(): void {
+    this.userService.userList().subscribe(res=> {
+
+      this.userInfoList = res.data as User[]
+      console.log(this.userInfoList)
+
+    });
+  }
 
   goToRegisterUser(): void {
     this.router.navigateByUrl("/app/setting/user/admin/register");

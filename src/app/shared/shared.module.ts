@@ -4,7 +4,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ClarityModule } from '@clr/angular';
-
+import { CommonModule } from '@angular/common';
 
 @NgModule({
     imports: [
@@ -14,7 +14,7 @@ import { ClarityModule } from '@clr/angular';
         ClarityModule,
         FormsModule,
         ReactiveFormsModule,
-
+        CommonModule
     ],
     declarations:[],
     exports:[
