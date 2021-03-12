@@ -41,29 +41,31 @@
             <ng-container *ngFor = "let topmenu of topMenu"> 
                 <ng-container *ngFor = "let topMenuIcon of topMenuIcon">
                     <ng-container *ngIf = "topmenu.icon_code == topMenuIcon.icon_code">
+
                     <clr-vertical-nav-group routerLinkActive="active">
-                     <a clrVerticalNavLink routerLinkActive="active" routerLink="/app/projects">
-                       <clr-icon [attr.shape]="topMenuIcon.icon_name" clrVerticalNavIcon></clr-icon>
-                        {{topmenu.top_menu_name}}  
-                    </a>
-                    <clr-vertical-nav-group-children>
-                        <ng-container *ngFor = "let submenu of subMenu">   
-                             <ng-container *ngIf= "topmenu.top_menu_code == submenu.top_menu_code"> 
-                        <a clrVerticalNavLink routerLink="/app/projects" routerLinkActive="active">
-                            <ng-contianer *ngFor = "let subMenuIcon of subMenuIcon">
-                            <ng-container *ngIf = "submenu.icon_code == subMenuIcon.icon_code">
-                            <clr-icon [attr.shape]="subMenuIcon.icon_name"></clr-icon>
-                            </ng-container>
-                            </ng-contianer>
-                            {{submenu.sub_menu_name}}
+                        <a clrVerticalNavLink routerLinkActive="active">
+                        <clr-icon [attr.shape]="topMenuIcon.icon_name" clrVerticalNavIcon></clr-icon>
+                            {{topmenu.top_menu_name}}  
                         </a>
-                        </ng-container>
-                        </ng-container>
-                    </clr-vertical-nav-group-children>
+                        <clr-vertical-nav-group-children>
+                            <ng-container *ngFor = "let submenu of subMenu">   
+                                <ng-container *ngIf= "topmenu.top_menu_code == submenu.top_menu_code"> 
+                                    <a clrVerticalNavLink (click)="goToTargetLink(topmenu.top_menu_code, submenu.sub_menu_code)" routerLinkActive="active">
+                                        <ng-contianer *ngFor = "let subMenuIcon of subMenuIcon">
+                                            <ng-container *ngIf = "submenu.icon_code == subMenuIcon.icon_code">
+                                                <clr-icon [attr.shape]="subMenuIcon.icon_name"></clr-icon>
+                                            </ng-container>
+                                        </ng-contianer>
+                                        {{submenu.sub_menu_name}}
+                                    </a>
+                                </ng-container>
+                            </ng-container>
+                        </clr-vertical-nav-group-children>
                     </clr-vertical-nav-group>
+
                 </ng-container>
                 </ng-container>
-            </ng-container>  
+            </ng-container> 
             <a clrVerticalNavLink routerLinkActive="active" routerLink="/app/setting">
                 설정
             </a>

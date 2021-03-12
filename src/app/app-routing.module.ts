@@ -31,7 +31,7 @@ const routes: Routes = [
         component:ProjectListComponent,
       },
       {
-        path:'grafana',
+        path:'target/:topCode/:subCode',
         component:TargetMenuComponent,
         canActivate: [KeycloakGuard],
       },

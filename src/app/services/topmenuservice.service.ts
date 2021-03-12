@@ -6,7 +6,7 @@ import { throwError as observableThrowError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 
 import { buildHttpRequestOptionsWithObserveResponse} from '../utils/utils'
-import {MENU_BASE_URL} from '../utils/utils';
+import { MENU_BASE_URL } from '../utils/utils';
 
 @Injectable({
   providedIn: 'root'
