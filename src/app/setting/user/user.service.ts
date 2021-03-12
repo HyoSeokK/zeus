@@ -22,6 +22,7 @@ export class UserService {
                 user,
                 HTTP_OPTIONS
             ).pipe(map(res => {
+                console.log(res)
                 return res;
             }));
     }
@@ -32,6 +33,7 @@ export class UserService {
                 userListEndpoint,
                 HTTP_OPTIONS
             ).pipe(map(res => {
+                console.log(res)
                 return res;
             }));
     }

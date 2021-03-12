@@ -4,6 +4,7 @@ export class User {
     lastName : string;
     email : string;
     enabled : string;
+    createdTimestamp : number;
     attributes : UserAttribute;
     credentials : Array<UserCredentials>;
 }

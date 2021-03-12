@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { UserService } from '../user.service';
+import { User } from '../user';
 
 @Component({
   selector: 'app-administrator-user',
@@ -9,17 +10,19 @@ import { UserService } from '../user.service';
 })
 export class AdministratorUserComponent implements OnInit {
 
+  user : User = new User();
+  userInfoList : User[]
+
   constructor(
     private router:Router,
     public userService : UserService) { }
 
   ngOnInit(): void {
     this.userService.userList().subscribe(res=> {
-      if(res.status == 201) {
-        console.log("Success User created")
-      } else {
-        console.log("Failed Create USer");
-      }
+
+      this.userInfoList = res.data as User[]
+      console.log(this.userInfoList)
+
     });
   }
 

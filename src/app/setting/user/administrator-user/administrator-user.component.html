@@ -41,37 +41,24 @@
           <th>계정현황</th>
         </tr>
       </thead>
+
       <tbody>
-        <tr>
+        <tr *ngFor="let userList of userInfoList">
           <td>
             <clr-checkbox-wrapper>
               <input type="checkbox" clrCheckbox name="options" required value="option1" />
-              <label>JoinLogger</label>
+              <label>{{userList.username}}</label>
             </clr-checkbox-wrapper>
           </td>
-          <td>관리자</td>
-          <td>김철수</td>
-          <td>MC 사업부 IoT 개발팀(주임)</td>
-          <td>jointree@naver.com</td>
-          <td>2020.10.12 13:10</td>
-          <td>2020.10.12 13:10</td>
-          <td>등록완료</td>
-        </tr>
-        <tr>
-          <td>
-            <clr-checkbox-wrapper>
-              <input type="checkbox" clrCheckbox name="options" required value="option1" />
-              <label>JoinLogger</label>
-            </clr-checkbox-wrapper>
-          </td>
-          <td>관리자</td>
-          <td>김철수</td>
-          <td>MC 사업부 IoT 개발팀(주임)</td>
-          <td>jointree@naver.com</td>
-          <td>2020.10.12 13:10</td>
+          <td></td>
+          <td>{{userList.firstName}}{{userList.lastName}}</td>
+          <td>{{userList.attributes.departmentNm}}({{userList.attributes.position}})</td>
+          <td>{{userList.email}}</td>
+          <td>{{userList.CreatedTimestamp}}</td>
           <td>2020.10.12 13:10</td>
           <td>등록완료</td>
         </tr>
       </tbody>
+      
     </table>
   </div>
