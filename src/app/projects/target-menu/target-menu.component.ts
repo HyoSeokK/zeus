@@ -9,6 +9,7 @@ import { TargetService } from './target-menu.service';
 })
 export class TargetMenuComponent implements OnInit {
 
+  url : string;
   constructor(
     private activatedRoute:ActivatedRoute, 
     private targetService:TargetService) {
@@ -18,7 +19,8 @@ export class TargetMenuComponent implements OnInit {
       let subCode = params['subCode']
 
       targetService.getTargetUrlLink(topCode, subCode).subscribe(res=>{
-        
+        this.url = res.data as string;
+        console.log("this url : " + this.url)
       });
     })
    }
