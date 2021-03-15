@@ -4,7 +4,7 @@
         <h1>Menu URL 설정 하기</h1>
       </div>
       <div>
-        <a href="#">설정 ></a><a href="#" class="link"> SMTP 설정</a>
+        <a href="#">설정 ></a><a href="#" class="link"> URL Link 설정</a>
       </div>
     </div>
   
@@ -15,59 +15,87 @@
   
     <div class="con-box">
       <div class="con-box-item">
-        <form clrForm class="formBox">
-          <clr-combobox-container>
+        <form clrForm class="formBox formBox-lg">
+          <clr-datalist-container>
             <label>Top Menu</label>
-            <clr-combobox  name = "top_menu_code" [(ngModel)] = "topMenu.top_menu_code">
-              <clr-options>
-                <ng-container *ngFor = "let topMenuList of TopMenuList">
-              <clr-option clrValue="{{topMenuList.top_menu_code}}">{{topMenuList.top_menu_name}}</clr-option>
+            <input clrDatalistInput placeholder="Select Menu" [(ngModel)] = "topMenu.top_menu_code" name = "top_menu_code"/>
+            <datalist>
+              <ng-container *ngFor = "let topMenuList of TopMenuList">
+              <option [value]="topMenuList.top_menu_code">{{topMenuList.top_menu_name}}</option>
             </ng-container>
-            </clr-options>
-          </clr-combobox>
-
-          <label>Sub Menu</label>
-            <clr-combobox  name = "sub_menu_code"  [(ngModel)] = "subMenu.sub_menu_code">
-              <clr-options>
-                <ng-container *ngFor = "let subMenuList of SubMenuList">
-              <clr-option clrValue="{{subMenuList.sub_menu_code}}">{{subMenuList.sub_menu_name}}</clr-option>
+            </datalist>
+          </clr-datalist-container>
+          <clr-datalist-container>
+            <label>Sub Menu</label>
+            <input clrDatalistInput placeholder="Select Menu" [(ngModel)] = "subMenu.sub_menu_code" name = "sub_menu_code"/>
+            <datalist>
+              <ng-container *ngFor = "let subMenuList of SubMenuList">
+              <option [value]="subMenuList.sub_menu_code">{{subMenuList.sub_menu_name}}</option>
             </ng-container>
-            </clr-options>
-          </clr-combobox>
-          </clr-combobox-container>
+            </datalist>
+          </clr-datalist-container>
+    
           <clr-input-container>
             <label>LINK URL</label>
-            <input clrInput placeholder="URL" name="menu_url" [(ngModel)] = "topMenu.top_menu_target_url" required/>
+            <input clrInput placeholder="URL" name="menu_url" [(ngModel)] = "topMenu.top_menu_target_url"/>
           </clr-input-container>
-          <clr-toggle-container>
+          <clr-input-container>
             <label>New Window</label>
+          </clr-input-container>
+
+          <div class="url-toggle">
+          <clr-toggle-container>
+            <label class="fx0">No</label>
             <clr-toggle-wrapper>
-                <input type="checkbox" clrToggle name="new_window_check" value="option1" [(ngModel)] = "topMenu.new_window_check"/>
+                <input type="checkbox" clrToggle name="new_window" value="option1" [(ngModel)] = "topMenu.new_window_check"/>
                 <label>Yes</label>
             </clr-toggle-wrapper>
         </clr-toggle-container>
+        </div>
         </form>
         <button class="btn btn-primary" (click) = "onTopMenuSave()">
           <clr-icon shape="download"></clr-icon>저장
         </button>
-        <button class="btn">
+        <button class="btn" (click) = "onOpenModal()" [disabled] = "Deleteclick">
           <clr-icon shape="ban"></clr-icon>삭제
         </button>
       </div>
+
+      <clr-modal [(clrModalOpen)]="TopopenModal">
+        <div class="modal-body modalBox">
+          <clr-icon shape="exclamation-triangle" status="danger" class="col-red" size="80" solid></clr-icon>
+          <p> {{topMenu.top_menu_code}} URL를 삭제 하시겠습니까 ?</p>
+        
+        <div>
+          <button type="button" class="btn btn-outline" (click)="TopopenModal = false"><clr-icon shape="undo"></clr-icon>취소</button>
+          <button type="button" class="btn btn-primary" (click)="onTopMenuDelete()"><clr-icon shape="ban"></clr-icon>삭제</button>
+        </div>
+      </div>
+      </clr-modal>
+
+      <clr-modal [(clrModalOpen)]="SubopenModal">
+        <div class="modal-body modalBox">
+          <clr-icon shape="exclamation-triangle" status="danger" class="col-red" size="80" solid></clr-icon>
+          <p> {{subMenu.sub_menu_code}} URL를 삭제 하시겠습니까 ?</p>
+        <div>
+          <button type="button" class="btn btn-outline" (click)="SubopenModal = false"><clr-icon shape="undo"></clr-icon>취소</button>
+          <button type="button" class="btn btn-primary" (click)="onTopMenuDelete()"><clr-icon shape="ban"></clr-icon>삭제</button>
+        </div>
+      </div>
+      </clr-modal>
+
+
       <div class="con-box-item textBox mtb10">
         <h2 class="con-box-h2-line">메뉴리스트</h2>
-        <button class="btn btn-primary btn-layer" (click) = "onDBSave()" [disabled] = "click">
-          <clr-icon shape="download"></clr-icon>URL 적용
-        </button>
         <clr-tree>
           <ng-container *ngFor = "let TopMenu of TopMenuList">
-            <clr-tree-node (click) = "onTopMenuGet(TopMenu)">
+            <clr-tree-node >
               <ng-container *ngFor = "let topMenuIcon of topMenuIcon">
               <ng-container *ngIf = "TopMenu.icon_code == topMenuIcon.icon_code">
                 <clr-icon [attr.shape]="topMenuIcon.icon_name"></clr-icon>
               </ng-container> 
             </ng-container>  
-              {{TopMenu.top_menu_name}} 
+              <p (click) = "onTopMenuGet(TopMenu)">{{TopMenu.top_menu_name}}</p>
               <clr-tree-node *ngFor = "let SubMenu of SubMenuList" (click) = "onSubMenuGet(SubMenu)">
                 <ng-container *ngIf = "TopMenu.top_menu_code == SubMenu.top_menu_code">
                   <ng-container *ngFor = "let topMenuIcon of topMenuIcon">

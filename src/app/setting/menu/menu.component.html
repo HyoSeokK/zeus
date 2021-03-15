@@ -15,51 +15,73 @@
   
   <div class="con-box">
     <div class="con-box-item">
-      <form clrForm class="formBox">
+      <form clrForm class="formBox bibox">
+        <div class="flex-box-wrap fx40">
+          <div class="flex-box-item">
         <clr-input-container>
           <label>Top Menu Name</label>
-          <input clrInput placeholder="Name" name="top_menu_name" [(ngModel)] = "topMenu.top_menu_name" required/>
+          <input clrInput placeholder="Name" name="top_menu_name" [(ngModel)] = "topMenu.top_menu_name"/>
         </clr-input-container>
+        </div>
+        <div class="flex-box-item">
         <clr-input-container>
           <label>Top Menu Code</label>
-          <input clrInput placeholder="Code" name="top_menu_code" [(ngModel)] = "topMenu.top_menu_code" required/>
+          <input clrInput placeholder="Code" name="top_menu_code" [(ngModel)] = "topMenu.top_menu_code"/>
         </clr-input-container>
+       </div>
+      </div>
+       <div class="flex-box-wrap fx40">
         <clr-input-container>
           <label>Menu Order</label>
-          <input clrInput placeholder="Order" name="top_menu_order" [(ngModel)] = "topMenu.top_menu_order" required/>
+          <input clrInput placeholder="Order" name="top_menu_order" [(ngModel)] = "topMenu.top_menu_order"/>
         </clr-input-container>
         <clr-combobox-container>
           <label>Top Menu Icon</label>
-          <clr-combobox [(ngModel)] = "topMenu.icon_code" name = "top_menu_icon" fi required>
-            <clr-options> 
+          <clr-combobox [(ngModel)] = "topMenu.icon_code" name = "top_menu_icon">
+            <clr-options > 
               <ng-container *ngFor = "let topMenuIcon of topMenuIcon">       
-            <clr-option clrValue="{{topMenuIcon.icon_code}}">
+            <clr-option clrValue="{{topMenuIcon.icon_code}}" class="mw10">
               <clr-icon [attr.shape]="topMenuIcon.icon_name"></clr-icon> {{topMenuIcon.icon_description}}
             </clr-option>
             </ng-container>
           </clr-options>
         </clr-combobox>
         </clr-combobox-container>
-        
+        </div>
+        <div class="wd100">
         <button class="btn btn-primary" (click) = "onTopMenuSave()">
           <clr-icon shape="download"></clr-icon>저장
         </button>
-        <button class="btn" (click) = "onTopMenuDelete()">
+        <button class="btn" (click) = "onTopOpenModal()" [disabled] = "TopDeleteclick">
           <clr-icon shape="ban"></clr-icon>삭제
         </button>
+      </div>
       </form>
-      <form clrForm class="formBox">
+
+      <form clrForm class="formBox bibox">
+        <div class="flex-box-wrap fx40">
+          <div class="flex-box-item">
         <clr-input-container>
           <label>Sub Menu Name</label>
-          <input clrInput placeholder="Name" name="sub_menu_name" [(ngModel)] = "subMenu.sub_menu_name" required/>
+          <input clrInput placeholder="Name" name="sub_menu_name" [(ngModel)] = "subMenu.sub_menu_name"/>
         </clr-input-container>
+        </div>
+        <div class="flex-box-item">
         <clr-input-container>
           <label>Sub Menu Code</label>
-          <input clrInput placeholder="SubCode" name="sub_menu_code" [(ngModel)] = "subMenu.sub_menu_code" required/>
+          <input clrInput placeholder="SubCode" name="sub_menu_code" [(ngModel)] = "subMenu.sub_menu_code"/>
         </clr-input-container>
+        </div>
+        </div>
+        <div class="flex-box-wrap fx40">
+        <clr-input-container>
+          <label>Menu Order</label>
+          <input clrInput placeholder="Order" name="sub_menu_order" [(ngModel)] = "subMenu.sub_menu_order"/>
+        </clr-input-container>
+      
         <clr-combobox-container>
           <label>Top Menu Code</label>
-          <clr-combobox [(ngModel)] = "subMenu.top_menu_code" name = "sub_top_menu_code" required>
+          <clr-combobox [(ngModel)] = "subMenu.top_menu_code" name = "sub_top_menu_code">
             <clr-options>
               <ng-container *ngFor = "let topMenuCodeList of topMenuCodeList">
             <clr-option clrValue="{{topMenuCodeList.top_menu_code}}">{{topMenuCodeList.top_menu_code}}</clr-option>
@@ -67,13 +89,10 @@
           </clr-options>
         </clr-combobox>
         </clr-combobox-container>
-        <clr-input-container>
-          <label>Menu Order</label>
-          <input clrInput placeholder="Order" name="sub_menu_order" [(ngModel)] = "subMenu.sub_menu_order" required/>
-        </clr-input-container>
+      </div>
         <clr-combobox-container>
           <label>Sub Menu Icon</label>
-          <clr-combobox [(ngModel)] = "subMenu.icon_code" name = "sub_menu_icon" required>
+          <clr-combobox [(ngModel)] = "subMenu.icon_code" name = "sub_menu_icon">
             <clr-options> 
               <ng-container *ngFor = "let topMenuIcon of topMenuIcon">
             <clr-option clrValue="{{topMenuIcon.icon_code}}">
@@ -83,15 +102,41 @@
           </clr-options>
         </clr-combobox>
         </clr-combobox-container>
+      
+      <div class="wd100">
         <button class="btn btn-primary" (click) = "onSubMenuSave()">
           <clr-icon shape="download"></clr-icon>저장
         </button>
-        <button class="btn" (click) = "onSubMenuDelete()">
+        <button class="btn" (click) = "onSubOpenModal()" [disabled] = "SubDeleteclick">
           <clr-icon shape="ban"></clr-icon>삭제
         </button>
+      </div>
       </form>
-  
     </div>
+
+    <clr-modal [(clrModalOpen)]="TopopenModal">
+      <div class="modal-body modalBox">
+        <clr-icon shape="exclamation-triangle" status="danger" class="col-red" size="80" solid></clr-icon>
+        <p> {{topMenu.top_menu_code}} 메뉴를 삭제 하시겠습니까 ?</p>
+      <div>
+        <button type="button" class="btn btn-outline" (click)="TopopenModal = false"><clr-icon shape="undo"></clr-icon>취소</button>
+        <button type="button" class="btn btn-primary" (click)="onTopMenuDelete()"><clr-icon shape="ban"></clr-icon>삭제</button>
+      </div>
+    </div>
+    </clr-modal>
+
+    <clr-modal [(clrModalOpen)]="SubopenModal" [clrModalClosable]="false">
+      <div class="modal-body modalBox">
+        <clr-icon shape="exclamation-triangle" status="danger" class="col-red" size="80" solid></clr-icon>
+        <p>{{subMenu.sub_menu_code}} 메뉴를 삭제 하시겠습니까 ?</p>
+      <div>
+        <button type="button" class="btn btn-outline" (click)="SubopenModal = false"><clr-icon shape="undo"></clr-icon>취소</button>
+        <button type="button" class="btn btn-primary" (click)="onSubMenuDelete()"><clr-icon shape="ban"></clr-icon>삭제</button>
+      </div>
+    </div>
+    </clr-modal>
+
+    
     <div class="con-box-item textBox mtb10">
       <h2 class="con-box-h2-line">메뉴리스트</h2>
       <button class="btn btn-primary btn-layer" (click) = "onDBSave()" [disabled] = "click">

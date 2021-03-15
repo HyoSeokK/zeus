@@ -13,6 +13,7 @@ import { ClarityModule } from '@clr/angular';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { KeycloakAngularModule, KeycloakService } from 'keycloak-angular';
 import { initializeKeycloak, initConfig } from './app.initialize';
+import {ToastrModule} from 'ngx-toastr';
 
 
 @NgModule({
@@ -29,6 +30,7 @@ import { initializeKeycloak, initConfig } from './app.initialize';
     ClarityModule,
     BrowserAnimationsModule,
     KeycloakAngularModule,
+    ToastrModule.forRoot()
   ],
   providers: [
     {

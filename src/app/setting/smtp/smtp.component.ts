@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 
 import { SmtpService } from '../../services/smtpservice.service' 
 import { smtpInfo } from './smtpInfo';
-import  {Router } from '@angular/router';
+import {NotificationService} from '../../services/notification.service'
 
 @Component({
   selector: 'app-smtptest',
@@ -15,7 +15,9 @@ export class SmtptestComponent implements OnInit {
 
   smtpInfo: smtpInfo[]
 
-  constructor(private smtpservice: SmtpService, private router:Router) {
+  constructor(private smtpservice: SmtpService,
+    private notifyservice: NotificationService
+    ) {
     
    }
 
@@ -28,35 +30,53 @@ export class SmtptestComponent implements OnInit {
     
   }
   onSubmit(){
+    if(this.EmailCheck() == false){
+      this.notifyservice.showWarning("입력값을 확인해주세요","")
+    }else{
     this.smtpservice.postSmtp(this.smtpInfo[0].AdminAddress,this.smtpInfo[0].SmtpAddress,this.smtpInfo[0].Port,
       this.smtpInfo[0].Password)
       .subscribe(() =>{
-        alert("테스트 성공")
+        this.notifyservice.showSuccess("연결 테스트에 성공되었습니다","");
         this.click = false;
       },
       error => {
         console.log(error)
-        alert("테스트 실패")
+        this.notifyservice.showWarning("입력값을 확인해주세요","");
       }     
         
       )
-      
+    }
   }
 
   onSave(){
     this.smtpservice.saveSmtp(this.smtpInfo[0].AdminAddress,this.smtpInfo[0].SmtpAddress,this.smtpInfo[0].Port,
       this.smtpInfo[0].Password)
       .subscribe(() =>{
-        alert("저장 성공")
-        this.router.navigateByUrl("/app/setting")
+        this.notifyservice.showSuccess("입력정보가 저장 되었습니다","");
+        this.ngOnInit();
+
       },
       error => {
         console.log(error)
-        alert("저장 실패")
+        this.notifyservice.showError("입력정보 저장에 실패하였습니다","");
       }     
         
       )
       
   }
+
+  onReset(){
+    this.smtpInfo[0].AdminAddress = "";
+    this.smtpInfo[0].SmtpAddress = "";
+  }
   
+  EmailCheck():boolean{
+    var check:boolean;
+
+    var regexp = new RegExp(/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/);
+
+    check = regexp.test(this.smtpInfo[0].AdminAddress);
+
+    return check
+  }
 }

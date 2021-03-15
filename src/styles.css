@@ -151,3 +151,44 @@ margin: 100px 0;
 .modal-btn-close:hover { transform:rotate(359deg); }
 
 
+/*  */
+.ht96p { height: 96.5% !important;}
+
+.flex-row { display: flex; flex-flow: row ; justify-content: left; width:100%;}
+.flex-row > div {flex:1 1 50%;}
+
+.formBox-lg .clr-form-horizontal > .clr-input-group { width:70% !important;}
+.flex-row.formBox clr-input-container { margin:0 !important;}
+
+.url-toggle .clr-form-control .clr-control-container { flex:0 !important;}
+.fx0 { font-weight: 400 !important; cursor: pointer;}
+.fx1 {  cursor: pointer;}
+
+.con-box .url-toggle .clr-col-md-2 { flex:0;}
+
+.bibox  { display: flex; justify-content: space-between; flex-flow: wrap;}
+.bibox .felx-box-wrap  { flex:0 0 50%; }
+.bibox .felx-box-wrap .flex-box-item {}
+.fx100{flex:0 0 100% !important;}
+.fx40 { flex:40%;}
+
+.bibox .clr-combobox-options { min-height:10.6rem !important;}
+.flex-box-wrap .clr-input { width: 60% !important;}
+.mg0 { margin:0 5px 0 0 !important;}
+.mg1 { margin:0 !important;}
+.mw10 { min-width: 9.6rem !important;}
+.wd100 { width:100% !important;}
+.mh120 { min-height: 120px ;}
+.pd-text-box { padding:1rem 2.5rem 1rem 2.5rem !important;}
+
+table.pl50 > thead > tr > th { padding-left: 2rem !important;}
+table.pl50 > tbody > tr > td { padding-left: 2rem !important; vertical-align: middle;}
+
+@media (max-width: 768px) {
+  table.pl50 > thead > tr > th { padding-left: 0.5rem !important;}
+  table.pl50 > tbody > tr > td { padding-left: 0.5rem !important;}
+}
+
+.clr-textarea-wrapper { margin-bottom: 5px;}
+
+.textarea-on { vertical-align: top !important; padding-top:20px !important;}
