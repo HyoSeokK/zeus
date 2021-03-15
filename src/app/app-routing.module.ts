@@ -8,6 +8,7 @@ import { SmtptestComponent } from './setting/smtp/smtp.component'
 import { AdministratorUserComponent } from './setting/user/administrator-user/administrator-user.component';
 import { DeveloperUserComponent } from './setting/user/developer-user/developer-user.component';
 
+import { AppMainComponent } from '../app/app-main/app-main.component';
 import { DataStorageComponent } from './setting/data-storage/data-storage.component'
 import { YamlComponent } from './setting/yaml/yaml.component'
 import { MenuComponent } from './setting/menu/menu.component'
@@ -20,20 +21,32 @@ import { RegisterComponent as DevRegister } from './setting/user/developer-user/
 import { RegisterComponent as YamlRegister} from './setting/yaml/register/register.component';
 
 const routes: Routes = [
-  { path:'', redirectTo:'app',pathMatch:'full', },
+  { 
+    path:'', 
+    redirectTo:'app/main',
+    pathMatch:'full', 
+  },
+  { 
+    path:'app', 
+    redirectTo:'app/main',
+    pathMatch:'full', 
+  },
   {
     path:'app',
     component:AppLayoutComponent,
     canActivate: [KeycloakGuard],
     children:[
       {
+        path:'main',
+        component:AppMainComponent,
+      },
+      {
         path:'projects',
         component:ProjectListComponent,
       },
       {
-        path:'grafana',
+        path:'target/:topCode/:subCode',
         component:TargetMenuComponent,
-        canActivate: [KeycloakGuard],
       },
       {
         path:'setting',
