@@ -14,6 +14,7 @@ export class SubmenuserviceService {
   private saveUri : string = MENU_BASE_URL + "/submenusave";
   private deleteUri : string = MENU_BASE_URL + "/submenudelete";
   private saveSubUrl : string = MENU_BASE_URL + "/submenusaveUrl";
+  private deleteSubUrl : string = MENU_BASE_URL + "/submenudeleteUrl"
 
   constructor(private http: HttpClient) { }
 
@@ -56,5 +57,14 @@ export class SubmenuserviceService {
     ).pipe(
       catchError(error => observableThrowError(error))
     );
+  }
+
+  public deleteSubUrlLink(sub_menu_code:string,sub_menu_target_url:string){
+    return this.http.post(this.deleteSubUrl,JSON.stringify({
+      'sub_menu_code':sub_menu_code, 'sub_menu_target_url':sub_menu_target_url
+    }),
+    ).pipe(
+      catchError(error => observableThrowError(error))
+    )
   }
 }

@@ -25,7 +25,6 @@
     <div class="content-container">      
         <clr-vertical-nav [clrVerticalNavCollapsible]="true" *ngIf="isUserExisting" class="sideMenu">
             <div>
-
             <ng-container *ngFor = "let topmenu of topMenu"> 
                 <ng-container *ngFor = "let topMenuIcon of topMenuIcon">
                     <ng-container *ngIf = "topmenu.icon_code == topMenuIcon.icon_code">
@@ -58,6 +57,14 @@
             <a clrVerticalNavLink routerLinkActive="active" routerLink="/app/setting">
                 설정
             </a>
+            </div>
+            <div class="mb-20">
+                <clr-toggle-container>
+                    <clr-toggle-wrapper>
+                        <input type="checkbox" clrToggle name="options" required value="option1" (click)="switchTheme()"
+                            id="ThemeSwitch" />
+                    </clr-toggle-wrapper>
+                </clr-toggle-container>
             </div>
         </clr-vertical-nav>
         <div class="content-area">

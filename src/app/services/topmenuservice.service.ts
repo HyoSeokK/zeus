@@ -14,10 +14,11 @@ import { MENU_BASE_URL } from '../utils/utils';
 export class TopmenuserviceService {
 
   private getTopMenuUri : string = MENU_BASE_URL + "/topmenu";
-  private getTopMenuIconUri : string = MENU_BASE_URL + "/topmenuicon"
+  private getTopMenuIconUri : string = MENU_BASE_URL + "/topmenuicon";
   private saveUri : string = MENU_BASE_URL + "/topmenusave";
   private deleteUri : string = MENU_BASE_URL + "/topmenudelete";
   private saveTopUrl : string = MENU_BASE_URL + "/topmenusaveUrl";
+  private deleteTopUrl : string = MENU_BASE_URL + "/topmenudeleteUrl";
  
 
   constructor(private http: HttpClient) { }
@@ -70,6 +71,15 @@ export class TopmenuserviceService {
     ).pipe(
       catchError(error => observableThrowError(error))
     );
+  }
+
+  public deleteTopUrlLink(top_menu_code:string,top_menu_target_url:string){
+    return this.http.post(this.deleteTopUrl,JSON.stringify({
+      'top_menu_code':top_menu_code, 'top_menu_target_url':top_menu_target_url
+    }),
+    ).pipe(
+      catchError(error => observableThrowError(error))
+    )
   }
 
   

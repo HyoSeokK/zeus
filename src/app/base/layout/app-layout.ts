@@ -1,4 +1,4 @@
-import { Component, OnInit} from '@angular/core';
+import { Component, OnInit,Inject, PLATFORM_ID} from '@angular/core';
 import { topMenu } from '../../setting/menu/topmenu'
 import { subMenu } from '../../setting/menu/submenu'
 import { topMenuIcon } from '../../setting/menu/topmenuicon'
@@ -6,6 +6,7 @@ import { Router } from '@angular/router';
 import { TopmenuserviceService } from '../../services/topmenuservice.service'
 import { SubmenuserviceService } from '../../services/submenuservice.service'
 import { CustomIconService } from '../../services/custom-icon.service'
+import { DOCUMENT, isPlatformBrowser } from '@angular/common';
 import '@cds/core/toggle/register.js';
 import { ClarityIcons, userIcon, checkboxListIcon, calendarIcon, folderOpenIcon, administratorIcon } from '@cds/core/icon';
 ClarityIcons.addIcons(userIcon, checkboxListIcon, calendarIcon, folderOpenIcon, administratorIcon);
@@ -22,7 +23,13 @@ export class AppLayoutComponent implements OnInit{
     subMenu : subMenu[]
     topMenuIcon: topMenuIcon[]
     subMenuIcon: topMenuIcon[]
-    mySubscription: any;
+    linkRef: HTMLLinkElement;
+
+    themes = [
+        { name: 'light', href: '/assets/css/clr-ui.css' },
+        { name: 'dark', href: '/assets/css/clr-ui-dark.css' }
+      ];
+      theme = this.themes[0];
 
     constructor(
         private topmenuservice: TopmenuserviceService,
@@ -31,6 +38,7 @@ export class AppLayoutComponent implements OnInit{
         private router:Router,
         ) {
             customIcon.load();
+           
         }
 
     ngOnInit() {
