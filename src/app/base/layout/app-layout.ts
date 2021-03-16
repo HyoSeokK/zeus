@@ -13,8 +13,7 @@ ClarityIcons.addIcons(userIcon, checkboxListIcon, calendarIcon, folderOpenIcon, 
 @Component({
     selector: 'app-layout',
     templateUrl: 'app-layout.html',
-    styleUrls: ["app-layout.css"],
-    
+    styleUrls: ["app-layout.css"],   
 })
 
 export class AppLayoutComponent implements OnInit{
@@ -30,7 +29,7 @@ export class AppLayoutComponent implements OnInit{
         private submenuservice: SubmenuserviceService,
         private customIcon: CustomIconService,
         private router:Router,
-        ){
+        ) {
             customIcon.load();
         }
 
@@ -59,5 +58,11 @@ export class AppLayoutComponent implements OnInit{
         this.topMenuIcon = resp.body as topMenuIcon[]
         this.subMenuIcon = resp.body as topMenuIcon[]
         })
+    }
+
+    goToMain() : void {
+        console.log("main page")
+        this.router.navigateByUrl("/app/main");
     } 
+
 }

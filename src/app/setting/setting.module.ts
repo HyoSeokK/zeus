@@ -3,6 +3,7 @@ import { RouterModule } from '@angular/router';
 import { SharedModule } from '../shared/shared.module'
 import { UserModule } from './user/user.module';
 import { YamlModule } from './yaml/yaml.module';
+import { GroupModule } from './group/group.module';
 import { ClarityModule } from '@clr/angular';
 
 import { SmtpComponent } from './smtpSample/setting.smtp'
@@ -18,7 +19,8 @@ import { SettingComponent } from './setting.component';
         RouterModule,
         ClarityModule,
         UserModule,
-        YamlModule
+        YamlModule,
+        GroupModule
     ],
     declarations:[
         SmtpComponent,
@@ -26,7 +28,7 @@ import { SettingComponent } from './setting.component';
         MenuComponent,
         UrlComponent,
         RefreshComponent,
-        SettingComponent
+        SettingComponent,
     ],
     exports:[
     ],

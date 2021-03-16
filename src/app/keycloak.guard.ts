@@ -24,12 +24,21 @@ export class KeycloakGuard extends KeycloakAuthGuard {
       });
     }
 
+    console.log('role restriction given at app-routing.module for this route', route.data.roles);
+    console.log('User roles coming after login from keycloak :', this.roles);
+
     // path 에서 필요한 roles
     const requiredRoles = route.data.roles;
 
     if(!(requiredRoles instanceof Array) || requiredRoles.length === 0) {
       return true;
     } else {
+      for (const requiredRole of requiredRoles) {
+        if(this.roles.indexOf(requiredRole) > -1) {
+          console.log(requiredRole)
+          return true;
+        }
+      }
       console.log("false")
     }
 
