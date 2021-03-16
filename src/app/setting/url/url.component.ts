@@ -52,7 +52,7 @@ export class UrlComponent implements OnInit {
   }
   onTopMenuSave(){
      if(this.topMenu.top_menu_code == null && this.topMenu.top_menu_target_url == null && this.subMenu.sub_menu_code == null){
-      this.notifyservice.showWarning("입력값을 확인해주세요1","");
+      this.notifyservice.showWarning("입력값을 확인해주세요","");
     } 
     if(this.topMenu.top_menu_code != null && this.subMenu.sub_menu_code == null){
      
@@ -75,7 +75,7 @@ export class UrlComponent implements OnInit {
         )
       }
       else {
-        this.notifyservice.showWarning("입력값을 확인해주세요2","")
+        this.notifyservice.showWarning("입력값을 확인해주세요","")
       }
     }
     else if(this.subMenu.sub_menu_code != null){
@@ -98,7 +98,7 @@ export class UrlComponent implements OnInit {
         )
       }
       else {
-        this.notifyservice.showWarning("입력값을 확인해주세요3","")
+        this.notifyservice.showWarning("입력값을 확인해주세요","")
       }
     }
   }
@@ -173,6 +173,7 @@ export class UrlComponent implements OnInit {
         this.notifyservice.showSuccess("입력정보가 삭제 되었습니다","");
         this.onReset();
         this.TopopenModal = false;
+        this.ngOnInit();
       },
       error => {
         console.log(error)
@@ -193,6 +194,7 @@ export class UrlComponent implements OnInit {
           this.notifyservice.showSuccess("입력정보가 삭제 되었습니다", "");
           this.onReset();
           this.SubopenModal = false;
+          this.ngOnInit();
         },
         error => {
           console.log(error)

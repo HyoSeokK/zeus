@@ -7,7 +7,7 @@ import {subMenu} from './submenu'
 import {topMenuIcon} from './topmenuicon'
 import { AppLayoutComponent } from 'src/app/base/layout/app-layout';
 import {NotificationService} from '../../services/notification.service'
-import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
+
 
 @Component({
   selector: 'app-menu',
@@ -68,28 +68,33 @@ export class MenuComponent implements OnInit {
     this.TopMenuobj.top_menu_code = this.topMenu.top_menu_code
     for(var i = 0; i<this.TopMenuList.length; i++){
       if(this.TopMenuobj.top_menu_code == this.TopMenuList[i].top_menu_code){
-        this.notifyservice.showWarning("이미 존재하는 TopMenuCode입니다","");
-        check = 0;
-        break;
-      }else {
-        check = 1;
-      }
+          this.notifyservice.showWarning("이미 존재하는 TopMenuCode입니다","");
+          check = 0;
+          break;
+          
+        }else {
+          check = 1;
     }
+  }
     this.TopMenuobj.top_menu_name = this.topMenu.top_menu_name
     this.TopMenuobj.top_menu_order = this.topMenu.top_menu_order
     this.TopMenuobj.icon_code = this.topMenu.icon_code
 
     
-    if (check == 1 && this.TopMenuobj.top_menu_code != null && this.TopMenuobj.top_menu_name != null && this.TopMenuobj.top_menu_order != null && this.TopMenuobj.icon_code != null){
-    this.TopMenuList.push(this.TopMenuobj);
-    this.TopMenuAddList.push(this.TopMenuobj);
-    this.click = false;
-    this.topcheck = 1;
-    this.onTopReset();
+    if (check == 1){
+      if(this.TopMenuobj.top_menu_code != null && this.TopMenuobj.top_menu_name != null && this.TopMenuobj.top_menu_order != null && this.TopMenuobj.icon_code != null){
+          this.TopMenuList.push(this.TopMenuobj);
+          this.TopMenuAddList.push(this.TopMenuobj);
+          this.click = false;
+          this.topcheck = 1;
+          this.onTopReset();
+      }
+      else {
+        console.log(check)
+        this.notifyservice.showWarning("입력값을 확인해주세요","");
+      }
     }
-    else {
-      this.notifyservice.showWarning("입력값을 확인해주세요","");
-    }
+   
   }
 
   onSubMenuSave(){
@@ -110,18 +115,18 @@ export class MenuComponent implements OnInit {
         check = 1;
       }
     }
-    if(check == 1 && this.SubMenuobj.top_menu_code != null && this.SubMenuobj.sub_menu_name != null && this.SubMenuobj.sub_menu_order != null
-      && this.SubMenuobj.sub_menu_code != null && this.SubMenuobj.icon_code != null){
-    this.SubMenuList.push(this.SubMenuobj);
-    this.SubMenuAddList.push(this.SubMenuobj);
-    this.click = false;
-    this.subcheck = 1;
-    this.onSubReset();
+    if(check == 1){
+      if(this.SubMenuobj.top_menu_code != null && this.SubMenuobj.sub_menu_name != null && this.SubMenuobj.sub_menu_order != null
+        && this.SubMenuobj.sub_menu_code != null && this.SubMenuobj.icon_code != null){
+            this.SubMenuList.push(this.SubMenuobj);
+            this.SubMenuAddList.push(this.SubMenuobj);
+            this.click = false;
+            this.subcheck = 1;
+            this.onSubReset();
+       }else{
+        this.notifyservice.showWarning("입력값을 확인해주세요","");
+      }
     }
-    else{
-      this.notifyservice.showWarning("입력값을 확인해주세요","");
-    }
-    
   }
 
   onDBSave(){

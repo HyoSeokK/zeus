@@ -16,7 +16,27 @@
     <div class="con-box">
       <div class="con-box-item">
         <form clrForm class="formBox formBox-lg">
-          <clr-datalist-container>
+          <clr-combobox-container>
+            <label>Top Menu</label>
+            <clr-combobox [(ngModel)] = "topMenu.top_menu_code" name = "top_top_menu_code">
+              <clr-options>
+                <ng-container *ngFor = "let topMenuList of TopMenuList">
+              <clr-option clrValue="{{topMenuList.top_menu_code}}">{{topMenuList.top_menu_name}}</clr-option>
+            </ng-container>
+            </clr-options>
+          </clr-combobox>
+        </clr-combobox-container>
+        <clr-combobox-container>
+          <label>Sub Menu</label>
+            <clr-combobox [(ngModel)] = "subMenu.top_menu_code" name = "sub_sub_menu_code">
+              <clr-options>
+                <ng-container *ngFor = "let subMenuList of SubMenuList">
+              <clr-option clrValue="{{subMenuList.top_menu_code}}">{{subMenuList.sub_menu_name}}</clr-option>
+            </ng-container>
+            </clr-options>
+          </clr-combobox>
+          </clr-combobox-container>
+          <!-- <clr-datalist-container>
             <label>Top Menu</label>
             <input clrDatalistInput placeholder="Select Menu" [(ngModel)] = "topMenu.top_menu_code" name = "top_menu_code"/>
             <datalist>
@@ -33,7 +53,7 @@
               <option [value]="subMenuList.sub_menu_code">{{subMenuList.sub_menu_name}}</option>
             </ng-container>
             </datalist>
-          </clr-datalist-container>
+          </clr-datalist-container> -->
     
           <clr-input-container>
             <label>LINK URL</label>
