@@ -46,6 +46,6 @@ testem.log
 Thumbs.db
 
 /src/app/app.initialize.ts
-.package.json
-.nohup.out
+package.json
+./nohup.out
 .proxy.conf.json

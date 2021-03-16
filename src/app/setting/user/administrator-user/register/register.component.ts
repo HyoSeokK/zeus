@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
-import { User, UserAttribute, UserCredentials } from '../../user';
+import { User, UserAttribute, UserCredentials, AdminInfo } from '../../user';
 import { UserService } from '../../user.service';
 import { Router } from '@angular/router';
 
@@ -14,11 +14,12 @@ export class RegisterComponent implements OnInit {
   userInfo : User = new User();
   userAttribute : UserAttribute = new UserAttribute();
   userCredentials : UserCredentials[] = new Array<UserCredentials>();
+  adminCli : AdminInfo = new AdminInfo();
 
   constructor(
     private router:Router,
     public userService : UserService) { 
-      console.log("adfsdf")
+      this.adminCli = JSON.parse(localStorage.getItem("cli")) as AdminInfo; 
     }
 
   ngOnInit(): void {}
@@ -34,7 +35,7 @@ export class RegisterComponent implements OnInit {
   });
 
   onSubmit() {
-    this.userInfo.username = this.userForm.controls.userId.value
+    this.userInfo.username = this.userForm.controls.userId.value;
     this.userInfo.firstName = this.userForm.controls.userFirstname.value;
     this.userInfo.lastName = this.userForm.controls.userLastName.value;
     this.userInfo.email = this.userForm.controls.userEmail.value;
@@ -51,17 +52,16 @@ export class RegisterComponent implements OnInit {
 
     console.log("Create User Json : " + JSON.stringify(this.userInfo));
   
-    this.userService.createUser(this.userInfo).subscribe(res=> {
+    this.userService.createUser(this.userInfo, this.adminCli).subscribe(res=> {
       
       if(res.data == "") {
-        console.log("Success User created")
-        alert("관리자를 등록했습니다.")
-        this.router.navigateByUrl("/app/setting/user/admin");
+          console.log("Success User created")
+          alert("관리자를 등록했습니다.")
+          this.router.navigateByUrl("/app/setting/user/admin");
       } else {
-        alert("관리자를 등록 실패했습니다.")
-        console.log("Failed Create USer");
+          alert("관리자를 등록 실패했습니다.")
+          console.log("Failed Create USer");
       }
     });
   }
-
 }

@@ -1,3 +1,4 @@
+<div class="innerDiv">
 <div class="titleBox">
     <div>
         <h1 class="custom-h1">SMTP 설정 </h1>
@@ -51,3 +52,32 @@
       <clr-icon shape="download"></clr-icon>저장
     </button>
   </div>
+</div>
+  <!--
+<form class="clr-form clr-form-horizontal">
+    <div class="clr-form-control">
+        <label>담당자 메일주소</label>
+        <input  type = "text" class="clr-input" name="AdminAddress" [(ngModel)]="smtpInfo.AdminAddress" required>
+    </div>
+    <div class="clr-form-control">
+        <label>SMTP서버주소</label>
+        <input type = "text" class="clr-input" name = "SmtpAddress" [(ngModel)] = "smtpInfo.SmtpAddress" required >
+    </div>
+    <div class="clr-form-control">
+        <label>접속포트</label>
+        <clr-combobox [(ngModel)] = "smtpInfo.Port" name = "Port" required>
+            <clr-options>
+              <clr-option clrValue="465">465</clr-option>
+              <clr-option clrValue="587">587</clr-option>
+            </clr-options>
+          </clr-combobox>
+    </div>
+    <div class="clr-form-control">
+        <label>비밀번호</label>
+        <input type = "password" class="clr-input" name = "Password" [(ngModel)] = "smtpInfo.Password" required>
+    </div>
+        <div class="clr-form-control">
+            <button type = "button" class = "btn btn-success" (click) = "onSubmit()">연결테스트</button>
+            <button type = "button" class = "btn btn-primary" (click) = "onSave()" [disabled] = "click">저장</button>
+        </div>
+</form>-->

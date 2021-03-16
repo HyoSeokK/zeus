@@ -5,6 +5,8 @@ import { ThemeService } from '../services/app-theme.service';
 import { THEME_ARRAY, ThemeInterface } from '../services/theme';
 import { clone, BASE_URL } from '../utils/utils';
 import { EnvSetting } from '../utils/utils.env';
+import { User, AdminInfo } from './user/user';
+import { FormControl, FormGroup } from '@angular/forms';
 
 import '@cds/core/toggle/register.js';
 
@@ -19,13 +21,14 @@ const changeThemeEndpoint = BASE_URL + "/changeTheme";
 
 export class SettingComponent implements OnInit {
 
+    isModalVisible = false;
     env : EnvSetting;
     themeRst : string;
     themeArray: ThemeInterface[] = clone(THEME_ARRAY);
     styleMode: string = this.themeArray[0].showStyle;
+    adminCli : AdminInfo = new AdminInfo();
 
     constructor(
-        private  httpClient:HttpClient,
         private router:Router,
         public theme:ThemeService
         ) {}
@@ -54,8 +57,26 @@ export class SettingComponent implements OnInit {
         }
     }
 
-    goToAdminUserManageLink(): void {
-            this.router.navigateByUrl("/app/setting/user/admin");
+    adminCliForm = new FormGroup({
+        id : new FormControl(''),
+        pw : new FormControl(''),
+        client : new FormControl(''),
+        secret : new FormControl(''),
+        url : new FormControl(''),
+    })
+    goToAdminUserManageLink() : void {
+        this.adminCli.adminId = this.adminCliForm.controls.id.value;
+        this.adminCli.adminPw = this.adminCliForm.controls.pw.value;
+        this.adminCli.clientId = this.adminCliForm.controls.client.value;
+        this.adminCli.clientSecret = this.adminCliForm.controls.secret.value;
+        this.adminCli.tokenUrl = this.adminCliForm.controls.url.value;
+      
+        localStorage.setItem("cli", JSON.stringify(this.adminCli))
+        this.router.navigateByUrl("/app/setting/user/admin");
+    }
+    
+    goToGroupManageLink() : void {
+        this.router.navigateByUrl("/app/setting/group");
     }
 
     goToDevUserManageLink() : void {

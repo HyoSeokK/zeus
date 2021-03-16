@@ -14,11 +14,13 @@ import { YamlComponent } from './setting/yaml/yaml.component'
 import { MenuComponent } from './setting/menu/menu.component'
 import { UrlComponent } from './setting/url/url.component'
 import { RefreshComponent } from './setting/refresh/refresh.component'
+import { GroupComponent } from './setting/group/group.component'
 import { KeycloakGuard } from './keycloak.guard';
 
 import { RegisterComponent as AdminRegister} from './setting/user/administrator-user/register/register.component';
 import { RegisterComponent as DevRegister } from './setting/user/developer-user/register/register.component';
 import { RegisterComponent as YamlRegister} from './setting/yaml/register/register.component';
+import { RegisterComponent as GroupRegister } from './setting/group/register/register.component';
 
 const routes: Routes = [
   { 
@@ -35,6 +37,7 @@ const routes: Routes = [
     path:'app',
     component:AppLayoutComponent,
     canActivate: [KeycloakGuard],
+    data : {roles:['super_admin', 'Viewer']},
     children:[
       {
         path:'main',
@@ -55,6 +58,14 @@ const routes: Routes = [
       {
         path:'setting/user',
         component:AdministratorUserComponent,
+      },
+      {
+        path:'setting/group',
+        component : GroupComponent,
+      },
+      {
+        path:'setting/group/register',
+        component : GroupRegister,
       },
       {
         path:'setting/user/admin',

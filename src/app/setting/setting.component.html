@@ -1,4 +1,4 @@
-
+<div class="innerDiv">
     <div class="textBox setBox">
         <div>
           <h3>테마 설정</h3>
@@ -48,13 +48,51 @@
         </div>
       </div>
       
+      <clr-modal [(clrModalOpen)]="isModalVisible">
+        <div class="modal-title">
+          <clr-icon shape="bell"></clr-icon>
+          <p>신규 계정 등록을 위해 계정 관리 로그인이 필요합니다.<br>
+            Keycloak Admin 접속 정보를 입력하세요.</p>
+        </div>
+  
+        <div class="modal-body">
+          <form clrForm  [formGroup]="adminCliForm">
+            <clr-input-container>
+              <label>Admin ID</label>
+              <input clrInput placeholder="Admin ID" formControlName="id"/>
+            </clr-input-container>
+            <clr-input-container>
+              <label>Admin PW</label>
+              <input clrInput placeholder="Admin PW" formControlName="pw"/>
+            </clr-input-container>
+            <clr-input-container>
+              <label>ClientID</label>
+              <input clrInput placeholder="Client ID" formControlName="client" />
+            </clr-input-container>
+            <clr-input-container>
+              <label>Client Secret</label>
+              <input clrInput placeholder="Client Secret" formControlName="secret"/>
+            </clr-input-container>
+            <clr-input-container>
+              <label>Token URL</label>
+              <input clrInput placeholder="Access Token URL" formControlName="url" />
+            </clr-input-container>
+          </form>
+        </div>
+        
+        <div class="modal-footer">
+          <button type="button" class="btn" (click)="isModalVisible = false">취소</button>
+          <button type="button" class="btn" (click)="goToAdminUserManageLink()">로그인</button>
+        </div>
+      </clr-modal>
+
       <div class="textBox setBox">
         <div>
           <h3>그룹 관리</h3>
           <p>헤파이토스 DevOps 플랫폼에 대한 그룹 및 개발자 등록 메뉴을 지원합니다.</p>
         </div>
         <div>
-          <button class="btn btn-primary">
+          <button class="btn btn-primary" (click)="goToGroupManageLink()">
             <clr-icon shape="recycle"></clr-icon>권한 관리
           </button>
         </div>
@@ -67,7 +105,7 @@
             관리자는 제우스, 헤파이토스, 헤라 등 모든 시스템에 관리자로 접속할 수 있습니다.</p>
         </div>
         <div>
-          <button class="btn btn-primary" (click)="goToAdminUserManageLink()">
+          <button class="btn btn-primary" (click)="isModalVisible = true">
             <clr-icon shape="recycle"></clr-icon>관리자 관리
           </button>
         </div>
@@ -199,3 +237,19 @@
         </div>
       </div>
 
+      <div class="textBox setBox">
+        <div>
+          <h3>사용자 등록 권한</h3>
+          <p>관리자가 개발자 등록데 대한 수락 여부를 설정합니다. <br>ON으로 설정 시 모든 개발자는 관리자가 허락 시 계정이 활성화 됩니다.</p>
+        </div>
+        <div>
+          <clr-toggle-container>
+            <label>ON</label>
+            <clr-toggle-wrapper>
+              <input type="checkbox" clrToggle name="options" required value="option1" />
+              <label>OFF</label>
+            </clr-toggle-wrapper>
+          </clr-toggle-container>
+        </div>
+      </div>
+    </div>

@@ -22,3 +22,12 @@ export class UserCredentials {
         public value:string,
         public temporary:boolean){}
 }
+
+export class AdminInfo {
+    adminId : string;
+    adminPw : string;
+    clientId : string;
+    clientSecret : string;
+    tokenUrl : string;
+
+}

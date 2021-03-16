@@ -14,8 +14,7 @@ ClarityIcons.addIcons(userIcon, checkboxListIcon, calendarIcon, folderOpenIcon, 
 @Component({
     selector: 'app-layout',
     templateUrl: 'app-layout.html',
-    styleUrls: ["app-layout.css"],
-    
+    styleUrls: ["app-layout.css"],   
 })
 
 export class AppLayoutComponent implements OnInit{
@@ -36,24 +35,10 @@ export class AppLayoutComponent implements OnInit{
         private topmenuservice: TopmenuserviceService,
         private submenuservice: SubmenuserviceService,
         private customIcon: CustomIconService,
-        @Inject(DOCUMENT) private document: Document, 
-        @Inject(PLATFORM_ID) private platformId: Object
-        ){
+        private router:Router,
+        ) {
             customIcon.load();
-            if (isPlatformBrowser(this.platformId)) {
-                try {
-                  const stored = localStorage.getItem('theme');
-                  if (stored) {
-                    this.theme = JSON.parse(stored);
-                  }
-                } catch (err) {
-                  // Nothing to do
-                }
-                this.linkRef = this.document.createElement('link');
-                this.linkRef.rel = 'stylesheet';
-                this.linkRef.href = this.theme.href;
-                this.document.querySelector('head').appendChild(this.linkRef);
-              }
+           
         }
 
     ngOnInit() {
@@ -81,15 +66,11 @@ export class AppLayoutComponent implements OnInit{
         this.topMenuIcon = resp.body as topMenuIcon[]
         this.subMenuIcon = resp.body as topMenuIcon[]
         })
+    }
+
+    goToMain() : void {
+        console.log("main page")
+        this.router.navigateByUrl("/app/main");
     } 
 
-    switchTheme() {
-        if (this.theme.name === 'light') {
-          this.theme = this.themes[1];
-        } else {
-          this.theme = this.themes[0];
-        }
-        localStorage.setItem('theme', JSON.stringify(this.theme));
-        this.linkRef.href = this.theme.href;
-      }
 }

@@ -1,0 +1,77 @@
+<!-- key값 등록 -->
+<div class="innerDiv">
+    <div class="titleBox">
+      <div>
+        <h1>대시보드 권한관리</h1>
+      </div>
+      <div>
+        <a href="#">설정 ></a><a href="#" class="link"> SMTP 설정</a>
+      </div>
+    </div>
+    <div class="textBox">
+      <clr-icon shape="bell"></clr-icon>
+      <p>쿠버네티스 대쉬 보드 권한 관리 Key값을 등록하세요.<br>
+        쿠버네티스 대쉬 보드는 관리자 권한, 개발자 프로젝트별 권한을 관리합니다. </p>
+    </div>
+    <table class="table custom-table pl50">
+      <colgroup>
+        <col style="width:25%">
+        <col style="width:75%">
+      </colgroup>
+      <caption>
+      </caption>
+      <thead>
+        <tr>
+          <th>
+            <label>그룹 이름</label>
+          </th>
+          <th>권한 코드 등록 여부</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="textarea-on">
+              <label>관리자 그룹</label>
+          </td>
+          <td class="pd-text-box">
+            <div class="btn-right">
+                <button class="btn btn-primary mg1" (click)="registerGroupKey('admin')">
+                  <clr-icon shape="plus" ></clr-icon>등록
+                </button>
+              </div>
+          </td>
+        </tr>
+        <tr>
+          <td>
+              <label>빅데이터 개발팀</label>
+          </td>
+          <td class="pd-text-box">
+            <div class="clr-textarea-wrapper " style="display:none;">
+              <textarea id="example3" placeholder="Placeholder" class="clr-textarea wd100 mh120"></textarea>
+            </div>
+            <div class="btn-right">
+            <button class="btn btn-primary mg1" (click)="registerGroupKey('bigDataDev')">
+              <clr-icon shape="plus"></clr-icon>등록
+            </button>
+          </div>
+          </td>
+        </tr>
+        <tr>
+          <td>
+              <label>애플리케이션 개발팀</label>
+          </td>
+          <td class="pd-text-box">
+            <div class="clr-textarea-wrapper" style="display:none;">
+              <textarea id="example3" placeholder="Placeholder" class="clr-textarea wd100 mh120"></textarea>
+            </div>
+            <div class="btn-right">
+            <button class="btn btn-primary mg1" (click)="registerGroupKey('appDev')">
+              <clr-icon shape="plus"></clr-icon>등록
+            </button>
+          </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <!-- key값 등록 -->

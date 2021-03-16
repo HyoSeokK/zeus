@@ -17,3 +17,7 @@
 .dropdown .dropdown-toggle > * { margin-right:10px;}
 a:hover { background-color:#0072a3 !important; color: #fff !important;}
 .clr-vertical-nav .nav-group-content:hover { color: var(--color-nav-hover); }
+
+.content-area {
+    padding: 0rem !important;
+}
