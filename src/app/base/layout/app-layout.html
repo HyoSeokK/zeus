@@ -36,9 +36,21 @@
                         </a>
                         <clr-vertical-nav-group-children>
                             <ng-container *ngFor = "let submenu of subMenu">   
-                                <ng-container *ngIf= "topmenu.top_menu_code == submenu.top_menu_code"> 
-                                    <a clrVerticalNavLink routerLinkActive="active"
-                                        [routerLink] = "'/app/target/'+topmenu.top_menu_code+'/'+submenu.sub_menu_code">
+                                <ng-container *ngIf= "topmenu.top_menu_code == submenu.top_menu_code">
+                                    <ng-container *ngIf = "submenu.new_window == '_self'; else other">  
+                                            <a clrVerticalNavLink routerLinkActive="active"
+                                            [routerLink] = "'/app/target/'+topmenu.top_menu_code+'/'+submenu.sub_menu_code" [attr.target]="submenu.new_window">
+                                            <ng-contianer *ngFor = "let subMenuIcon of subMenuIcon">
+                                                <ng-container *ngIf = "submenu.icon_code == subMenuIcon.icon_code">
+                                                    <clr-icon [attr.shape]="subMenuIcon.icon_name"></clr-icon>
+                                                </ng-container>
+                                            </ng-contianer>
+                                            {{submenu.sub_menu_name}}
+                                        </a>
+                                    </ng-container>
+                                    <ng-template #other>
+                                        <a clrVerticalNavLink routerLinkActive="active"
+                                        [attr.href]="submenu.sub_menu_target_url" [attr.target]="submenu.new_window">
                                         <ng-contianer *ngFor = "let subMenuIcon of subMenuIcon">
                                             <ng-container *ngIf = "submenu.icon_code == subMenuIcon.icon_code">
                                                 <clr-icon [attr.shape]="subMenuIcon.icon_name"></clr-icon>
@@ -46,6 +58,7 @@
                                         </ng-contianer>
                                         {{submenu.sub_menu_name}}
                                     </a>
+                                    </ng-template>
                                 </ng-container>
                             </ng-container>
                         </clr-vertical-nav-group-children>

@@ -4,9 +4,9 @@ import { HttpHeaders, HttpParams } from '@angular/common/http';
 import { HttpOptionInterface, RequestQueryParams } from './RequestQueryParams'
 
 export const BASE_URL = "/api";
-export const SMTP_BASE_URL = "/smtp";
-export const USER_BASE_URL = "/user";
-export const MENU_BASE_URL = "/menu";
+export const SMTP_BASE_URL = BASE_URL + "/smtp";
+export const USER_BASE_URL = BASE_URL + "/user";
+export const MENU_BASE_URL = BASE_URL + "/menu";
 
 export const HTTP_OPTIONS: HttpOptionInterface = {
     headers: new HttpHeaders({

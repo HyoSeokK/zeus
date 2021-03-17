@@ -7,6 +7,7 @@ import {subMenu} from './submenu'
 import {topMenuIcon} from './topmenuicon'
 import { AppLayoutComponent } from 'src/app/base/layout/app-layout';
 import {NotificationService} from '../../services/notification.service'
+import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
 
 
 @Component({
@@ -71,16 +72,18 @@ export class MenuComponent implements OnInit {
           this.notifyservice.showWarning("이미 존재하는 TopMenuCode입니다","");
           check = 0;
           break;
-          
         }else {
           check = 1;
     }
   }
     this.TopMenuobj.top_menu_name = this.topMenu.top_menu_name
     this.TopMenuobj.top_menu_order = this.topMenu.top_menu_order
-    this.TopMenuobj.icon_code = this.topMenu.icon_code
+    for(var i = 0; i<this.topMenuIcon.length; i++){
+      if(this.topMenu.icon_code == this.topMenuIcon[i].icon_description){
+        this.TopMenuobj.icon_code = this.topMenuIcon[i].icon_code
+      }
+    }
 
-    
     if (check == 1){
       if(this.TopMenuobj.top_menu_code != null && this.TopMenuobj.top_menu_name != null && this.TopMenuobj.top_menu_order != null && this.TopMenuobj.icon_code != null){
           this.TopMenuList.push(this.TopMenuobj);
@@ -101,11 +104,7 @@ export class MenuComponent implements OnInit {
     var check = 0;
     this.SubMenuobj = new subMenu();
     this.SubMenuobj.sub_menu_code = this.subMenu.sub_menu_code
-    this.SubMenuobj.sub_menu_name = this.subMenu.sub_menu_name
-    this.SubMenuobj.top_menu_code = this.subMenu.top_menu_code
-    this.SubMenuobj.sub_menu_order = this.subMenu.sub_menu_order
-    this.SubMenuobj.icon_code = this.subMenu.icon_code
-    
+
     for (var i = 0; i<this.SubMenuList.length; i++){
       if(this.SubMenuobj.sub_menu_code == this.SubMenuList[i].sub_menu_code){
         this.notifyservice.showWarning("이미 존재하는 SubMenuCode입니다","");
@@ -115,6 +114,20 @@ export class MenuComponent implements OnInit {
         check = 1;
       }
     }
+    this.SubMenuobj.sub_menu_name = this.subMenu.sub_menu_name
+    for(var i = 0; i<this.topMenuCodeList.length; i++){
+      if(this.subMenu.top_menu_code == this.topMenuCodeList[i].top_menu_name){
+        this.SubMenuobj.top_menu_code = this.topMenuCodeList[i].top_menu_code
+      }
+    }
+    this.SubMenuobj.sub_menu_order = this.subMenu.sub_menu_order
+    for(var i = 0; i<this.topMenuIcon.length; i++){
+      if(this.subMenu.icon_code == this.topMenuIcon[i].icon_description){
+        this.SubMenuobj.icon_code = this.topMenuIcon[i].icon_code
+      }
+    }
+    
+    
     if(check == 1){
       if(this.SubMenuobj.top_menu_code != null && this.SubMenuobj.sub_menu_name != null && this.SubMenuobj.sub_menu_order != null
         && this.SubMenuobj.sub_menu_code != null && this.SubMenuobj.icon_code != null){
@@ -134,44 +147,42 @@ export class MenuComponent implements OnInit {
      for (var i = 0; i<this.TopMenuAddList.length; i++){
     this.topmenuservice.saveTopMenu(this.TopMenuAddList[i].top_menu_name,this.TopMenuAddList[i].top_menu_code,
       this.TopMenuAddList[i].top_menu_order,this.TopMenuAddList[i].icon_code)
-      .subscribe(() => {
-        console.log(this.TopMenuAddList[i].top_menu_name)
-        
+      .subscribe(result => {
+        if(result.data != null){
+          this.notifyservice.showSuccess("입력정보가 저장 되었습니다","");
+          this.topcheck = 0;
+          this.click = true;
+          this.ngOnInit();
+        }
       },
       error => {
+        this.notifyservice.showError("입력정보 저장에 실패하였습니다","");
         console.log(error)
-        console.log(this.TopMenuAddList)
+        this.ngOnInit()
+        this.click = true;
       }
       )
     } 
-      if(this.topcheck == 1){
-        this.notifyservice.showSuccess("입력정보가 저장 되었습니다","");
-        this.topcheck = 0;
-        this.click = true;
-        this.ngOnInit();
-      }else {
-        this.notifyservice.showError("입력정보 저장에 실패하였습니다","");
-      }
-    }
+  }
     if(this.subcheck == 1){
         for(var i = 0; i<this.SubMenuAddList.length; i++){
         this.submenuservice.saveSubMenu(this.SubMenuAddList[i].sub_menu_code,this.SubMenuAddList[i].sub_menu_name,this.SubMenuAddList[i].top_menu_code,
         this.SubMenuAddList[i].sub_menu_order,this.SubMenuAddList[i].icon_code)
-        .subscribe(() => {
-          console.log(this.SubMenuAddList[i].sub_menu_name)
+        .subscribe(result => {
+          if(result.data != null){ 
+            this.notifyservice.showSuccess("입력정보가 저장 되었습니다","");
+            this.subcheck = 0;
+            this.click = true;
+            this.ngOnInit();
+          }
         },
         error => {
+          this.notifyservice.showError("입력정보 저장에 실패하였습니다","");
           console.log(error)
+          this.ngOnInit()
+          this.click = true;
         }
         ) 
-      }
-      if(this.subcheck == 1){ 
-        this.notifyservice.showSuccess("입력정보가 저장 되었습니다","");
-        this.subcheck = 0;
-        this.click = true;
-        this.ngOnInit();
-      }else {
-        this.notifyservice.showError("입력정보 저장에 실패하였습니다","");
       }
     }
   }
@@ -181,7 +192,10 @@ export class MenuComponent implements OnInit {
     this.topMenu.top_menu_code = this.topMenuInfo.top_menu_code
     this.topMenu.top_menu_name = this.topMenuInfo.top_menu_name
     this.topMenu.top_menu_order = this.topMenuInfo.top_menu_order
-    this.topMenu.icon_code = this.topMenuInfo.icon_code
+    for(var i = 0; i < this.topMenuIcon.length; i++){
+      if(this.topMenuInfo.icon_code == this.topMenuIcon[i].icon_code)
+        this.topMenu.icon_code = this.topMenuIcon[i].icon_description
+      }
     this.TopDeleteclick = false;
   }
 
@@ -190,8 +204,14 @@ export class MenuComponent implements OnInit {
     this.subMenu.sub_menu_name = this.subMenuInfo.sub_menu_name
     this.subMenu.sub_menu_code = this.subMenuInfo.sub_menu_code
     this.subMenu.sub_menu_order = this.subMenuInfo.sub_menu_order
-    this.subMenu.top_menu_code = this.subMenuInfo.top_menu_code
-    this.subMenu.icon_code = this.subMenuInfo.icon_code
+    for(var i = 0; i< this.topMenuCodeList.length; i++){
+      if(this.subMenuInfo.top_menu_code == this.topMenuCodeList[i].top_menu_code)
+      this.subMenu.top_menu_code = this.topMenuCodeList[i].top_menu_name
+    }
+    for(var i = 0; i< this.topMenuIcon.length; i++){
+      if(this.subMenuInfo.icon_code == this.topMenuIcon[i].icon_code)
+        this.subMenu.icon_code = this.topMenuIcon[i].icon_description
+    }
     this.SubDeleteclick = false;
   }
 
