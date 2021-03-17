@@ -37,7 +37,7 @@ const routes: Routes = [
     path:'app',
     component:AppLayoutComponent,
     canActivate: [KeycloakGuard],
-    data : {roles:['super_admin', 'Viewer']},
+    data : {roles:['super_admin', 'admin']},
     children:[
       {
         path:'main',
@@ -64,7 +64,7 @@ const routes: Routes = [
         component : GroupComponent,
       },
       {
-        path:'setting/group/register',
+        path:'setting/group/register/:key',
         component : GroupRegister,
       },
       {

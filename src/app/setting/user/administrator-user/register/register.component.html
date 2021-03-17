@@ -16,21 +16,13 @@
     </div>
 
     <form clrForm class="formBox" [formGroup]="userForm">
-      <clr-toggle-container>
-        <label>일반사용자</label>
-        <clr-toggle-wrapper>
-          <input type="checkbox" clrToggle name="options" required value="option1" />
-          <label>개발자</label>
-        </clr-toggle-wrapper>
-      </clr-toggle-container>
-  
       <clr-input-container>
         <label>사용자ID</label>
         <input clrInput placeholder="User Id" formControlName="userId"/>
       </clr-input-container>
       <clr-password-container>
         <label>신규비밀번호</label>
-        <input clrPassword placeholder="Password" name="password" />
+        <input clrPassword placeholder="Password" formControlName="password" />
       </clr-password-container>
       <clr-password-container>
         <label>비밀번호 확인</label>

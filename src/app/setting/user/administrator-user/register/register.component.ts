@@ -15,6 +15,7 @@ export class RegisterComponent implements OnInit {
   userAttribute : UserAttribute = new UserAttribute();
   userCredentials : UserCredentials[] = new Array<UserCredentials>();
   adminCli : AdminInfo = new AdminInfo();
+  groups : string[] = [];
 
   constructor(
     private router:Router,
@@ -32,9 +33,11 @@ export class RegisterComponent implements OnInit {
     userDepartmentNm : new FormControl(''),
     userPosition : new FormControl(''),
     userPhoneNumber : new FormControl(''),
+    password : new FormControl(''),
   });
 
   onSubmit() {
+    this.groups.push("admin")
     this.userInfo.username = this.userForm.controls.userId.value;
     this.userInfo.firstName = this.userForm.controls.userFirstname.value;
     this.userInfo.lastName = this.userForm.controls.userLastName.value;
@@ -44,11 +47,11 @@ export class RegisterComponent implements OnInit {
     this.userAttribute.position = this.userForm.controls.userPosition.value;
     this.userAttribute.phoneNumber = this.userForm.controls.userPhoneNumber.value;
 
-    this.userCredentials.push(new UserCredentials("password", "1234", true))
-
+    this.userCredentials.push(new UserCredentials("password", this.userForm.controls.password.value, true))
     this.userInfo.credentials = this.userCredentials;
-
     this.userInfo.attributes = this.userAttribute;
+
+    this.userInfo.groups = this.groups
 
     console.log("Create User Json : " + JSON.stringify(this.userInfo));
   
