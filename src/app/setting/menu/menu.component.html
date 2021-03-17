@@ -38,10 +38,10 @@
         </clr-input-container>
         <clr-combobox-container>
           <label>Top Menu Icon</label>
-          <clr-combobox [(ngModel)] = "topMenu.icon_code" name = "top_menu_icon">
+          <clr-combobox [(ngModel)] = "topMenu.icon_code" name = "top_menu_icon" >
             <clr-options> 
               <ng-container *ngFor = "let topMenuIcon of topMenuIcon">       
-            <clr-option clrValue="{{topMenuIcon.icon_code}}" class="mw10">
+            <clr-option clrValue="{{topMenuIcon.icon_description}}" class="mw10">
               <clr-icon [attr.shape]="topMenuIcon.icon_name"></clr-icon> {{topMenuIcon.icon_description}}
             </clr-option>
             </ng-container>
@@ -85,7 +85,7 @@
           <clr-combobox [(ngModel)] = "subMenu.top_menu_code" name = "sub_top_menu_code">
             <clr-options>
               <ng-container *ngFor = "let topMenuCodeList of topMenuCodeList">
-            <clr-option clrValue="{{topMenuCodeList.top_menu_code}}">{{topMenuCodeList.top_menu_code}}</clr-option>
+            <clr-option clrValue="{{topMenuCodeList.top_menu_name}}">{{topMenuCodeList.top_menu_name}}</clr-option>
           </ng-container>
           </clr-options>
         </clr-combobox>
@@ -96,7 +96,7 @@
           <clr-combobox [(ngModel)] = "subMenu.icon_code" name = "sub_menu_icon">
             <clr-options> 
               <ng-container *ngFor = "let topMenuIcon of topMenuIcon">
-            <clr-option clrValue="{{topMenuIcon.icon_code}}">
+            <clr-option clrValue="{{topMenuIcon.icon_description}}">
               <clr-icon [attr.shape]="topMenuIcon.icon_name"></clr-icon> {{topMenuIcon.icon_description}}
             </clr-option>
             </ng-container>

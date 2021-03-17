@@ -3,7 +3,7 @@ import { HttpClient, HttpResponse, HttpParams } from  "@angular/common/http";
 import { topMenu } from '../setting/menu/topmenu'
 import { topMenuIcon } from '../setting/menu/topmenuicon'
 import { throwError as observableThrowError } from 'rxjs';
-import { catchError } from 'rxjs/operators';
+import { catchError, map } from 'rxjs/operators';
 
 import { buildHttpRequestOptionsWithObserveResponse} from '../utils/utils'
 import { MENU_BASE_URL } from '../utils/utils';
@@ -43,13 +43,15 @@ export class TopmenuserviceService {
       catchError(error => observableThrowError(error)),);
   }
 
-  public saveTopMenu(top_menu_name:string,top_menu_code:string,top_menu_order:string,icon_code:string){
+  public saveTopMenu(top_menu_name:string,top_menu_code:string,top_menu_order:string,icon_code:string) : any{
     return this.http.post(this.saveUri,JSON.stringify({
       'top_menu_code':top_menu_code, 'top_menu_name':top_menu_name,
       'top_menu_order':top_menu_order, 'icon_code':icon_code
     }),
     ).pipe(
-      catchError(error => observableThrowError(error))
+      map(result => {
+        return result;
+      })
     );
   }
 

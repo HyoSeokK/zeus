@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpResponse, HttpParams } from  "@angular/common/http";
 import { subMenu } from '../setting/menu/submenu'
 import { throwError as observableThrowError, of, Observable } from 'rxjs';
-import { catchError } from 'rxjs/operators';
+import { catchError, map } from 'rxjs/operators';
 import { buildHttpRequestOptionsWithObserveResponse} from '../utils/utils'
 
 import {MENU_BASE_URL} from '../utils/utils';
@@ -29,13 +29,15 @@ export class SubmenuserviceService {
   }
 
   
-  public saveSubMenu(sub_menu_code:string,sub_menu_name:string,top_menu_code:string,sub_menu_order:string,icon_code:string){
+  public saveSubMenu(sub_menu_code:string,sub_menu_name:string,top_menu_code:string,sub_menu_order:string,icon_code:string) : any{
     return this.http.post(this.saveUri,JSON.stringify({
       'sub_menu_code':sub_menu_code, 'sub_menu_name':sub_menu_name,
       'top_menu_code':top_menu_code, 'sub_menu_order':sub_menu_order,'icon_code':icon_code
     }),
     ).pipe(
-      catchError(error => observableThrowError(error))
+      map(result =>{
+        return result
+      })
     );
   }
 
