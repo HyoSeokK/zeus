@@ -38,7 +38,7 @@ export class KeycloakGuard extends KeycloakAuthGuard {
           console.log("required : ", requiredRole)
           return true;
         }
-      }
+      } 
     }
 
     return requiredRoles.every((role) => this.roles.includes(role));

@@ -33,6 +33,7 @@ export class RegisterComponent implements OnInit {
     userDepartmentNm : new FormControl(''),
     userPosition : new FormControl(''),
     userPhoneNumber : new FormControl(''),
+    password : new FormControl(''),
   });
 
   onSubmit() {
@@ -46,7 +47,7 @@ export class RegisterComponent implements OnInit {
     this.userAttribute.position = this.userForm.controls.userPosition.value;
     this.userAttribute.phoneNumber = this.userForm.controls.userPhoneNumber.value;
 
-    this.userCredentials.push(new UserCredentials("password", "1234", true))
+    this.userCredentials.push(new UserCredentials("password", this.userForm.controls.password.value, true))
     this.userInfo.credentials = this.userCredentials;
     this.userInfo.attributes = this.userAttribute;
 
