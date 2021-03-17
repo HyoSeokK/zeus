@@ -10,6 +10,7 @@ import { DOCUMENT, isPlatformBrowser } from '@angular/common';
 import '@cds/core/toggle/register.js';
 import { ClarityIcons, userIcon, checkboxListIcon, calendarIcon, folderOpenIcon, administratorIcon } from '@cds/core/icon';
 ClarityIcons.addIcons(userIcon, checkboxListIcon, calendarIcon, folderOpenIcon, administratorIcon);
+import { KeycloakAuthGuard, KeycloakService } from 'keycloak-angular';
 
 @Component({
     selector: 'app-layout',
@@ -24,6 +25,7 @@ export class AppLayoutComponent implements OnInit{
     topMenuIcon: topMenuIcon[]
     subMenuIcon: topMenuIcon[]
     linkRef: HTMLLinkElement;
+    username : string;
 
     themes = [
         { name: 'light', href: '/assets/css/clr-ui.css' },
@@ -36,10 +38,15 @@ export class AppLayoutComponent implements OnInit{
         private submenuservice: SubmenuserviceService,
         private customIcon: CustomIconService,
         private router:Router,
+        protected readonly keycloak: KeycloakService,
         ) {
             customIcon.load();
-           
+            this.username = localStorage.getItem('username')
         }
+
+    sessionLogout() {
+        this.keycloak.logout();
+    }
 
     ngOnInit() {
         this.topmenuservice.getTopMenu()

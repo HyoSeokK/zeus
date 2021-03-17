@@ -35,10 +35,10 @@
           </td>
           <td class="pd-text-box">
             <div class="clr-textarea-wrapper ">
-              <textarea id="example3" placeholder="Placeholder" class="clr-textarea wd100 mh120"></textarea>
+              <textarea id="token_key" [(ngModel)]="tokenVal" placeholder="Token Value" class="clr-textarea wd100 mh120"></textarea>
             </div>
             <div class="btn-left">
-            <button class="btn btn-primary mg1 ">
+            <button class="btn btn-primary mg1" (click)="registerToken()">
               <clr-icon shape="plus"></clr-icon>저장
             </button>
           </div>

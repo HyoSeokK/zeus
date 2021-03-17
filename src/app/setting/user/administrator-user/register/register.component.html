@@ -16,14 +16,6 @@
     </div>
 
     <form clrForm class="formBox" [formGroup]="userForm">
-      <clr-toggle-container>
-        <label>일반사용자</label>
-        <clr-toggle-wrapper>
-          <input type="checkbox" clrToggle name="options" required value="option1" />
-          <label>개발자</label>
-        </clr-toggle-wrapper>
-      </clr-toggle-container>
-  
       <clr-input-container>
         <label>사용자ID</label>
         <input clrInput placeholder="User Id" formControlName="userId"/>

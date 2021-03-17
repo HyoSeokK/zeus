@@ -10,13 +10,13 @@
             <clr-dropdown class="mr30">
                 <button class="" clrDropdownTrigger>
                     <clr-icon shape="user" size="21" class="icon-left mr10"></clr-icon>
-                    <span>JOINTREE</span>
+                    <span>{{username}}</span>
                     <clr-icon shape="caret down"></clr-icon>
                 </button>
                 <clr-dropdown-menu clrPosition="bottom-right" *clrIfOpen>
                     <div aria-label="Dropdown header Action 1" clrDropdownItem>정보변경</div>
                     <div class="dropdown-divider" role="separator" aria-hidden="true"></div>
-                    <div clrDropdownItem>로그아웃</div>
+                    <div clrDropdownItem (click)="sessionLogout()">로그아웃</div>
                 </clr-dropdown-menu>
             </clr-dropdown>
         </div>
@@ -58,14 +58,7 @@
                 설정
             </a>
             </div>
-            <div class="mb-20">
-                <clr-toggle-container>
-                    <clr-toggle-wrapper>
-                        <input type="checkbox" clrToggle name="options" required value="option1" (click)="switchTheme()"
-                            id="ThemeSwitch" />
-                    </clr-toggle-wrapper>
-                </clr-toggle-container>
-            </div>
+            
         </clr-vertical-nav>
         <div class="content-area">
             <router-outlet></router-outlet>

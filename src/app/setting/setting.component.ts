@@ -22,6 +22,7 @@ const changeThemeEndpoint = BASE_URL + "/changeTheme";
 export class SettingComponent implements OnInit {
 
     isModalVisible = false;
+    url : string = "groups";
     env : EnvSetting;
     themeRst : string;
     themeArray: ThemeInterface[] = clone(THEME_ARRAY);
@@ -64,7 +65,8 @@ export class SettingComponent implements OnInit {
         secret : new FormControl(''),
         url : new FormControl(''),
     })
-    goToAdminUserManageLink() : void {
+
+    goToAdminApiManageLink() : void {
         this.adminCli.adminId = this.adminCliForm.controls.id.value;
         this.adminCli.adminPw = this.adminCliForm.controls.pw.value;
         this.adminCli.clientId = this.adminCliForm.controls.client.value;
@@ -72,11 +74,24 @@ export class SettingComponent implements OnInit {
         this.adminCli.tokenUrl = this.adminCliForm.controls.url.value;
       
         localStorage.setItem("cli", JSON.stringify(this.adminCli))
-        this.router.navigateByUrl("/app/setting/user/admin");
+
+        if(this.url == "groups") {
+            this.router.navigateByUrl("/app/setting/group");
+        } else if (this.url == "admin") {
+            this.router.navigateByUrl("/app/setting/user/admin");
+        }
     }
     
     goToGroupManageLink() : void {
-        this.router.navigateByUrl("/app/setting/group");
+        this.adminCli.adminId = this.adminCliForm.controls.id.value;
+        this.adminCli.adminPw = this.adminCliForm.controls.pw.value;
+        this.adminCli.clientId = this.adminCliForm.controls.client.value;
+        this.adminCli.clientSecret = this.adminCliForm.controls.secret.value;
+        this.adminCli.tokenUrl = this.adminCliForm.controls.url.value;
+      
+        localStorage.setItem("cli", JSON.stringify(this.adminCli))
+
+        
     }
 
     goToDevUserManageLink() : void {

@@ -29,46 +29,16 @@
         </tr>
       </thead>
       <tbody>
-        <tr>
+        <tr *ngFor="let groups of groupsList">
           <td class="textarea-on">
-              <label>관리자 그룹</label>
+              <label>{{groups.name}}</label>
           </td>
           <td class="pd-text-box">
             <div class="btn-right">
-                <button class="btn btn-primary mg1" (click)="registerGroupKey('admin')">
+                <button class="btn btn-primary mg1" (click)="registerGroupKey(groups.id)">
                   <clr-icon shape="plus" ></clr-icon>등록
                 </button>
               </div>
-          </td>
-        </tr>
-        <tr>
-          <td>
-              <label>빅데이터 개발팀</label>
-          </td>
-          <td class="pd-text-box">
-            <div class="clr-textarea-wrapper " style="display:none;">
-              <textarea id="example3" placeholder="Placeholder" class="clr-textarea wd100 mh120"></textarea>
-            </div>
-            <div class="btn-right">
-            <button class="btn btn-primary mg1" (click)="registerGroupKey('bigDataDev')">
-              <clr-icon shape="plus"></clr-icon>등록
-            </button>
-          </div>
-          </td>
-        </tr>
-        <tr>
-          <td>
-              <label>애플리케이션 개발팀</label>
-          </td>
-          <td class="pd-text-box">
-            <div class="clr-textarea-wrapper" style="display:none;">
-              <textarea id="example3" placeholder="Placeholder" class="clr-textarea wd100 mh120"></textarea>
-            </div>
-            <div class="btn-right">
-            <button class="btn btn-primary mg1" (click)="registerGroupKey('appDev')">
-              <clr-icon shape="plus"></clr-icon>등록
-            </button>
-          </div>
           </td>
         </tr>
       </tbody>

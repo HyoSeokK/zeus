@@ -7,6 +7,7 @@ export class User {
     createdTimestamp : number;
     attributes : UserAttribute;
     credentials : Array<UserCredentials>;
+    groups : Array<string>;
 }
 
 export class UserAttribute {
