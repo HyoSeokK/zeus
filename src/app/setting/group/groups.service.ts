@@ -7,6 +7,7 @@ import { Groups, GroupsAttr } from './groups';
 
 const groupsListEndpoint = GROUPS_BASE_URL + "/lt"
 const groupsAttributeEndpoint = GROUPS_BASE_URL + "/putKey"
+const deleteGroupsAttributeEndpoint = GROUPS_BASE_URL + "/deleteKey"
 
 @Injectable({
     providedIn: 'root'
@@ -40,6 +41,22 @@ export class GroupsService {
         return this.httpClient
             .post<HttpResponse<any>> (
                 groupsAttributeEndpoint,
+                this.groupObj,
+                HTTP_OPTIONS
+            ).pipe(map(res => {
+                console.log(res)
+                return res;
+            }));
+    }
+
+    deleteAttribute(key:string) : any {
+        this.groupObj.id = key
+
+        console.log("group Object : " + JSON.stringify(this.groupObj))
+
+        return this.httpClient
+            .post<HttpResponse<any>> (
+                deleteGroupsAttributeEndpoint,
                 this.groupObj,
                 HTTP_OPTIONS
             ).pipe(map(res => {

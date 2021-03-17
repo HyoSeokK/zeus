@@ -20,6 +20,18 @@ export class GroupComponent implements OnInit {
   registerGroupKey(key : string) : any {
     this.router.navigateByUrl("/app/setting/group/register/"+key);
   }
+  deleteGroupKey(key : string) : any {
+    this.groupService.addAttribute(key, "").subscribe(res => {
+      if(res.data == "") {
+          console.log("Success User created")
+          alert("삭제했습니다.")
+          this.router.navigateByUrl("/app/setting/group");
+      } else {
+          alert("삭제를 실패했습니다.")
+          console.log("Failed Create USer");
+      }
+    });
+  }
 
   ngOnInit(): void {
     this.adminCli = JSON.parse(localStorage.getItem("cli")) as AdminInfo; 

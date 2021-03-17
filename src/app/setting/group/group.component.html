@@ -35,9 +35,21 @@
           </td>
           <td class="pd-text-box">
             <div class="btn-right">
-                <button class="btn btn-primary mg1" (click)="registerGroupKey(groups.id)">
-                  <clr-icon shape="plus" ></clr-icon>등록
-                </button>
+                <div *ngIf="groups.attributes.token == null">
+                  <button class="btn btn-primary mg1" (click)="registerGroupKey(groups.id)">
+                    <clr-icon shape="plus" ></clr-icon>등록
+                  </button>
+                </div>
+
+                <div *ngIf="groups.attributes.token != null">
+                  <button *ngIf="groups.attributes.token == ''" class="btn btn-primary mg1" (click)="registerGroupKey(groups.id)">
+                    <clr-icon shape="plus" ></clr-icon>등록
+                  </button>
+                  <button *ngIf="groups.attributes.token != ''" class="btn btn-primary mg1" (click)="deleteGroupKey(groups.id)">
+                    <clr-icon shape="plus" ></clr-icon>삭제
+                  </button>
+                </div>
+                
               </div>
           </td>
         </tr>
