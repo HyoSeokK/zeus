@@ -50,11 +50,17 @@
         </clr-combobox-container>
         </div>
         <div class="wd100">
-        <button class="btn btn-primary" (click) = "onTopMenuSave()">
+        <button class="btn btn-primary" (click) = "onTopMenuSave()" [hidden]="save">
           <clr-icon shape="download"></clr-icon>저장
+        </button>
+        <button class="btn btn-primary" [hidden] = "update">
+          <clr-icon shape="download"></clr-icon>수정
         </button>
         <button class="btn" (click) = "onTopOpenModal()" [disabled] = "TopDeleteclick">
           <clr-icon shape="ban"></clr-icon>삭제
+        </button>
+        <button class="btn btn-info-outline" (click) = "onTopCancel()">
+          <clr-icon shape="ban"></clr-icon>취소
         </button>
       </div>
       </form>
@@ -81,7 +87,7 @@
         </clr-input-container>
       
         <clr-combobox-container>
-          <label>Top Menu Code</label>
+          <label>Top Menu Name</label>
           <clr-combobox [(ngModel)] = "subMenu.top_menu_code" name = "sub_top_menu_code">
             <clr-options>
               <ng-container *ngFor = "let topMenuCodeList of topMenuCodeList">
@@ -108,8 +114,14 @@
         <button class="btn btn-primary" (click) = "onSubMenuSave()">
           <clr-icon shape="download"></clr-icon>저장
         </button>
+        <button class="btn btn-primary">
+          <clr-icon shape="download"></clr-icon>수정
+        </button>
         <button class="btn" (click) = "onSubOpenModal()" [disabled] = "SubDeleteclick">
           <clr-icon shape="ban"></clr-icon>삭제
+        </button>
+        <button class="btn btn-info-outline" (click) = "onSubCancel()">
+          <clr-icon shape="ban"></clr-icon>취소
         </button>
       </div>
       </form>
@@ -140,9 +152,6 @@
     
     <div class="con-box-item textBox mtb10">
       <h2 class="con-box-h2-line">메뉴리스트</h2>
-      <button class="btn btn-primary btn-layer" (click) = "onDBSave()" [disabled] = "click">
-        <clr-icon shape="download"></clr-icon>메뉴 적용
-      </button>
       <clr-tree>
         <ng-container *ngFor = "let TopMenu of TopMenuList">
           <clr-tree-node (click) = "onTopMenuGet(TopMenu)">

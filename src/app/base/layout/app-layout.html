@@ -28,12 +28,26 @@
             <ng-container *ngFor = "let topmenu of topMenu"> 
                 <ng-container *ngFor = "let topMenuIcon of topMenuIcon">
                     <ng-container *ngIf = "topmenu.icon_code == topMenuIcon.icon_code">
-
-                    <clr-vertical-nav-group routerLinkActive="active">
-                        <a clrVerticalNavLink routerLinkActive="active">
-                        <clr-icon [attr.shape]="topMenuIcon.icon_name" routerLinkActive="active" clrVerticalNavIcon></clr-icon>
-                            {{topmenu.top_menu_name}}  
-                        </a>
+                        <ng-container *ngIf = "topmenu.top_menu_target_url != 'null' && topmenu.top_menu_target_url != ''; else otherMenu">
+                            <ng-container *ngIf = "topmenu.new_window == '_self'; else topother">
+                            <a clrVerticalNavLink routerLinkActive="active" [routerLink] = "'/app/target/'+topmenu.top_menu_code" [attr.target]="topmenu.new_window">
+                                <clr-icon [attr.shape]="topMenuIcon.icon_name" routerLinkActive="active" clrVerticalNavIcon></clr-icon>
+                                {{topmenu.top_menu_name}}
+                            </a>
+                            </ng-container>
+                            <ng-template #topother>
+                                <a clrVerticalNavLink routerLinkActive="active" [attr.href]="topmenu.top_menu_target_url" [attr.target]="topmenu.new_window">
+                                    <clr-icon [attr.shape]="topMenuIcon.icon_name" routerLinkActive="active" clrVerticalNavIcon></clr-icon>
+                                    {{topmenu.top_menu_name}}
+                                </a>
+                            </ng-template>
+                        </ng-container>
+                        <ng-template #otherMenu>
+                        <clr-vertical-nav-group routerLinkActive="active">
+                            <a clrVerticalNavLink routerLinkActive="active">
+                            <clr-icon [attr.shape]="topMenuIcon.icon_name" routerLinkActive="active" clrVerticalNavIcon></clr-icon>
+                                {{topmenu.top_menu_name}}
+                            </a>
                         <clr-vertical-nav-group-children>
                             <ng-container *ngFor = "let submenu of subMenu">   
                                 <ng-container *ngIf= "topmenu.top_menu_code == submenu.top_menu_code">
@@ -63,11 +77,12 @@
                             </ng-container>
                         </clr-vertical-nav-group-children>
                     </clr-vertical-nav-group>
+                </ng-template>
                     </ng-container>
                 </ng-container>
             </ng-container> 
-            
             <a clrVerticalNavLink routerLinkActive="active" routerLink="/app/setting">
+                <clr-icon shape="testicon1" routerLinkActive="active" clrVerticalNavIcon></clr-icon>
                 설정
             </a>
             </div>

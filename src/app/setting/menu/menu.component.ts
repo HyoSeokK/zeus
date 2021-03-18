@@ -7,7 +7,6 @@ import {subMenu} from './submenu'
 import {topMenuIcon} from './topmenuicon'
 import { AppLayoutComponent } from 'src/app/base/layout/app-layout';
 import {NotificationService} from '../../services/notification.service'
-import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
 
 
 @Component({
@@ -16,9 +15,10 @@ import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
   styleUrls: ['./menu.component.css']
 })
 export class MenuComponent implements OnInit {
-  click : boolean = true;
   TopDeleteclick : boolean = true;
   SubDeleteclick : boolean = true;
+  save : boolean = false;
+  update : boolean = true;
   topMenu: topMenu = new topMenu();
   subMenu: subMenu = new subMenu();
   topMenuInfo: topMenu = new topMenu();
@@ -31,8 +31,6 @@ export class MenuComponent implements OnInit {
   SubMenuobj : subMenu = new subMenu();
   TopMenuAddList : Array<topMenu>=new Array<topMenu>();
   SubMenuAddList : Array<subMenu>=new Array<subMenu>();
-  topcheck = 0;
-  subcheck = 0;
   TopopenModal = false;
   SubopenModal = false;
   
@@ -88,9 +86,25 @@ export class MenuComponent implements OnInit {
       if(this.TopMenuobj.top_menu_code != null && this.TopMenuobj.top_menu_name != null && this.TopMenuobj.top_menu_order != null && this.TopMenuobj.icon_code != null){
           this.TopMenuList.push(this.TopMenuobj);
           this.TopMenuAddList.push(this.TopMenuobj);
-          this.click = false;
-          this.topcheck = 1;
-          this.onTopReset();
+          for (var i = 0; i<this.TopMenuAddList.length; i++){
+            this.topmenuservice.saveTopMenu(this.TopMenuAddList[i].top_menu_name,this.TopMenuAddList[i].top_menu_code,
+              this.TopMenuAddList[i].top_menu_order,this.TopMenuAddList[i].icon_code)
+              .subscribe(result => {
+                if(result.data != null){
+                  this.notifyservice.showSuccess("입력정보가 저장 되었습니다","");
+                  this.ngOnInit();
+                  this.onTopReset();
+                }
+              },
+              error => {
+                this.notifyservice.showError("입력정보 저장에 실패하였습니다","");
+                console.log(error)
+                this.ngOnInit();
+                this.onTopReset();
+              }
+              )
+            } 
+          
       }
       else {
         console.log(check)
@@ -126,6 +140,11 @@ export class MenuComponent implements OnInit {
         this.SubMenuobj.icon_code = this.topMenuIcon[i].icon_code
       }
     }
+    for(var i = 0; i<this.topMenuCodeList.length; i++){
+      if(this.subMenu.top_menu_code == this.topMenuCodeList[i].top_menu_name){
+        this.SubMenuobj.top_menu_name = this.topMenuCodeList[i].top_menu_name
+      }
+    }
     
     
     if(check == 1){
@@ -133,56 +152,26 @@ export class MenuComponent implements OnInit {
         && this.SubMenuobj.sub_menu_code != null && this.SubMenuobj.icon_code != null){
             this.SubMenuList.push(this.SubMenuobj);
             this.SubMenuAddList.push(this.SubMenuobj);
-            this.click = false;
-            this.subcheck = 1;
-            this.onSubReset();
+            for(var i = 0; i<this.SubMenuAddList.length; i++){
+              this.submenuservice.saveSubMenu(this.SubMenuAddList[i].sub_menu_code,this.SubMenuAddList[i].sub_menu_name,this.SubMenuAddList[i].top_menu_code,
+              this.SubMenuAddList[i].top_menu_name,this.SubMenuAddList[i].sub_menu_order,this.SubMenuAddList[i].icon_code)
+              .subscribe(result => {
+                if(result.data != null){ 
+                  this.notifyservice.showSuccess("입력정보가 저장 되었습니다","");
+                  this.onSubReset()
+                  this.ngOnInit();
+                }
+              },
+              error => {
+                this.notifyservice.showError("입력정보 저장에 실패하였습니다","");
+                console.log(error)
+                this.ngOnInit()
+                this.onSubReset()
+              }
+              ) 
+            }
        }else{
         this.notifyservice.showWarning("입력값을 확인해주세요","");
-      }
-    }
-  }
-
-  onDBSave(){
-    if(this.topcheck == 1){
-     for (var i = 0; i<this.TopMenuAddList.length; i++){
-    this.topmenuservice.saveTopMenu(this.TopMenuAddList[i].top_menu_name,this.TopMenuAddList[i].top_menu_code,
-      this.TopMenuAddList[i].top_menu_order,this.TopMenuAddList[i].icon_code)
-      .subscribe(result => {
-        if(result.data != null){
-          this.notifyservice.showSuccess("입력정보가 저장 되었습니다","");
-          this.topcheck = 0;
-          this.click = true;
-          this.ngOnInit();
-        }
-      },
-      error => {
-        this.notifyservice.showError("입력정보 저장에 실패하였습니다","");
-        console.log(error)
-        this.ngOnInit()
-        this.click = true;
-      }
-      )
-    } 
-  }
-    if(this.subcheck == 1){
-        for(var i = 0; i<this.SubMenuAddList.length; i++){
-        this.submenuservice.saveSubMenu(this.SubMenuAddList[i].sub_menu_code,this.SubMenuAddList[i].sub_menu_name,this.SubMenuAddList[i].top_menu_code,
-        this.SubMenuAddList[i].sub_menu_order,this.SubMenuAddList[i].icon_code)
-        .subscribe(result => {
-          if(result.data != null){ 
-            this.notifyservice.showSuccess("입력정보가 저장 되었습니다","");
-            this.subcheck = 0;
-            this.click = true;
-            this.ngOnInit();
-          }
-        },
-        error => {
-          this.notifyservice.showError("입력정보 저장에 실패하였습니다","");
-          console.log(error)
-          this.ngOnInit()
-          this.click = true;
-        }
-        ) 
       }
     }
   }
@@ -283,6 +272,16 @@ export class MenuComponent implements OnInit {
         check = 1;
       }
       if(check == 1){
+        for(var i = 0; i<this.topMenuCodeList.length; i++){
+          if(this.subMenu.top_menu_code == this.topMenuCodeList[i].top_menu_name){
+            this.subMenu.top_menu_code = this.topMenuCodeList[i].top_menu_code
+          }
+        }
+        if (this.subMenuInfo.top_menu_code != this.subMenu.top_menu_code){
+          this.notifyservice.showWarning("맞지 않는 TopMenuCode 입니다.","");
+          this.SubopenModal = false;
+          this.onSubReset();
+        }else{
       this.submenuservice.deleteSubMenu(this.subMenu.sub_menu_code,this.subMenu.sub_menu_name,this.subMenu.top_menu_code,
         this.subMenu.sub_menu_order,this.subMenu.icon_code)
         .subscribe(() => {
@@ -298,6 +297,7 @@ export class MenuComponent implements OnInit {
         }
         )
       }
+    }
       }
       else{
         this.notifyservice.showWarning("입력값을 확인해주세요","");
@@ -314,6 +314,23 @@ export class MenuComponent implements OnInit {
     }
 
     onSubReset(){
+      this.subMenu.sub_menu_name = "";
+      this.subMenu.sub_menu_code = "";
+      this.subMenu.top_menu_code = "";
+      this.subMenu.sub_menu_order = "";
+      this.subMenu.icon_code = "";
+      this.SubDeleteclick = true;
+    }
+    
+    onTopCancel(){
+      this.topMenu.top_menu_code = "";
+      this.topMenu.top_menu_name = "";
+      this.topMenu.top_menu_order = "";
+      this.topMenu.icon_code = "";
+      this.TopDeleteclick = true;
+    }
+
+    onSubCancel(){
       this.subMenu.sub_menu_name = "";
       this.subMenu.sub_menu_code = "";
       this.subMenu.top_menu_code = "";

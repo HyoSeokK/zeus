@@ -19,6 +19,8 @@ export class TopmenuserviceService {
   private deleteUri : string = MENU_BASE_URL + "/topmenudelete";
   private saveTopUrl : string = MENU_BASE_URL + "/topmenusaveUrl";
   private deleteTopUrl : string = MENU_BASE_URL + "/topmenudeleteUrl";
+  private updateTopUrl : string = MENU_BASE_URL + "/topmenuupdate";
+  
  
 
   constructor(private http: HttpClient) { }
@@ -53,6 +55,18 @@ export class TopmenuserviceService {
         return result;
       })
     );
+  }
+
+  public updateTopMenu(top_menu_code:string,top_menu_name:string,top_menu_order:string,icon_code:string) : any{
+    return this.http.post(this.updateTopUrl,JSON.stringify({
+      'top_menu_code':top_menu_code,  'top_menu_name':top_menu_name,
+      'top_menu_order':top_menu_order, 'icon_code':icon_code
+    }),
+    ).pipe(
+      map(result => {
+        return result;
+      })
+    )
   }
 
   public deleteTopMenu(top_menu_name:string,top_menu_code:string,top_menu_order:string,icon_code:string){

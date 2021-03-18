@@ -4,6 +4,7 @@ import { MENU_BASE_URL, HTTP_OPTIONS } from '../../utils/utils'
 import { map } from 'rxjs/operators';
 
 const getTargetUrlLink = MENU_BASE_URL + "/target"
+const getTargetTopUrlLink = MENU_BASE_URL + "/toptarget"
 
 class RequestCode {
     top_menu_code: string;
@@ -25,6 +26,20 @@ export class TargetService {
         return this.httpClient
             .post<HttpResponse<any>> (
                 getTargetUrlLink,
+                this.menuCode,
+                HTTP_OPTIONS
+            ).pipe(map(res => {
+                console.log(res)
+                return res;
+            }));
+    }
+
+    getTargetTopUrlLink(topCode : string) : any {
+        this.menuCode.top_menu_code = topCode
+
+        return this.httpClient
+            .post<HttpResponse<any>> (
+                getTargetTopUrlLink,
                 this.menuCode,
                 HTTP_OPTIONS
             ).pipe(map(res => {

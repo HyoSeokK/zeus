@@ -15,6 +15,7 @@ export class SubmenuserviceService {
   private deleteUri : string = MENU_BASE_URL + "/submenudelete";
   private saveSubUrl : string = MENU_BASE_URL + "/submenusaveUrl";
   private deleteSubUrl : string = MENU_BASE_URL + "/submenudeleteUrl"
+  private updateSubUrl : string = MENU_BASE_URL + "/submenuupdate";
 
   constructor(private http: HttpClient) { }
 
@@ -29,9 +30,9 @@ export class SubmenuserviceService {
   }
 
   
-  public saveSubMenu(sub_menu_code:string,sub_menu_name:string,top_menu_code:string,sub_menu_order:string,icon_code:string) : any{
+  public saveSubMenu(sub_menu_code:string,sub_menu_name:string,top_menu_code:string,top_menu_name:string,sub_menu_order:string,icon_code:string) : any{
     return this.http.post(this.saveUri,JSON.stringify({
-      'sub_menu_code':sub_menu_code, 'sub_menu_name':sub_menu_name,
+      'sub_menu_code':sub_menu_code, 'sub_menu_name':sub_menu_name, 'top_menu_name':top_menu_name,
       'top_menu_code':top_menu_code, 'sub_menu_order':sub_menu_order,'icon_code':icon_code
     }),
     ).pipe(
@@ -39,6 +40,12 @@ export class SubmenuserviceService {
         return result
       })
     );
+  }
+  public updateSubMenu(sub_menu_code:string,sub_menu_name:string,top_menu_code:string,top_menu_name:string,sub_menu_order:string,icon_code:string) : any{
+    return this.http.post(this.updateSubUrl,JSON.stringify({
+      'sub_menu_code':sub_menu_code,'sub_menu_name':sub_menu_name,'top_menu_code':top_menu_code,
+      'top_menu_name':top_menu_name,'sub_menu_order':sub_menu_order,'icon_code':icon_code
+    }))
   }
 
   public deleteSubMenu(sub_menu_code:string,sub_menu_name:string,top_menu_code:string,sub_menu_order:string,icon_code:string){
