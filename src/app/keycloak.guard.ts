@@ -19,14 +19,19 @@ export class KeycloakGuard extends KeycloakAuthGuard {
     state: RouterStateSnapshot
   ) {
     if(!this.authenticated) {
+      console.log("authenticated")
       await this.keycloak.login({
+        scope:"email profile group roles",
         redirectUri: window.location.origin + state.url,
       });
     }
 
+    this.keycloak.loadUserProfile().then(user => {
+      console.log("user : " + JSON.stringify(user))
+    })
     localStorage.setItem('username', this.keycloak.getUsername())
-    
-    // path 에서 필요한 roles
+
+    // path에서 필요한 roles
     const requiredRoles = route.data.roles;
 
     if(!(requiredRoles instanceof Array) || requiredRoles.length === 0) {
@@ -38,9 +43,8 @@ export class KeycloakGuard extends KeycloakAuthGuard {
           console.log("required : ", requiredRole)
           return true;
         }
-      } 
+      }
     }
-
     return requiredRoles.every((role) => this.roles.includes(role));
   }
 }

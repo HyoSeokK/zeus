@@ -10,7 +10,7 @@ import { User, AdminInfo } from '../user';
   styleUrls: ['./administrator-user.component.css']
 })
 export class AdministratorUserComponent implements OnInit {
-
+  check = true;
   user : User = new User();
   userInfoList : User[]
   adminCli : AdminInfo = new AdminInfo();
@@ -27,12 +27,26 @@ export class AdministratorUserComponent implements OnInit {
       if(res.status == 200) {
         this.userInfoList = res.data as User[]
         console.log(this.userInfoList)
+      } else {
+
       }
     });
   }
 
   goToRegisterUser(): void {
     this.router.navigateByUrl("/app/setting/user/admin/register");
+  }
+
+  onClickUserInfo() : void {
+    this.check = false;
+    let cnt = 0;
+    this.userInfoList.forEach(userList => {
+      console.log(userList.checked)
+      /*
+      if(user.checked) {
+        console.log("check")
+      }*/
+    });
   }
 
 }

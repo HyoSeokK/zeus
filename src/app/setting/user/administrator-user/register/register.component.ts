@@ -37,7 +37,7 @@ export class RegisterComponent implements OnInit {
   });
 
   onSubmit() {
-    this.groups.push("admin")
+    this.groups.push("administrator")
     this.userInfo.username = this.userForm.controls.userId.value;
     this.userInfo.firstName = this.userForm.controls.userFirstname.value;
     this.userInfo.lastName = this.userForm.controls.userLastName.value;
