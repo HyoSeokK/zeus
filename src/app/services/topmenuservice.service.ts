@@ -57,7 +57,7 @@ export class TopmenuserviceService {
     );
   }
 
-  public updateTopMenu(top_menu_code:string,top_menu_name:string,top_menu_order:string,icon_code:string) : any{
+  public updateTopMenu(top_menu_name:string,top_menu_code:string,top_menu_order:string,icon_code:string) : any{
     return this.http.post(this.updateTopUrl,JSON.stringify({
       'top_menu_code':top_menu_code,  'top_menu_name':top_menu_name,
       'top_menu_order':top_menu_order, 'icon_code':icon_code

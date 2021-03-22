@@ -27,7 +27,7 @@
         <div class="flex-box-item">
         <clr-input-container>
           <label>Top Menu Code</label>
-          <input clrInput placeholder="Code" name="top_menu_code" [(ngModel)] = "topMenu.top_menu_code"/>
+          <input clrInput placeholder="Code" name="top_menu_code" [(ngModel)] = "topMenu.top_menu_code" [readonly] = "MenuGet"/>
         </clr-input-container>
        </div>
       </div>
@@ -51,16 +51,16 @@
         </div>
         <div class="wd100">
         <button class="btn btn-primary" (click) = "onTopMenuSave()" [hidden]="save">
-          <clr-icon shape="download"></clr-icon>저장
+          <clr-icon shape="success-standard"></clr-icon>저장
         </button>
-        <button class="btn btn-primary" [hidden] = "update">
-          <clr-icon shape="download"></clr-icon>수정
+        <button class="btn btn-primary" [hidden] = "update" (click) = "onTopMenuUpdate()">
+          <clr-icon shape="success-standard"></clr-icon>수정
         </button>
         <button class="btn" (click) = "onTopOpenModal()" [disabled] = "TopDeleteclick">
-          <clr-icon shape="ban"></clr-icon>삭제
+          <clr-icon shape="times"></clr-icon>삭제
         </button>
         <button class="btn btn-info-outline" (click) = "onTopCancel()">
-          <clr-icon shape="ban"></clr-icon>취소
+          <clr-icon shape="times"></clr-icon>취소
         </button>
       </div>
       </form>
@@ -76,7 +76,7 @@
         <div class="flex-box-item">
         <clr-input-container>
           <label>Sub Menu Code</label>
-          <input clrInput placeholder="SubCode" name="sub_menu_code" [(ngModel)] = "subMenu.sub_menu_code"/>
+          <input clrInput placeholder="SubCode" name="sub_menu_code" [(ngModel)] = "subMenu.sub_menu_code" [readonly] = "subMenuGet"/>
         </clr-input-container>
         </div>
         </div>
@@ -111,17 +111,17 @@
         </clr-combobox-container>
       
       <div class="wd100">
-        <button class="btn btn-primary" (click) = "onSubMenuSave()">
-          <clr-icon shape="download"></clr-icon>저장
+        <button class="btn btn-primary" (click) = "onSubMenuSave()" [hidden]="subsave">
+          <clr-icon shape="success-standard"></clr-icon>저장
         </button>
-        <button class="btn btn-primary">
-          <clr-icon shape="download"></clr-icon>수정
+        <button class="btn btn-primary" (click) = "onSubMenuUpdate()" [hidden] = "subupdate">
+          <clr-icon shape="success-standard"></clr-icon>수정
         </button>
         <button class="btn" (click) = "onSubOpenModal()" [disabled] = "SubDeleteclick">
-          <clr-icon shape="ban"></clr-icon>삭제
+          <clr-icon shape="times"></clr-icon>삭제
         </button>
         <button class="btn btn-info-outline" (click) = "onSubCancel()">
-          <clr-icon shape="ban"></clr-icon>취소
+          <clr-icon shape="times"></clr-icon>취소
         </button>
       </div>
       </form>

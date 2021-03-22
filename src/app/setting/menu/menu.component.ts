@@ -18,7 +18,11 @@ export class MenuComponent implements OnInit {
   TopDeleteclick : boolean = true;
   SubDeleteclick : boolean = true;
   save : boolean = false;
+  subsave : boolean = false;
   update : boolean = true;
+  subupdate : boolean = true;
+  MenuGet : boolean = false;
+  subMenuGet : boolean = false;
   topMenu: topMenu = new topMenu();
   subMenu: subMenu = new subMenu();
   topMenuInfo: topMenu = new topMenu();
@@ -186,6 +190,9 @@ export class MenuComponent implements OnInit {
         this.topMenu.icon_code = this.topMenuIcon[i].icon_description
       }
     this.TopDeleteclick = false;
+    this.update = false;
+    this.save = true;
+    this.MenuGet = true;
   }
 
   onSubMenuGet(subMenu){
@@ -202,6 +209,9 @@ export class MenuComponent implements OnInit {
         this.subMenu.icon_code = this.topMenuIcon[i].icon_description
     }
     this.SubDeleteclick = false;
+    this.subupdate = false;
+    this.subsave = true;
+    this.subMenuGet = true;
   }
 
   onTopOpenModal() {
@@ -305,37 +315,116 @@ export class MenuComponent implements OnInit {
       }
     }
 
-    onTopReset(){
+    onTopMenuUpdate(){
+      if(this.topMenu.top_menu_name != null && this.topMenu.top_menu_code != null && this.topMenu.top_menu_order != null && this.topMenu.icon_code !=null &&
+        this.topMenu.top_menu_order != "" && this.topMenu.top_menu_name != "" && this.topMenu.icon_code != ""){
+        for(var i = 0; i<this.topMenuIcon.length; i++){
+          if(this.topMenu.icon_code == this.topMenuIcon[i].icon_description){
+            this.topMenu.icon_code = this.topMenuIcon[i].icon_code
+          }
+        }
+          this.topmenuservice.updateTopMenu(this.topMenu.top_menu_name,this.topMenu.top_menu_code,this.topMenu.top_menu_order,this.topMenu.icon_code)
+          .subscribe(result => {
+            if(result.data != null){
+            this.notifyservice.showSuccess("입력정보가 수정 되었습니다","");
+            this.ngOnInit();
+            this.onTopReset();
+            }
+          },
+          error => {
+            console.log(error)
+            this.notifyservice.showError("입력정보 수정에 실패하였습니다","");
+            this.onTopReset();
+          }
+          )
+      }
+      else{
+        this.notifyservice.showWarning("입력값을 확인해주세요","");
+      }
+    }
+  
+  onSubMenuUpdate(){
+    if(this.subMenu.sub_menu_name != "" && this.subMenu.sub_menu_order != "" && this.subMenu.top_menu_code != "" && this.subMenu.icon_code != ""){
+      for(var i = 0; i<this.topMenuCodeList.length; i++){
+        if(this.subMenu.top_menu_code == this.topMenuCodeList[i].top_menu_name){
+          this.subMenu.top_menu_code = this.topMenuCodeList[i].top_menu_code
+        }
+      }
+      for(var i = 0; i<this.topMenuIcon.length; i++){
+        if(this.subMenu.icon_code == this.topMenuIcon[i].icon_description){
+          this.subMenu.icon_code = this.topMenuIcon[i].icon_code
+        }
+      }
+      for(var i = 0; i<this.topMenuCodeList.length; i++){
+        if(this.subMenu.top_menu_code == this.topMenuCodeList[i].top_menu_name){
+          this.SubMenuobj.top_menu_name = this.topMenuCodeList[i].top_menu_name
+        }
+      }
+      
+      this.submenuservice.updateSubMenu(this.subMenu.sub_menu_code,this.subMenu.sub_menu_name,this.subMenu.top_menu_code,this.subMenu.top_menu_name,
+        this.subMenu.sub_menu_order,this.subMenu.icon_code)
+        .subscribe(result => {
+          if(result.data != null){
+            this.notifyservice.showSuccess("입력정보가 수정 되었습니다","");
+            this.ngOnInit();
+            this.onSubReset();
+          }
+        },
+        error => {
+          console.log(error)
+          this.notifyservice.showError("입력정보 수정에 실패하였습니다","");
+          this.onSubReset();
+        }
+        )  
+    }
+    else{
+      this.notifyservice.showWarning("입력값을 확인해주세요","");
+    }
+  }
+
+  onTopReset(){
       this.topMenu.top_menu_code = "";
       this.topMenu.top_menu_name = "";
       this.topMenu.top_menu_order = "";
       this.topMenu.icon_code = "";
       this.TopDeleteclick = true;
+      this.save = false;
+      this.update = true;
+      this.MenuGet = false;
     }
 
-    onSubReset(){
+  onSubReset(){
       this.subMenu.sub_menu_name = "";
       this.subMenu.sub_menu_code = "";
       this.subMenu.top_menu_code = "";
       this.subMenu.sub_menu_order = "";
       this.subMenu.icon_code = "";
       this.SubDeleteclick = true;
+      this.subsave = false;
+      this.subupdate = true;
+      this.subMenuGet = false;
     }
     
-    onTopCancel(){
+  onTopCancel(){
       this.topMenu.top_menu_code = "";
       this.topMenu.top_menu_name = "";
       this.topMenu.top_menu_order = "";
       this.topMenu.icon_code = "";
       this.TopDeleteclick = true;
+      this.save = false;
+      this.update = true;
+      this.MenuGet = false;
     }
 
-    onSubCancel(){
+  onSubCancel(){
       this.subMenu.sub_menu_name = "";
       this.subMenu.sub_menu_code = "";
       this.subMenu.top_menu_code = "";
       this.subMenu.sub_menu_order = "";
       this.subMenu.icon_code = "";
       this.SubDeleteclick = true;
+      this.subsave = false;
+      this.subupdate = true;
+      this.subMenuGet = false;
     }
 }
