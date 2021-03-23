@@ -3,6 +3,7 @@ import { FormControl, FormGroup } from '@angular/forms';
 import { User, UserAttribute, UserCredentials, AdminInfo } from '../../user';
 import { UserService } from '../../user.service';
 import { Router } from '@angular/router';
+import { NotificationService } from '../../../../services/notification.service';
 
 @Component({
   selector: 'admin-register',
@@ -19,7 +20,8 @@ export class RegisterComponent implements OnInit {
 
   constructor(
     private router:Router,
-    public userService : UserService) { 
+    public userService : UserService,
+    private notifyservice: NotificationService) { 
       this.adminCli = JSON.parse(localStorage.getItem("cli")) as AdminInfo; 
     }
 
@@ -58,11 +60,10 @@ export class RegisterComponent implements OnInit {
     this.userService.createUser(this.userInfo, this.adminCli).subscribe(res=> {
       
       if(res.data == "") {
-          console.log("Success User created")
-          alert("관리자를 등록했습니다.")
+          this.notifyservice.showSuccess("등록 완료했습니다.", "관리자 등록")
           this.router.navigateByUrl("/app/setting/user/admin");
       } else {
-          alert("관리자를 등록 실패했습니다.")
+          this.notifyservice.showError("등록 실패했습니다.", "관리자 등록")
           console.log("Failed Create USer");
       }
     });

@@ -6,6 +6,7 @@ import { User, AdminInfo } from './user';
 
 const createUserEndpoint = USER_BASE_URL + "/register_user"
 const updateUserEndpoint = USER_BASE_URL + "/update_user"
+const updateCredentailsUserEndpoint = USER_BASE_URL + "/update_userCredentials"
 const deleteUserEndpoint = USER_BASE_URL + "/delete_user"
 const userListEndpoint = USER_BASE_URL + "/user_list"
 
@@ -89,7 +90,26 @@ export class UserService {
 
     }
 
-    deleteUser(userid, admininfo : AdminInfo) : any {
+    updateUserCredentials(userid : string, admininfo : AdminInfo) : any {
+        
+        this.postData.admin = admininfo as AdminInfo;
+        
+        console.log("postData : " + JSON.stringify(this.postData));
+
+        return this.httpClient
+            .post<HttpResponse<any>> (
+                updateCredentailsUserEndpoint + "/" + userid,
+                this.postData,
+                HTTP_OPTIONS
+            ).pipe(map(res => {
+                console.log(res)
+                return res;
+            }));
+
+    }
+
+
+    deleteUser(userid : string, admininfo : AdminInfo) : any {
         this.postData.admin = admininfo as AdminInfo;
         
         return this.httpClient

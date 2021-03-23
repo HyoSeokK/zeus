@@ -15,6 +15,8 @@ const changeThemeEndpoint = BASE_URL + "/changeTheme";
 export class ThemeService {
 
   rst : string;
+  linkRef: HTMLLinkElement;
+  
 
   constructor(
     @Inject(DOCUMENT) private document: Document,
@@ -42,7 +44,7 @@ export class ThemeService {
   updateTheme() : any {
     console.log("change function")
     var env = JSON.parse(localStorage.getItem('env')) as EnvSetting;
-
+    console.log("updataTheme : " + JSON.stringify(env))
     return this.httpClient
         .post<HttpResponse<any>>(
             changeThemeEndpoint, 

@@ -5,30 +5,15 @@
           <p>관재 색상 테마를 선택할 수 있습니다. 검정과 흰색 두 가지를 지원하며, 기본은 검정 입니다.</p>
         </div>
 
-        <div>
-            <ng-container *ngFor="let theme of themeArray;let i=index">
-                <ng-container *ngIf="theme.showStyle === styleMode">
-                    
-                    <clr-toggle-container *ngIf="styleMode === 'LIGHT'">
-                      <label>Light</label>
-                        <clr-toggle-wrapper >
-                            <input type="checkbox" (click)="themeChanged(theme)" clrToggle name="light" required value="option1"/>
-                            <label>DARK</label>
-                        </clr-toggle-wrapper>
-                    </clr-toggle-container>
-
-                    <clr-toggle-container *ngIf="styleMode === 'DARK'">
-                      <label>Dark</label>
-                      <clr-toggle-wrapper >
-                          <input type="checkbox" (click)="themeChanged(theme)" clrToggle name="light" required value="option1"/>
-                          <label>LIGHT</label>
-                      </clr-toggle-wrapper>
-                  </clr-toggle-container>
-
-                </ng-container>
-            </ng-container>
-        </div>
-        
+        <div class="mb-20">
+          <clr-toggle-container>
+              <clr-toggle-wrapper>
+                  <input type="checkbox" clrToggle name="options" required value="option1" (click)="switchTheme()"
+                      id="ThemeSwitch" />
+              </clr-toggle-wrapper>
+          </clr-toggle-container>
+      </div>
+      
     </div>
 
 
@@ -246,7 +231,7 @@
           <clr-toggle-container>
             <label>ON</label>
             <clr-toggle-wrapper>
-              <input type="checkbox" clrToggle name="UserRegisterAuth" [(ngModel)]="env.UserRegisterAuth" required value="option1" />
+              <input type="checkbox" clrToggle name="UserRegisterAuth" required value="option1" />
               <label>OFF</label>
             </clr-toggle-wrapper>
           </clr-toggle-container>
