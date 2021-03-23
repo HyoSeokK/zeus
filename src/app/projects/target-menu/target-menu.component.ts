@@ -27,6 +27,14 @@ export class TargetMenuComponent implements OnInit {
       });
 
     })
+
+    this.activatedRoute.params.subscribe(params => {
+      this.topCode = params['topCode']
+      this.targetService.getTargetTopUrlLink(this.topCode)
+      .subscribe(res =>{
+        this.url = this.sanitizer.bypassSecurityTrustResourceUrl(res.data);
+      })
+    })
    }
 
   ngOnInit(): void {}

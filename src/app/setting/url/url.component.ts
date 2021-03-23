@@ -6,6 +6,8 @@ import {topMenu} from '../../setting/menu/topmenu'
 import {subMenu} from '../../setting/menu/submenu'
 import {topMenuIcon} from '../../setting/menu/topmenuicon'
 import {NotificationService} from '../../services/notification.service'
+import { AppLayoutComponent } from 'src/app/base/layout/app-layout'
+
 
 @Component({
   selector: 'app-url',
@@ -27,13 +29,14 @@ export class UrlComponent implements OnInit {
 
   constructor(private topmenuservice: TopmenuserviceService,
     private submenuservice: SubmenuserviceService,
-    private notifyservice: NotificationService) { }
+    private notifyservice: NotificationService,
+    private AppLayout: AppLayoutComponent) { }
 
   ngOnInit(): void {
     this.topmenuservice.getTopMenu()
     .subscribe(resp => {
       this.TopMenuList = resp.body as topMenu[]
-      
+      this.topMenu.top_menu_code = this.TopMenuList[0].top_menu_name
     })
 
     this.topmenuservice.getTopMenuIcon()
@@ -48,7 +51,7 @@ export class UrlComponent implements OnInit {
     })
     
     this.topMenu.new_window_check = false;
-    
+    this.AppLayout.ngOnInit();
   }
   onTopMenuSave(){
      if(this.topMenu.top_menu_code == null && this.topMenu.top_menu_target_url == null && this.subMenu.sub_menu_code == null){
@@ -125,6 +128,7 @@ export class UrlComponent implements OnInit {
 
   onTopMenuGet(topMenu){
     this.topMenuInfo = topMenu
+
     for(var i = 0; i < this.TopMenuList.length; i++){
       if(this.topMenuInfo.top_menu_code == this.TopMenuList[i].top_menu_code){
         this.topMenu.top_menu_code = this.TopMenuList[i].top_menu_name

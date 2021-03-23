@@ -50,6 +50,10 @@ const routes: Routes = [
         component:ProjectListComponent,
       },
       {
+        path:'target/:topCode',
+        component:TargetMenuComponent,
+      },
+      {
         path:'target/:topCode/:subCode',
         component:TargetMenuComponent,
       },

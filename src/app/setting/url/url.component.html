@@ -31,33 +31,17 @@
             <clr-combobox [(ngModel)] = "subMenu.sub_menu_code" name = "sub_sub_menu_code">
               <clr-options>
                 <ng-container *ngFor = "let subMenuList of SubMenuList">
-              <clr-option clrValue="{{subMenuList.sub_menu_name}}">{{subMenuList.sub_menu_name}}</clr-option>
-            </ng-container>
+                    <ng-container *ngIf = "topMenu.top_menu_code == subMenuList.top_menu_name">
+                      <clr-option clrValue="{{subMenuList.sub_menu_name}}">{{subMenuList.sub_menu_name}}</clr-option>
+                    </ng-container>
+                 </ng-container>
             </clr-options>
           </clr-combobox>
           </clr-combobox-container>
-          <!-- <clr-datalist-container>
-            <label>Top Menu</label>
-            <input clrDatalistInput placeholder="Select Menu" [(ngModel)] = "topMenu.top_menu_code" name = "top_menu_code"/>
-            <datalist>
-              <ng-container *ngFor = "let topMenuList of TopMenuList">
-              <option [value]="topMenuList.top_menu_code">{{topMenuList.top_menu_name}}</option>
-            </ng-container>
-            </datalist>
-          </clr-datalist-container>
-          <clr-datalist-container>
-            <label>Sub Menu</label>
-            <input clrDatalistInput placeholder="Select Menu" [(ngModel)] = "subMenu.sub_menu_code" name = "sub_menu_code"/>
-            <datalist>
-              <ng-container *ngFor = "let subMenuList of SubMenuList">
-              <option [value]="subMenuList.sub_menu_code">{{subMenuList.sub_menu_name}}</option>
-            </ng-container>
-            </datalist>
-          </clr-datalist-container> -->
     
           <clr-input-container>
             <label>LINK URL</label>
-            <input clrInput placeholder="URL" name="menu_url" [(ngModel)] = "topMenu.top_menu_target_url"/>
+            <input clrInput placeholder="URL" name="menu_url" [(ngModel)] = "topMenu.top_menu_target_url" />
           </clr-input-container>
           <clr-input-container>
             <label>New Window</label>
@@ -74,10 +58,10 @@
         </div>
         </form>
         <button class="btn btn-primary" (click) = "onTopMenuSave()">
-          <clr-icon shape="download"></clr-icon>저장
+          <clr-icon shape="success-standard"></clr-icon>저장
         </button>
         <button class="btn" (click) = "onOpenModal()" [disabled] = "Deleteclick">
-          <clr-icon shape="ban"></clr-icon>삭제
+          <clr-icon shape="times"></clr-icon>삭제
         </button>
       </div>
 

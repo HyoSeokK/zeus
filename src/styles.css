@@ -82,6 +82,7 @@ margin: 100px 0;
 .clr-combobox-options { min-width: 9.2rem !important; }
 .formBox .clr-input { width:35% !important; min-width: 180px;}
 .formBox input[name="password"] { width:100%!important; min-width: 130px;}
+.formBox input[name="menu_url"] { width:110%!important; min-width: 130px;}
 .formBox  ::-webkit-input-placeholder {
   color:var(--clr-forms-placeholder-color, #8c8c8c) !important;
   opacity: 0.54 !important;
