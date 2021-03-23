@@ -10,6 +10,8 @@ export class User {
     attributes : UserAttribute;
     credentials : Array<UserCredentials>;
     groups : Array<string>;
+    password : string;
+    passwordcheck : string; 
 }
 
 export class UserAttribute {

@@ -15,42 +15,54 @@
         일반사용자는 단순히 시스템에 정보를 확인할 수 있는 Viewer 권한이 있습니다.</p>
     </div>
 
-    <form clrForm class="formBox" [formGroup]="userForm">
+    <form clrForm class="formBox">
       <clr-input-container>
         <label>사용자ID</label>
-        <input clrInput placeholder="User Id" formControlName="userId"/>
+        <input clrInput placeholder="User Id" [(ngModel)]="userInfo.username" id ="userid" name="userid" required/>
+        <clr-control-error>
+          id를 입력해주세요.
+        </clr-control-error>
       </clr-input-container>
       <clr-password-container>
         <label>신규비밀번호</label>
-        <input clrPassword placeholder="Password" formControlName="password" />
+        <input clrPassword placeholder="Password" name="password" id = "password" [(ngModel)]="userInfo.password" required />
+        <clr-control-error>비밀번호를 입력해주세요.</clr-control-error>
       </clr-password-container>
       <clr-password-container>
         <label>비밀번호 확인</label>
-        <input clrPassword placeholder="Password" name="password" />
+        <input clrPassword placeholder="Password" name="passwordcheck" id = "passwordcheck" [(ngModel)]="userInfo.passwordcheck" appForbiddenName="userInfo.password" required/>
+        <clr-control-error *clrIfError="'appForbiddenName'">
+          비밀번호를 확인해주세요.
+        </clr-control-error>
       </clr-password-container>
       <clr-input-container>
         <label>성</label>
-        <input clrInput placeholder="Name" formControlName="userFirstname"/>
+        <input clrInput placeholder="Name" [(ngModel)]="userInfo.firstName"  name="userFirstname" required/>
+        <clr-control-error>성을 입력해주세요.</clr-control-error>
       </clr-input-container>
       <clr-input-container>
         <label>이름</label>
-        <input clrInput placeholder="Name" formControlName="userLastName"/>
+        <input clrInput placeholder="Name" [(ngModel)]="userInfo.lastName"  name="userLastName" required/>
+        <clr-control-error>이름을 입력해주세요.</clr-control-error>
       </clr-input-container>
       <clr-input-container>
         <label>부서명</label>
-        <input clrInput placeholder="Department" formControlName="userDepartmentNm" />
+        <input clrInput placeholder="Department" [(ngModel)]="userAttribute.departmentNm"  name="userDepartmentNm" required>
+        <clr-control-error>부서명을 입력해주세요.</clr-control-error>
       </clr-input-container>
       <clr-input-container>
         <label>직급</label>
-        <input clrInput placeholder="Position" formControlName="userPosition" />
+        <input clrInput placeholder="Position" [(ngModel)]="userAttribute.position" name="userPosition" required/>
+        <clr-control-error>직급을 입력해주세요.</clr-control-error>
       </clr-input-container>
       <clr-input-container>
         <label>Email 주소</label>
-        <input clrInput placeholder="E-mail" formControlName="userEmail" />
+        <input clrInput placeholder="E-mail" [(ngModel)]="userInfo.email" name="userEmail" required/>
+        <clr-control-error>이메일을 입력해주세요.</clr-control-error>
       </clr-input-container>
       <clr-input-container>
         <label>전화번호(선택)</label>
-        <input clrInput placeholder="Number" formControlName="userPhoneNumber" />
+        <input clrInput placeholder="Number" [(ngModel)]="userAttribute.phoneNumber"  name="userPhoneNumber"/>
       </clr-input-container>
     </form>
     <div class="btn-left">

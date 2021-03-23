@@ -1,255 +1,264 @@
 <div class="innerDiv">
-    <div class="textBox setBox">
-        <div>
-          <h3>테마 설정</h3>
-          <p>관재 색상 테마를 선택할 수 있습니다. 검정과 흰색 두 가지를 지원하며, 기본은 검정 입니다.</p>
-        </div>
+  <div class="textBox setBox">
+      <div>
+        <h3>테마 설정</h3>
+        <p>관재 색상 테마를 선택할 수 있습니다. 검정과 흰색 두 가지를 지원하며, 기본은 검정 입니다.</p>
+      </div>
 
-        <div>
-            <ng-container *ngFor="let theme of themeArray;let i=index">
-                <ng-container *ngIf="theme.showStyle === styleMode">
-                    
-                    <clr-toggle-container *ngIf="styleMode === 'LIGHT'">
-                      <label>Light</label>
-                        <clr-toggle-wrapper >
-                            <input type="checkbox" (click)="themeChanged(theme)" clrToggle name="light" required value="option1"/>
-                            <label>DARK</label>
-                        </clr-toggle-wrapper>
-                    </clr-toggle-container>
-
-                    <clr-toggle-container *ngIf="styleMode === 'DARK'">
-                      <label>Dark</label>
+      <div class="mb-20">
+        <clr-toggle-container>
+            <clr-toggle-wrapper>
+                <input type="checkbox" clrToggle name="options" required value="option1" (click)="switchTheme()"
+                    id="ThemeSwitch" />
+            </clr-toggle-wrapper>
+        </clr-toggle-container>
+    </div>
+    
+      <!--<div>
+          <ng-container *ngFor="let theme of themeArray;let i=index">
+              <ng-container *ngIf="theme.showStyle === styleMode">
+                  
+                  <clr-toggle-container *ngIf="styleMode === 'LIGHT'">
+                    <label>Light</label>
                       <clr-toggle-wrapper >
                           <input type="checkbox" (click)="themeChanged(theme)" clrToggle name="light" required value="option1"/>
-                          <label>LIGHT</label>
+                          <label>DARK</label>
                       </clr-toggle-wrapper>
                   </clr-toggle-container>
 
-                </ng-container>
-            </ng-container>
-        </div>
-        
-    </div>
+                  <clr-toggle-container *ngIf="styleMode === 'DARK'">
+                    <label>Dark</label>
+                    <clr-toggle-wrapper >
+                        <input type="checkbox" (click)="themeChanged(theme)" clrToggle name="light" required value="option1"/>
+                        <label>LIGHT</label>
+                    </clr-toggle-wrapper>
+                </clr-toggle-container>
 
+              </ng-container>
+          </ng-container>
+      </div>-->
+      
+  </div>
+
+
+  <div class="textBox setBox">
+      <div>
+        <h3>언어 설정</h3>
+        <p>한글과 영문 두가지 버전의 언어를 지원합니다.</p>
+      </div>
+      <div>
+        <clr-toggle-container>
+          <label>Kor</label>
+          <clr-toggle-wrapper>
+            <input type="checkbox" clrToggle name="options" required value="option1" />
+            <label>Eng</label>
+          </clr-toggle-wrapper>
+        </clr-toggle-container>
+      </div>
+    </div>
+    
+    <clr-modal [(clrModalOpen)]="isModalVisible">
+      <div class="modal-title">
+        <clr-icon shape="bell"></clr-icon>
+        <p>신규 계정 등록을 위해 계정 관리 로그인이 필요합니다.<br>
+          Keycloak Admin 접속 정보를 입력하세요.</p>
+      </div>
+
+      <div class="modal-body">
+        <form clrForm  [formGroup]="adminCliForm">
+          <clr-input-container>
+            <label>Admin ID</label>
+            <input clrInput placeholder="Admin ID" formControlName="id"/>
+          </clr-input-container>
+          <clr-input-container>
+            <label>Admin PW</label>
+            <input clrInput placeholder="Admin PW" formControlName="pw"/>
+          </clr-input-container>
+          <clr-input-container>
+            <label>ClientID</label>
+            <input clrInput placeholder="Client ID" formControlName="client" />
+          </clr-input-container>
+          <clr-input-container>
+            <label>Client Secret</label>
+            <input clrInput placeholder="Client Secret" formControlName="secret"/>
+          </clr-input-container>
+          <clr-input-container>
+            <label>Token URL</label>
+            <input clrInput placeholder="Access Token URL" formControlName="url" />
+          </clr-input-container>
+        </form>
+      </div>
+      
+      <div class="modal-footer">
+        <button type="button" class="btn" (click)="isModalVisible = false">취소</button>
+        <button type="button" class="btn" (click)="goToAdminApiManageLink()">로그인</button>
+      </div>
+    </clr-modal>
 
     <div class="textBox setBox">
-        <div>
-          <h3>언어 설정</h3>
-          <p>한글과 영문 두가지 버전의 언어를 지원합니다.</p>
-        </div>
-        <div>
-          <clr-toggle-container>
-            <label>Kor</label>
-            <clr-toggle-wrapper>
-              <input type="checkbox" clrToggle name="options" required value="option1" />
-              <label>Eng</label>
-            </clr-toggle-wrapper>
-          </clr-toggle-container>
-        </div>
+      <div>
+        <h3>그룹 관리</h3>
+        <p>헤파이토스 DevOps 플랫폼에 대한 그룹 및 개발자 등록 메뉴을 지원합니다.</p>
       </div>
-      
-      <clr-modal [(clrModalOpen)]="isModalVisible">
-        <div class="modal-title">
-          <clr-icon shape="bell"></clr-icon>
-          <p>신규 계정 등록을 위해 계정 관리 로그인이 필요합니다.<br>
-            Keycloak Admin 접속 정보를 입력하세요.</p>
-        </div>
-  
-        <div class="modal-body">
-          <form clrForm  [formGroup]="adminCliForm">
-            <clr-input-container>
-              <label>Admin ID</label>
-              <input clrInput placeholder="Admin ID" formControlName="id"/>
-            </clr-input-container>
-            <clr-input-container>
-              <label>Admin PW</label>
-              <input clrInput placeholder="Admin PW" formControlName="pw"/>
-            </clr-input-container>
-            <clr-input-container>
-              <label>ClientID</label>
-              <input clrInput placeholder="Client ID" formControlName="client" />
-            </clr-input-container>
-            <clr-input-container>
-              <label>Client Secret</label>
-              <input clrInput placeholder="Client Secret" formControlName="secret"/>
-            </clr-input-container>
-            <clr-input-container>
-              <label>Token URL</label>
-              <input clrInput placeholder="Access Token URL" formControlName="url" />
-            </clr-input-container>
-          </form>
-        </div>
-        
-        <div class="modal-footer">
-          <button type="button" class="btn" (click)="isModalVisible = false">취소</button>
-          <button type="button" class="btn" (click)="goToAdminApiManageLink()">로그인</button>
-        </div>
-      </clr-modal>
-
-      <div class="textBox setBox">
-        <div>
-          <h3>그룹 관리</h3>
-          <p>헤파이토스 DevOps 플랫폼에 대한 그룹 및 개발자 등록 메뉴을 지원합니다.</p>
-        </div>
-        <div>
-          <button class="btn btn-primary" (click)="isModalVisible = true; url = 'groups'">
-            <clr-icon shape="recycle"></clr-icon>권한 관리
-          </button>
-        </div>
-      </div>
-      
-      <div class="textBox setBox">
-        <div>
-          <h3>관리자 관리</h3>
-          <p>파르테논 관리자 등록, 수정, 삭제를 제공합니다.<br>
-            관리자는 제우스, 헤파이토스, 헤라 등 모든 시스템에 관리자로 접속할 수 있습니다.</p>
-        </div>
-        <div>
-          <button class="btn btn-primary" (click)="isModalVisible = true; url = 'admin'">
-            <clr-icon shape="recycle"></clr-icon>관리자 관리
-          </button>
-        </div>
-      </div>
-
-      <div class="textBox setBox">
-        <div>
-          <h3>개발자 관리</h3>
-          <p>파르테논 개발자 등록, 수정, 삭제를 제공합니다.<br>
-            개발자는 자식이 속한 프로젝트 그룹에 대한 개발 권한을 가지고 있습니다. </p>
-        </div>
-        <div>
-          <button class="btn btn-primary" (click)="goToDevUserManageLink()">
-            <clr-icon shape="recycle"></clr-icon>개발자 관리
-          </button>
-        </div>
-      </div>
-      
-      <div class="textBox setBox">
-        <div>
-          <h3>SMTP 설정</h3>
-          <p>사용자 초대 메일 , 에러 발생에 대한 메일 전송용 SMTP 서버를 설정한다.</p>
-        </div>
-        <div>
-          <button class="btn btn-primary" (click)="goToSmtpLink()">
-            <clr-icon shape="cog"></clr-icon>설정
-          </button>
-        </div>
-      </div>
-      
-      <div class="textBox setBox">
-        <div>
-          <h3>데이터 저장기간</h3>
-          <p>사용자 초대 메일 , 에러 발생에 대한 메일 전송용 SMTP 서버를 설정한다.</p>
-        </div>
-        <div>
-          <button class="btn btn-primary" (click)="goToDataStoreDurationLink()">
-            <clr-icon shape="cog"></clr-icon>설정
-          </button>
-        </div>
-      </div>
-      
-      <div class="textBox setBox">
-        <div>
-          <h3>자동로그아웃</h3>
-          <p>3분동안 미사용시 자동 로그 아웃 됩니다.</p>
-        </div>
-        <div>
-          <clr-toggle-container>
-            <label>OFF</label>
-            <clr-toggle-wrapper>
-              <input type="checkbox" clrToggle name="options" required value="option1" />
-              <label>ON</label>
-            </clr-toggle-wrapper>
-          </clr-toggle-container>
-        </div>
-      </div>
-      
-      <div class="textBox setBox">
-        <div>
-          <h3>Help</h3>
-          <p>AnyLogger에 대해 궁금하세요?<br>
-            궁금하신 기능, 운영 방법을 확인해 보세요</p>
-        </div>
-        <div>
-          <button class="btn btn-primary">
-            <clr-icon shape="search"></clr-icon>자세히 보기
-          </button>
-        </div>
-      </div>
-      
-      <div class="textBox setBox">
-        <div>
-          <h3>Version</h3>
-        </div>
-        <div>
-          <span>Jeus V1.0</span>
-        </div>
-      </div>
-      
-      <div class="textBox setBox">
-        <div>
-          <h3>YAML 관리</h3>
-          <p>Top Memu 기능을 설정합니다.<br>
-            APM Performance, Applicaton Log, Network Log, Hear Beat 및 신규 메뉴를 추가할 수 있습니다.</p>
-        </div>
-        <div>
-          <button class="btn btn-primary" (click)="goToYamlLink()">
-            <clr-icon shape="cog"></clr-icon>설정
-          </button>
-        </div>
-      </div>
-      
-      <div class="textBox setBox">
-        <div>
-          <h3>Menu 설정</h3>
-          <p>Top Memu 기능을 설정합니다.<br>
-            APM Performance, Applicaton Log, Network Log, Hear Beat 및 신규 메뉴를 추가할 수 있습니다.</p>
-        </div>
-        <div>
-          <button class="btn btn-primary" (click)="goToMenuLink()">
-            <clr-icon shape="cog"></clr-icon>설정
-          </button>
-        </div>
-      </div>
-      
-      <div class="textBox setBox">
-        <div>
-          <h3>URL Link</h3>
-          <p>Top Menu의 URL Link를 설정합니다.<br>
-            Dash 보드를 생성한 후 해당 URL을 링크해 주세요</p>
-        </div>
-        <div>
-          <button class="btn btn-primary" (click)="goToUrlLink()">
-            <clr-icon shape="cog"></clr-icon>설정
-          </button>
-        </div>
-      </div>
-      
-      <div class="textBox setBox">
-        <div>
-          <h3>Refresh Time</h3>
-          <p>AnyLogger 화면 갱신에 필요한 기간 및 시간을 설정합니다.</p>
-        </div>
-        <div>
-          <button class="btn btn-primary" (click)="goToRefreshLink()">
-            <clr-icon shape="cog"></clr-icon>설정
-          </button>
-        </div>
-      </div>
-
-      <div class="textBox setBox">
-        <div>
-          <h3>사용자 등록 권한</h3>
-          <p>관리자가 개발자 등록데 대한 수락 여부를 설정합니다. <br>ON으로 설정 시 모든 개발자는 관리자가 허락 시 계정이 활성화 됩니다.</p>
-        </div>
-        <div>
-          <clr-toggle-container>
-            <label>ON</label>
-            <clr-toggle-wrapper>
-              <input type="checkbox" clrToggle name="UserRegisterAuth" [(ngModel)]="env.UserRegisterAuth" required value="option1" />
-              <label>OFF</label>
-            </clr-toggle-wrapper>
-          </clr-toggle-container>
-        </div>
+      <div>
+        <button class="btn btn-primary" (click)="isModalVisible = true; url = 'groups'">
+          <clr-icon shape="recycle"></clr-icon>권한 관리
+        </button>
       </div>
     </div>
+    
+    <div class="textBox setBox">
+      <div>
+        <h3>관리자 관리</h3>
+        <p>파르테논 관리자 등록, 수정, 삭제를 제공합니다.<br>
+          관리자는 제우스, 헤파이토스, 헤라 등 모든 시스템에 관리자로 접속할 수 있습니다.</p>
+      </div>
+      <div>
+        <button class="btn btn-primary" (click)="isModalVisible = true; url = 'admin'">
+          <clr-icon shape="recycle"></clr-icon>관리자 관리
+        </button>
+      </div>
+    </div>
+
+    <div class="textBox setBox">
+      <div>
+        <h3>개발자 관리</h3>
+        <p>파르테논 개발자 등록, 수정, 삭제를 제공합니다.<br>
+          개발자는 자식이 속한 프로젝트 그룹에 대한 개발 권한을 가지고 있습니다. </p>
+      </div>
+      <div>
+        <button class="btn btn-primary" (click)="goToDevUserManageLink()">
+          <clr-icon shape="recycle"></clr-icon>개발자 관리
+        </button>
+      </div>
+    </div>
+    
+    <div class="textBox setBox">
+      <div>
+        <h3>SMTP 설정</h3>
+        <p>사용자 초대 메일 , 에러 발생에 대한 메일 전송용 SMTP 서버를 설정한다.</p>
+      </div>
+      <div>
+        <button class="btn btn-primary" (click)="goToSmtpLink()">
+          <clr-icon shape="cog"></clr-icon>설정
+        </button>
+      </div>
+    </div>
+    
+    <div class="textBox setBox">
+      <div>
+        <h3>데이터 저장기간</h3>
+        <p>사용자 초대 메일 , 에러 발생에 대한 메일 전송용 SMTP 서버를 설정한다.</p>
+      </div>
+      <div>
+        <button class="btn btn-primary" (click)="goToDataStoreDurationLink()">
+          <clr-icon shape="cog"></clr-icon>설정
+        </button>
+      </div>
+    </div>
+    
+    <div class="textBox setBox">
+      <div>
+        <h3>자동로그아웃</h3>
+        <p>3분동안 미사용시 자동 로그 아웃 됩니다.</p>
+      </div>
+      <div>
+        <clr-toggle-container>
+          <label>OFF</label>
+          <clr-toggle-wrapper>
+            <input type="checkbox" clrToggle name="options" required value="option1" />
+            <label>ON</label>
+          </clr-toggle-wrapper>
+        </clr-toggle-container>
+      </div>
+    </div>
+    
+    <div class="textBox setBox">
+      <div>
+        <h3>Help</h3>
+        <p>AnyLogger에 대해 궁금하세요?<br>
+          궁금하신 기능, 운영 방법을 확인해 보세요</p>
+      </div>
+      <div>
+        <button class="btn btn-primary">
+          <clr-icon shape="search"></clr-icon>자세히 보기
+        </button>
+      </div>
+    </div>
+    
+    <div class="textBox setBox">
+      <div>
+        <h3>Version</h3>
+      </div>
+      <div>
+        <span>Jeus V1.0</span>
+      </div>
+    </div>
+    
+    <div class="textBox setBox">
+      <div>
+        <h3>YAML 관리</h3>
+        <p>Top Memu 기능을 설정합니다.<br>
+          APM Performance, Applicaton Log, Network Log, Hear Beat 및 신규 메뉴를 추가할 수 있습니다.</p>
+      </div>
+      <div>
+        <button class="btn btn-primary" (click)="goToYamlLink()">
+          <clr-icon shape="cog"></clr-icon>설정
+        </button>
+      </div>
+    </div>
+    
+    <div class="textBox setBox">
+      <div>
+        <h3>Menu 설정</h3>
+        <p>Top Memu 기능을 설정합니다.<br>
+          APM Performance, Applicaton Log, Network Log, Hear Beat 및 신규 메뉴를 추가할 수 있습니다.</p>
+      </div>
+      <div>
+        <button class="btn btn-primary" (click)="goToMenuLink()">
+          <clr-icon shape="cog"></clr-icon>설정
+        </button>
+      </div>
+    </div>
+    
+    <div class="textBox setBox">
+      <div>
+        <h3>URL Link</h3>
+        <p>Top Menu의 URL Link를 설정합니다.<br>
+          Dash 보드를 생성한 후 해당 URL을 링크해 주세요</p>
+      </div>
+      <div>
+        <button class="btn btn-primary" (click)="goToUrlLink()">
+          <clr-icon shape="cog"></clr-icon>설정
+        </button>
+      </div>
+    </div>
+    
+    <div class="textBox setBox">
+      <div>
+        <h3>Refresh Time</h3>
+        <p>AnyLogger 화면 갱신에 필요한 기간 및 시간을 설정합니다.</p>
+      </div>
+      <div>
+        <button class="btn btn-primary" (click)="goToRefreshLink()">
+          <clr-icon shape="cog"></clr-icon>설정
+        </button>
+      </div>
+    </div>
+
+    <div class="textBox setBox">
+      <div>
+        <h3>사용자 등록 권한</h3>
+        <p>관리자가 개발자 등록데 대한 수락 여부를 설정합니다. <br>ON으로 설정 시 모든 개발자는 관리자가 허락 시 계정이 활성화 됩니다.</p>
+      </div>
+      <div>
+        <clr-toggle-container>
+          <label>ON</label>
+          <clr-toggle-wrapper>
+            <input type="checkbox" clrToggle name="UserRegisterAuth" required value="option1" />
+            <label>OFF</label>
+          </clr-toggle-wrapper>
+        </clr-toggle-container>
+      </div>
+    </div>
+  </div>
