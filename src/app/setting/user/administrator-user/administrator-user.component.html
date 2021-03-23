@@ -16,10 +16,10 @@
     <button class="btn btn-primary" (click)="goToRegisterUser()">
       <clr-icon shape="plus"></clr-icon>신규등록
     </button>
-    <button class="btn btn-primary" [disabled] = "check">
+    <button class="btn btn-primary" [disabled] = "check" (click)="updateUser()">
       <clr-icon shape="sync"></clr-icon>정보변경
     </button>
-    <button class="btn btn-line" [disabled] = "check">
+    <button class="btn btn-line" [disabled] = "check" (click)="deleteUser()">
       <clr-icon shape="ban"></clr-icon>관리자삭제
     </button>
     <table class="table custom-table">
@@ -47,7 +47,7 @@
         <tr *ngFor="let userList of userInfoList">
           <td>
             <clr-checkbox-wrapper>
-              <input type="checkbox" [(ngModel)]="userList.checked" (ngModelChange)="onClickUserInfo()" clrCheckbox name="options" required value="option1" />
+              <input type="checkbox" [(ngModel)]="userList.checked" (ngModelChange)="onClickUserInfo()" clrCheckbox name="options" required />
               <label>{{userList.username}}</label>
             </clr-checkbox-wrapper>
           </td>

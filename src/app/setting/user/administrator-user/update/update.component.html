@@ -1,0 +1,73 @@
+<div class="innerDiv">
+    <div class="titleBox">
+      <div>
+        <h1>관리자 등록 시나리오</h1>
+      </div>
+      <div>
+        <a href="#">설정 ></a><a href="#" class="link"> SMTP 설정</a>
+      </div>
+    </div>
+  
+    <div class="con-box">
+      <div class="con-box-item textBox">
+        <h2>개인정보 변경</h2>
+        <form clrForm class="formBox">
+          <clr-input-container>
+            <label>성</label>
+            <input clrInput placeholder="Name" name="firstname" [(ngModel)]="this.user.firstName"/>
+          </clr-input-container>
+          <clr-input-container>
+            <label>이름</label>
+            <input clrInput placeholder="Name" name="lastname" [(ngModel)]="this.user.lastName"/>
+          </clr-input-container>
+          <clr-input-container>
+            <label>부서명</label>
+            <input clrInput placeholder="Department" name="departmentNm" [(ngModel)]="this.userAttribute.departmentNm"/>
+          </clr-input-container>
+          <clr-input-container>
+            <label>직급</label>
+            <input clrInput placeholder="Position" name="position" [(ngModel)]="this.userAttribute.position"/>
+          </clr-input-container>
+          <clr-input-container>
+            <label>Email 주소</label>
+            <input clrInput placeholder="E-mail" name="email" [(ngModel)]="this.user.email"/>
+          </clr-input-container>
+          <clr-input-container>
+            <label>전화번호</label>
+            <input clrInput placeholder="Number" name="phoneNumber" [(ngModel)]="this.userAttribute.phoneNumber"/>
+          </clr-input-container>
+        </form>
+        <div class="btn-left">
+          <button class="btn btn-primary" (click)="updateBasicInfo()">
+            <clr-icon shape="download"></clr-icon>저장
+          </button>
+        </div>
+      </div>
+      <div class="con-box-item textBox">
+        <h2>비밀번호 변경</h2>
+        <div class="textBox mtb10">
+          <clr-icon shape="bell"></clr-icon>
+          <p>영문자, 숫자, 특수키 조합으로 8자 이상으로 설정하세요.</p>
+        </div>
+        <form clrForm class="formBox">
+          <clr-password-container>
+            <label>현재 비밀번호</label>
+            <input clrPassword placeholder="Password" name="password" />
+          </clr-password-container>
+          <clr-password-container>
+            <label>신규 비밀번호</label>
+            <input clrPassword placeholder="Password" name="password" />
+          </clr-password-container>
+          <clr-password-container>
+            <label>비밀번호 확인</label>
+            <input clrPassword placeholder="Password" name="password" />
+          </clr-password-container>
+        </form>
+        <div class="btn-left">
+          <button class="btn btn-primary" (click)="updateCredentials()">
+            <clr-icon shape="download"></clr-icon>저장
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>

@@ -29,6 +29,8 @@ export class SettingComponent implements OnInit {
     styleMode: string = this.themeArray[0].showStyle;
     adminCli : AdminInfo = new AdminInfo();
 
+    
+
     constructor(
         private router:Router,
         public theme:ThemeService
@@ -36,8 +38,9 @@ export class SettingComponent implements OnInit {
 
     ngOnInit() {
         if (localStorage) {
-            var env = JSON.parse(localStorage.getItem('env')) as EnvSetting;
-            this.styleMode = env.ThemeSettingVal;
+            this.env = JSON.parse(localStorage.getItem('env')) as EnvSetting;
+            console.log("env : " + JSON.stringify(this.env))
+            this.styleMode = this.env.ThemeSettingVal;
         }
     }
 

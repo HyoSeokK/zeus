@@ -22,6 +22,8 @@ import { RegisterComponent as DevRegister } from './setting/user/developer-user/
 import { RegisterComponent as YamlRegister} from './setting/yaml/register/register.component';
 import { RegisterComponent as GroupRegister } from './setting/group/register/register.component';
 
+import { AdminUpdateComponent as AdminUpdate } from './setting/user/administrator-user/update/update.component';
+
 const routes: Routes = [
   { 
     path:'', 
@@ -74,6 +76,10 @@ const routes: Routes = [
       {
         path:'setting/user/admin/register',
         component:AdminRegister,
+      },
+      {
+        path:'setting/user/admin/update/:id',
+        component:AdminUpdate,
       },
       {
         path:'setting/user/developer',

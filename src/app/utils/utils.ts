@@ -29,9 +29,11 @@ export function buildHttpRequestOption(params: HttpParams) : HttpOptionInterface
         }),
         responseType: 'json'
     };
+
     if (params) {
         reqOptions.params = params;
     }
+    console.log("reqOptions : " + JSON.stringify(reqOptions))
     return reqOptions;
 }
 

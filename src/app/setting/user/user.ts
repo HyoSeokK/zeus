@@ -1,4 +1,5 @@
 export class User {
+    id : string;
     checked : true;
     username : string;
     firstName : string;

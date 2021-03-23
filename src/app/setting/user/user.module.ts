@@ -6,7 +6,8 @@ import { ClarityModule } from '@clr/angular';
 import { RegisterComponent as AdminRegister } from './administrator-user/register/register.component';
 import { AdministratorUserComponent } from './administrator-user/administrator-user.component';
 import { DeveloperUserComponent } from './developer-user/developer-user.component';
-import { RegisterComponent } from './developer-user/register/register.component'
+import { RegisterComponent } from './developer-user/register/register.component';
+import { AdminUpdateComponent } from './administrator-user/update/update.component'
 
 @NgModule({
     imports:[
@@ -18,7 +19,8 @@ import { RegisterComponent } from './developer-user/register/register.component'
         AdministratorUserComponent, 
         AdminRegister,
         DeveloperUserComponent,
-        RegisterComponent, 
+        RegisterComponent,
+        AdminUpdateComponent, 
     ],
     exports:[],
     providers:[]

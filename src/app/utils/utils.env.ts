@@ -3,5 +3,6 @@ export class EnvSetting {
     LangSettingVal : string;
     AutoLogoutVal : string;
     PortalVersion : string;
+    UserRegisterAuth : string;
 }
   

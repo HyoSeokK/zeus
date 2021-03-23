@@ -22,6 +22,7 @@ export class AppConfigService {
           .get(systemInfoEndpoint, HTTP_OPTIONS)
           .pipe(map(response => {
             this.configurations = response as EnvSetting;
+            
             return this.configurations;
           }));
     }
