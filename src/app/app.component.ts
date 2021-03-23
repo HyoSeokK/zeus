@@ -21,25 +21,28 @@ export class AppComponent implements OnInit {
     this.setTheme();
   }
 
+
   setTheme () {
     var env = JSON.parse(localStorage.getItem("env")) as EnvSetting;
 
     let styleMode = this.themeArray[0].showStyle;
 
-    const localHasStyle = localStorage && env.ThemeSettingVal;
+    console.log("styleMode : " + styleMode)
+    const localHasStyle = localStorage && env.themeSettingVal;
 
     if (localHasStyle) {
-        //styleMode = localStorage.getItem(HAS_STYLE_MODE);
-        styleMode = env.ThemeSettingVal;
+        styleMode = env.themeSettingVal;
+        console.log("localHasStyle : " + styleMode )
     } else {
-        //localStorage.setItem(HAS_STYLE_MODE, styleMode);
-        env.ThemeSettingVal = styleMode;
+        env.themeSettingVal = styleMode;
         localStorage.setItem("env", JSON.stringify(env));
     }
 
     this.themeArray.forEach((themeItem) => {
+    
         if (themeItem.showStyle === styleMode) {
-            this.theme.loadStyle(themeItem.currentFileName);
+          console.log(themeItem.currentFileName) 
+          this.theme.loadStyle(themeItem.currentFileName);
         }
     });
 }

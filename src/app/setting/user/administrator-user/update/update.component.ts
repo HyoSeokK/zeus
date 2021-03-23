@@ -1,8 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { UserService } from '../../user.service';
-import { User, UserAttribute, UserCredentials, AdminInfo } from '../../user';
+import { User, UserAttribute, AdminInfo } from '../../user';
 import { Router } from '@angular/router';
+import { NotificationService } from '../../../../services/notification.service';
+import { KeycloakService } from 'keycloak-angular';
 
 @Component({
   selector: 'app-update',
@@ -23,7 +25,9 @@ export class AdminUpdateComponent implements OnInit {
   constructor(
     private router:Router,
     private activatedRoute:ActivatedRoute,
-    public userService : UserService
+    public userService : UserService,
+    private notifyservice: NotificationService,
+    protected readonly keycloak: KeycloakService,
   ) {
     
     this.activatedRoute.params.subscribe(params => {
@@ -57,15 +61,10 @@ export class AdminUpdateComponent implements OnInit {
   updateBasicInfo() : void {
     console.log("user Update Info : " + JSON.stringify(this.user))
     this.userService.updateUser(this.user, this.adminCli).subscribe(res=> {
-      console.log("update ")
-
       if(res.data == "") {
-          console.log("Success Update created")
-          
-          this.router.navigateByUrl("/app/setting/user/admin");
+          this.notifyservice.showSuccess("등록 완료했습니다.", "관리자 수정")
       } else {
-          alert("실패했습니다.")
-          console.log("Failed Update USer");
+        this.notifyservice.showError("등록 실패했습니다.", "관리자 수정")
       }
 
     });
@@ -73,7 +72,17 @@ export class AdminUpdateComponent implements OnInit {
   }
 
   updateCredentials() : void {
-    
+
+    this.userService.updateUserCredentials(this.userid, this.adminCli).subscribe(res=> {
+      if(res.data == "") {
+        this.notifyservice.showSuccess("메일을 확인해주세요.", "관리자 수정")
+        this.keycloak.logout();
+      } else {
+        this.notifyservice.showError("삭제 실패했습니다.", "관리자 수정")
+      }
+
+    });
+
   }
 
 }

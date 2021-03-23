@@ -27,6 +27,7 @@ export class SettingComponent implements OnInit {
     themeRst : string;
     themeArray: ThemeInterface[] = clone(THEME_ARRAY);
     styleMode: string = this.themeArray[0].showStyle;
+    regiAuthMode : string;
     adminCli : AdminInfo = new AdminInfo();
 
     
@@ -40,26 +41,49 @@ export class SettingComponent implements OnInit {
         if (localStorage) {
             this.env = JSON.parse(localStorage.getItem('env')) as EnvSetting;
             console.log("env : " + JSON.stringify(this.env))
-            this.styleMode = this.env.ThemeSettingVal;
+            this.styleMode = this.env.themeSettingVal;
+            console.log("env : " + JSON.stringify(this.styleMode))
+
         }
     }
 
-    themeChanged(theme) {
-        var env = JSON.parse(localStorage.getItem('env')) as EnvSetting;
+    switchTheme() {
+        var env = JSON.parse(localStorage.getItem("env")) as EnvSetting;
+        let styleMode = this.themeArray[0].showStyle;
+    
+        const localHasStyle = localStorage && env.themeSettingVal;
+        if (localHasStyle) {
+            styleMode = env.themeSettingVal;
 
-        this.styleMode = theme.mode;
-        this.theme.loadStyle(theme.toggleFileName);
-        if (localStorage) {
-            env.ThemeSettingVal = this.styleMode;
-            localStorage.setItem(THEME_STORAGE_NM, JSON.stringify(env));
-            
+            if(localHasStyle == "LIGHT")
+                styleMode = "DARK"
+            if(localHasStyle == "DARK")
+                styleMode = "LIGHT"
+
+            env.themeSettingVal = styleMode;
+            localStorage.setItem("env", JSON.stringify(env));
+
             this.theme.updateTheme().subscribe(res => {
                 if(res.status == 200) {
                     console.log("success")
                 }
             })
+            
+        } else {
+            env.themeSettingVal = styleMode;
+            localStorage.setItem("env", JSON.stringify(env));
         }
-    }
+       
+        this.themeArray.forEach((themeItem) => {
+        
+            if (themeItem.showStyle === styleMode) {
+              console.log("themeItem.showStyle : " + themeItem.showStyle)
+              console.log(themeItem.currentFileName) 
+              this.theme.loadStyle(themeItem.currentFileName);
+            }
+        });
+    
+      }
 
     adminCliForm = new FormGroup({
         id : new FormControl(''),

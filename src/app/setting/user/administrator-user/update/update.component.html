@@ -20,22 +20,35 @@
             <label>이름</label>
             <input clrInput placeholder="Name" name="lastname" [(ngModel)]="this.user.lastName"/>
           </clr-input-container>
-          <clr-input-container>
-            <label>부서명</label>
-            <input clrInput placeholder="Department" name="departmentNm" [(ngModel)]="this.userAttribute.departmentNm"/>
-          </clr-input-container>
-          <clr-input-container>
-            <label>직급</label>
-            <input clrInput placeholder="Position" name="position" [(ngModel)]="this.userAttribute.position"/>
-          </clr-input-container>
+          
+          <div *ngFor="let x of this.userAttribute.departmentNm; let i = index;">
+            <clr-input-container>
+              <label>부서명</label>
+                <input clrInput placeholder="Department" name="departmentNm" [(ngModel)]="this.userAttribute.departmentNm[i]"/>
+            </clr-input-container>
+          </div>
+          
+          <div *ngFor="let x of this.userAttribute.position; let i = index;">
+            <clr-input-container>
+              <label>직급</label>
+              <input clrInput placeholder="Position" name="position" [(ngModel)]="this.userAttribute.position[i]"/>
+            </clr-input-container>
+          </div>
+
+          
           <clr-input-container>
             <label>Email 주소</label>
             <input clrInput placeholder="E-mail" name="email" [(ngModel)]="this.user.email"/>
           </clr-input-container>
-          <clr-input-container>
-            <label>전화번호</label>
-            <input clrInput placeholder="Number" name="phoneNumber" [(ngModel)]="this.userAttribute.phoneNumber"/>
-          </clr-input-container>
+          
+
+          <div *ngFor="let x of this.userAttribute.phoneNumber; let i = index;">
+            <clr-input-container>
+              <label>전화번호</label>
+              <input clrInput placeholder="Number" name="phoneNumber" [(ngModel)]="this.userAttribute.phoneNumber[i]"/>
+            </clr-input-container>
+          </div>
+
         </form>
         <div class="btn-left">
           <button class="btn btn-primary" (click)="updateBasicInfo()">
@@ -49,25 +62,13 @@
           <clr-icon shape="bell"></clr-icon>
           <p>영문자, 숫자, 특수키 조합으로 8자 이상으로 설정하세요.</p>
         </div>
-        <form clrForm class="formBox">
-          <clr-password-container>
-            <label>현재 비밀번호</label>
-            <input clrPassword placeholder="Password" name="password" />
-          </clr-password-container>
-          <clr-password-container>
-            <label>신규 비밀번호</label>
-            <input clrPassword placeholder="Password" name="password" />
-          </clr-password-container>
-          <clr-password-container>
-            <label>비밀번호 확인</label>
-            <input clrPassword placeholder="Password" name="password" />
-          </clr-password-container>
-        </form>
+
         <div class="btn-left">
           <button class="btn btn-primary" (click)="updateCredentials()">
-            <clr-icon shape="download"></clr-icon>저장
+            <clr-icon shape="download"></clr-icon>비밀 번호 재설정
           </button>
         </div>
+        
       </div>
     </div>
   </div>

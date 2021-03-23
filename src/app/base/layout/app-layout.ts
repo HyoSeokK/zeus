@@ -54,6 +54,7 @@ export class AppLayoutComponent implements OnInit{
                   // Nothing to do
                 }
                 this.linkRef = this.document.createElement('link');
+                this.linkRef.id = "test"
                 this.linkRef.rel = 'stylesheet';
                 this.linkRef.href = this.theme.href;
                 this.document.querySelector('head').appendChild(this.linkRef);
