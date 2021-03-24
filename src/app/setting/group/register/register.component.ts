@@ -44,7 +44,7 @@ export class RegisterComponent implements OnInit {
         for(var i=0; i<this.groupsList.length; i++){
           if(this.id == this.groupsList[i].id){
             this.name = this.groupsList[i].name
-          }
+            }
         }
       }
     });
