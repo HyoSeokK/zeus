@@ -1,8 +1,7 @@
 export class EnvSetting {
     themeSettingVal : string;
     langSettingVal : string;
-    autoLogoutVal : string;
+    autoLogoutVal : boolean;
     portalVersion : string;
-    userRegisterAuth : string;
+    userRegisterAuth : boolean;
 }
-  

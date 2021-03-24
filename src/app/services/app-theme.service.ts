@@ -42,9 +42,10 @@ export class ThemeService {
   }
 
   updateTheme() : any {
-    console.log("change function")
+    
     var env = JSON.parse(localStorage.getItem('env')) as EnvSetting;
     console.log("updataTheme : " + JSON.stringify(env))
+    
     return this.httpClient
         .post<HttpResponse<any>>(
             changeThemeEndpoint, 

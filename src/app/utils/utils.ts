@@ -8,6 +8,7 @@ export const SMTP_BASE_URL = BASE_URL+"/smtp";
 export const USER_BASE_URL = BASE_URL+"/user";
 export const MENU_BASE_URL = BASE_URL+"/menu";
 export const GROUPS_BASE_URL = BASE_URL+"/groups";
+export const AUTH_BASE_URL = BASE_URL+"/auth";
 
 export const HTTP_OPTIONS: HttpOptionInterface = {
     headers: new HttpHeaders({

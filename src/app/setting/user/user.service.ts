@@ -4,6 +4,7 @@ import { USER_BASE_URL, HTTP_OPTIONS, buildHttpRequestOption } from '../../utils
 import { map } from 'rxjs/operators';
 import { User, AdminInfo } from './user';
 
+const authInfoEndpoint = "/auth_list"
 const createUserEndpoint = USER_BASE_URL + "/register_user"
 const updateUserEndpoint = USER_BASE_URL + "/update_user"
 const updateCredentailsUserEndpoint = USER_BASE_URL + "/update_userCredentials"

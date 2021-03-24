@@ -32,5 +32,4 @@ export class AdminInfo {
     clientId : string;
     clientSecret : string;
     tokenUrl : string;
-
 }

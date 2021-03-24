@@ -1,17 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { HttpClient } from  "@angular/common/http";
 import { ThemeService } from '../services/app-theme.service';
 import { THEME_ARRAY, ThemeInterface } from '../services/theme';
-import { clone, BASE_URL } from '../utils/utils';
+import { clone } from '../utils/utils';
 import { EnvSetting } from '../utils/utils.env';
-import { User, AdminInfo } from './user/user';
+import { AdminInfo } from './user/user';
 import { FormControl, FormGroup } from '@angular/forms';
+import { AuthService } from './setting.service'
 
 import '@cds/core/toggle/register.js';
-
-const THEME_STORAGE_NM: string = 'env';
-const changeThemeEndpoint = BASE_URL + "/changeTheme";
 
 @Component({
     selector: 'setting.component',
@@ -30,11 +27,15 @@ export class SettingComponent implements OnInit {
     regiAuthMode : string;
     adminCli : AdminInfo = new AdminInfo();
 
-    
+    authList : AdminInfo[]
+    authLen : number
+    auth:boolean;
+    menuDiv : string;
 
     constructor(
         private router:Router,
-        public theme:ThemeService
+        public theme:ThemeService,
+        public authService:AuthService,
         ) {}
 
     ngOnInit() {
@@ -42,8 +43,21 @@ export class SettingComponent implements OnInit {
             this.env = JSON.parse(localStorage.getItem('env')) as EnvSetting;
             console.log("env : " + JSON.stringify(this.env))
             this.styleMode = this.env.themeSettingVal;
-            console.log("env : " + JSON.stringify(this.styleMode))
+            this.auth = this.env.userRegisterAuth
+        }
 
+        this.authService.authList().subscribe(res => {
+            this.authLen = res.len
+            this.authList = res.data as AdminInfo[]
+        });
+        if (this.auth == true && this.authLen > 0) {
+            this.adminCli.adminId = this.authList[0].adminId;
+            this.adminCli.adminPw = this.authList[0].adminPw;
+            this.adminCli.clientId = this.authList[0].clientId;
+            this.adminCli.clientSecret = this.authList[0].clientSecret;
+            this.adminCli.tokenUrl = this.authList[0].tokenUrl;
+      
+            localStorage.setItem("cli", JSON.stringify(this.adminCli))
         }
     }
 
@@ -68,22 +82,52 @@ export class SettingComponent implements OnInit {
                     console.log("success")
                 }
             })
-            
         } else {
             env.themeSettingVal = styleMode;
             localStorage.setItem("env", JSON.stringify(env));
         }
        
         this.themeArray.forEach((themeItem) => {
-        
             if (themeItem.showStyle === styleMode) {
-              console.log("themeItem.showStyle : " + themeItem.showStyle)
-              console.log(themeItem.currentFileName) 
               this.theme.loadStyle(themeItem.currentFileName);
             }
         });
     
       }
+
+    // 사용자 등록 권한 on/off 
+    updateUserRegisterAuth() : void {
+        var env = JSON.parse(localStorage.getItem("env")) as EnvSetting;
+        var authMode = env.userRegisterAuth
+
+        console.log("authMode : " + JSON.stringify(env))
+
+        // 현재 상태가 on이라면 off로 변경
+        if (authMode == true){
+            env.userRegisterAuth = false
+            this.auth = false
+        }
+        // 현재 상태가 off라면 on으로 변경
+        if (authMode == false){
+            env.userRegisterAuth = true
+            this.auth = true
+            // DB에 저장되어있는 Auth 정보가 없다면 Setting Popup Enable
+            if(this.authLen < 1) {
+                this.isModalVisible = true;
+                this.url = 'setting'
+            }
+        }
+        localStorage.setItem("env", JSON.stringify(env))
+
+        // 등록 권한 UPDATE
+        this.theme.updateTheme().subscribe(res => {
+            if(res.status == 200) {
+                console.log("success")
+            }
+        })
+
+        
+    }
 
     adminCliForm = new FormGroup({
         id : new FormControl(''),
@@ -93,19 +137,60 @@ export class SettingComponent implements OnInit {
         url : new FormControl(''),
     })
 
-    goToAdminApiManageLink() : void {
-        this.adminCli.adminId = this.adminCliForm.controls.id.value;
-        this.adminCli.adminPw = this.adminCliForm.controls.pw.value;
-        this.adminCli.clientId = this.adminCliForm.controls.client.value;
-        this.adminCli.clientSecret = this.adminCliForm.controls.secret.value;
-        this.adminCli.tokenUrl = this.adminCliForm.controls.url.value;
-      
+    authInfoSettingFunc() : void {
+        
+        this.goToAdminApiManageLink(this.url);
+    }
+
+    // Keycloak API를 사용하기 위한 Auth 정보 등록
+    goToAdminApiManageLink(url : string) : void {
+        this.url = url;
+        // 사용자 등록 권한 ON
+        if (this.auth == true) {
+            // AuthInfo가 저장되어 있지 않다면..(Setting Page Toggle 버튼에서 사용됨.)
+            if(this.authLen < 1) {
+                this.adminCli.adminId = this.adminCliForm.controls.id.value;
+                this.adminCli.adminPw = this.adminCliForm.controls.pw.value;
+                this.adminCli.clientId = this.adminCliForm.controls.client.value;
+                this.adminCli.clientSecret = this.adminCliForm.controls.secret.value;
+                this.adminCli.tokenUrl = this.adminCliForm.controls.url.value;
+
+                this.authService.saveAuth(this.adminCli).subscribe(res=>{
+                    if(res.status == 200 && res.data.data) {
+                        this.authLen = res.data.len;
+                    }
+                });
+                this.authLen = 1;
+
+                console.log("this.auth == true and this.authLen < 1 " + JSON.stringify(this.adminCli))
+            } else {
+                // AuthInfo가 저장되어 있음. (권한 관리, 관리자 관리, 개발자 관리 등에서 사용됨.)
+                this.adminCli.adminId = this.authList[0].adminId;
+                this.adminCli.adminPw = this.authList[0].adminPw;
+                this.adminCli.clientId = this.authList[0].clientId;
+                this.adminCli.clientSecret = this.authList[0].clientSecret;
+                this.adminCli.tokenUrl = this.authList[0].tokenUrl;
+                console.log("this.auth == true and this.authLen > 1 " + JSON.stringify(this.adminCli))
+            }
+        }
+        // 사용자 등록 권한 OFF - AuthInfo를 필요로 하는 메뉴 접근 시 팝업창에서 데이터 받아옴.
+        if(this.auth == false){
+            console.log("this.auth == false" + JSON.stringify(this.adminCli))
+            this.adminCli.adminId = this.adminCliForm.controls.id.value;
+            this.adminCli.adminPw = this.adminCliForm.controls.pw.value;
+            this.adminCli.clientId = this.adminCliForm.controls.client.value;
+            this.adminCli.clientSecret = this.adminCliForm.controls.secret.value;
+            this.adminCli.tokenUrl = this.adminCliForm.controls.url.value;
+        }
+        // Session에 다시 등록
         localStorage.setItem("cli", JSON.stringify(this.adminCli))
 
         if(this.url == "groups") {
             this.router.navigateByUrl("/app/setting/group");
         } else if (this.url == "admin") {
             this.router.navigateByUrl("/app/setting/user/admin");
+        } else {
+            this.isModalVisible = false;
         }
     }
     
@@ -118,7 +203,6 @@ export class SettingComponent implements OnInit {
       
         localStorage.setItem("cli", JSON.stringify(this.adminCli))
 
-        
     }
 
     goToDevUserManageLink() : void {
