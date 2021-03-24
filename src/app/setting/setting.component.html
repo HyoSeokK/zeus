@@ -1,18 +1,26 @@
 <div class="innerDiv">
-<<<<<<< HEAD
   <div class="textBox setBox">
       <div>
         <h3>테마 설정</h3>
         <p>관재 색상 테마를 선택할 수 있습니다. 검정과 흰색 두 가지를 지원하며, 기본은 검정 입니다.</p>
       </div>
 
-      <div class="mb-20">
+      <!-- <div class="mb-20">
         <clr-toggle-container>
             <clr-toggle-wrapper>
                 <input type="checkbox" clrToggle name="options" required value="option1" (click)="switchTheme()"
                     id="ThemeSwitch" />
             </clr-toggle-wrapper>
         </clr-toggle-container>
+    </div> -->
+    <div class="url-toggle">
+      <clr-toggle-container>
+        <label class="fx0">Light</label>
+        <clr-toggle-wrapper>
+            <input type="checkbox" clrToggle name="options" value="option1" (click)="switchTheme()" id="ThemeSwitch"/>
+            <label>Dark</label>
+        </clr-toggle-wrapper>
+    </clr-toggle-container>
     </div>
     
       <!--<div>
@@ -34,24 +42,6 @@
                         <label>LIGHT</label>
                     </clr-toggle-wrapper>
                 </clr-toggle-container>
-=======
-    <div class="textBox setBox">
-        <div>
-          <h3>테마 설정</h3>
-          <p>관재 색상 테마를 선택할 수 있습니다. 검정과 흰색 두 가지를 지원하며, 기본은 검정 입니다.</p>
-        </div>
-
-        <div class="mb-20">
-          <clr-toggle-container>
-              <clr-toggle-wrapper>
-                  <input type="checkbox" clrToggle name="options" required value="option1" (click)="switchTheme()"
-                      id="ThemeSwitch" />
-              </clr-toggle-wrapper>
-          </clr-toggle-container>
-      </div>
-      
-    </div>
->>>>>>> publish
 
               </ng-container>
           </ng-container>
