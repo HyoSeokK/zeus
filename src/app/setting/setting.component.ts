@@ -175,12 +175,12 @@ export class SettingComponent implements OnInit {
         }
         // 사용자 등록 권한 OFF - AuthInfo를 필요로 하는 메뉴 접근 시 팝업창에서 데이터 받아옴.
         if(this.auth == false){
-            console.log("this.auth == false" + JSON.stringify(this.adminCli))
             this.adminCli.adminId = this.adminCliForm.controls.id.value;
             this.adminCli.adminPw = this.adminCliForm.controls.pw.value;
             this.adminCli.clientId = this.adminCliForm.controls.client.value;
             this.adminCli.clientSecret = this.adminCliForm.controls.secret.value;
             this.adminCli.tokenUrl = this.adminCliForm.controls.url.value;
+            console.log("this.auth == false" + JSON.stringify(this.adminCli))
         }
         // Session에 다시 등록
         localStorage.setItem("cli", JSON.stringify(this.adminCli))

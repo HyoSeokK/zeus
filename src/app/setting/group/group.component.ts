@@ -36,6 +36,7 @@ export class GroupComponent implements OnInit {
   ngOnInit(): void {
     this.adminCli = JSON.parse(localStorage.getItem("cli")) as AdminInfo; 
 
+    console.log("this admincli : " + JSON.stringify(this.adminCli))
     this.groupService.groupList(this.adminCli).subscribe(res=> {
 
       if(res.status == 200) {
