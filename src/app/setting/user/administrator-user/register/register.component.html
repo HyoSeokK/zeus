@@ -1,64 +1,78 @@
 <div class="innerDiv">
-    <div class="titleBox">
-      <div>
-        <h1>개발자/일반 사용자 등록-1</h1>
-      </div>
-      <div>
-        <a href="#">설정 ></a><a href="#" class="link"> SMTP 설정</a>
-      </div>
+  <div class="titleBox">
+    <div>
+      <h1>개발자/일반 사용자 등록-1</h1>
     </div>
-  
-    <div class="textBox">
-      <clr-icon shape="bell"></clr-icon>
-      <p>일반 사용자를 등록해 주세요.<br>
-        개발자는 개발에 필요한 IDE, Docker 및 POD 생성 권한이 있습니다.<br>
-        일반사용자는 단순히 시스템에 정보를 확인할 수 있는 Viewer 권한이 있습니다.</p>
-    </div>
-
-    <form clrForm class="formBox" [formGroup]="userForm">
-      <clr-input-container>
-        <label>사용자ID</label>
-        <input clrInput placeholder="User Id" formControlName="userId"/>
-      </clr-input-container>
-      <clr-password-container>
-        <label>신규비밀번호</label>
-        <input clrPassword placeholder="Password" formControlName="password" />
-      </clr-password-container>
-      <clr-password-container>
-        <label>비밀번호 확인</label>
-        <input clrPassword placeholder="Password" name="password" />
-      </clr-password-container>
-      <clr-input-container>
-        <label>성</label>
-        <input clrInput placeholder="Name" formControlName="userFirstname"/>
-      </clr-input-container>
-      <clr-input-container>
-        <label>이름</label>
-        <input clrInput placeholder="Name" formControlName="userLastName"/>
-      </clr-input-container>
-      <clr-input-container>
-        <label>부서명</label>
-        <input clrInput placeholder="Department" formControlName="userDepartmentNm" />
-      </clr-input-container>
-      <clr-input-container>
-        <label>직급</label>
-        <input clrInput placeholder="Position" formControlName="userPosition" />
-      </clr-input-container>
-      <clr-input-container>
-        <label>Email 주소</label>
-        <input clrInput placeholder="E-mail" formControlName="userEmail" />
-      </clr-input-container>
-      <clr-input-container>
-        <label>전화번호(선택)</label>
-        <input clrInput placeholder="Number" formControlName="userPhoneNumber" />
-      </clr-input-container>
-    </form>
-    <div class="btn-left">
-      <button class="btn btn-primary">
-        <clr-icon shape="undo"></clr-icon>취소
-      </button>
-      <button class="btn btn-primary" (click)="onSubmit()">
-        <clr-icon shape="download"></clr-icon>저장
-      </button>
+    <div>
+      <a href="#">설정 ></a><a href="#" class="link"> SMTP 설정</a>
     </div>
   </div>
+
+  <div class="textBox">
+    <clr-icon shape="bell"></clr-icon>
+    <p>일반 사용자를 등록해 주세요.<br>
+      개발자는 개발에 필요한 IDE, Docker 및 POD 생성 권한이 있습니다.<br>
+      일반사용자는 단순히 시스템에 정보를 확인할 수 있는 Viewer 권한이 있습니다.</p>
+  </div>
+
+  <form clrForm class="formBox" [formGroup]="userForm">
+    <clr-input-container>
+      <label>사용자ID</label>
+      <input clrInput placeholder="User Id" formControlName="userId" required/>
+      <clr-control-error>
+        id를 입력해주세요.
+      </clr-control-error>
+    </clr-input-container>
+        <clr-password-container>
+            <label>신규비밀번호</label>
+            <input clrPassword formControlName="password" placeholder="Password"/>
+            <clr-control-error *clrIfError="'required'">비밀번호를 입력해주세요.</clr-control-error>
+        </clr-password-container>
+        <clr-password-container>
+          <label>비밀번호 확인</label>
+          <input clrPassword formControlName="confirmPassword" placeholder="Password"/>
+          <clr-control-error *clrIfError="'required'">비밀번호를 입력해주세요.</clr-control-error>
+          <clr-control-error *clrIfError="'mismatch'">비밀번호가 일치하지 않습니다</clr-control-error>
+        </clr-password-container>
+
+    
+    <clr-input-container>
+      <label>성</label>
+      <input clrInput placeholder="Name" formControlName="userFirstname" required/>
+      <clr-control-error>성을 입력해주세요.</clr-control-error>
+    </clr-input-container>
+    <clr-input-container>
+      <label>이름</label>
+      <input clrInput placeholder="Name" formControlName="userLastName" required/>
+      <clr-control-error>이름을 입력해주세요.</clr-control-error>
+    </clr-input-container>
+    <clr-input-container>
+      <label>부서명</label>
+      <input clrInput placeholder="Department" formControlName="userDepartmentNm" required/>
+      <clr-control-error>부서명을 입력해주세요.</clr-control-error>
+    </clr-input-container>
+    <clr-input-container>
+      <label>직급</label>
+      <input clrInput placeholder="Position" formControlName="userPosition" required/>
+      <clr-control-error>직급을 입력해주세요.</clr-control-error>
+    </clr-input-container>
+    <clr-input-container>
+      <label>Email 주소</label>
+      <input clrInput placeholder="E-mail" formControlName="userEmail" required/>
+      <clr-control-error *clrIfError="'required'">이메일을 입력해주세요.</clr-control-error>
+      <clr-control-error *clrIfError="'email'">이메일형식을 확인해주세요.</clr-control-error>
+    </clr-input-container>
+    <clr-input-container>
+      <label>전화번호(선택)</label>
+      <input clrInput placeholder="Number" formControlName="userPhoneNumber"/>  
+    </clr-input-container>
+  </form>
+  <div class="btn-left">
+    <button class="btn btn-primary">
+      <clr-icon shape="undo"></clr-icon>취소
+    </button>
+    <button class="btn btn-primary" (click)="onSubmit()">
+      <clr-icon shape="download"></clr-icon>저장
+    </button>
+  </div>
+</div>

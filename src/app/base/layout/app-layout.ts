@@ -27,12 +27,6 @@ export class AppLayoutComponent implements OnInit{
     linkRef: HTMLLinkElement;
     username : string;
 
-    themes = [
-        { name: 'light', href: '/assets/css/clr-ui.css' },
-        { name: 'dark', href: '/assets/css/clr-ui-dark.css' }
-      ];
-      theme = this.themes[0];
-
     constructor(
         private topmenuservice: TopmenuserviceService,
         private submenuservice: SubmenuserviceService,
@@ -42,26 +36,8 @@ export class AppLayoutComponent implements OnInit{
         @Inject(DOCUMENT) private document: Document, 
         @Inject(PLATFORM_ID) private platformId: Object) 
         {
-            customIcon.load();
-           
-            if (isPlatformBrowser(this.platformId)) {
-                try {
-                  const stored = localStorage.getItem('theme');
-                  if (stored) {
-                    this.theme = JSON.parse(stored);
-                  }
-                } catch (err) {
-                  // Nothing to do
-                }
-                this.linkRef = this.document.createElement('link');
-                this.linkRef.id = "test"
-                this.linkRef.rel = 'stylesheet';
-                this.linkRef.href = this.theme.href;
-                this.document.querySelector('head').appendChild(this.linkRef);
-              }
+            customIcon.load(); 
               this.username = localStorage.getItem('username')
-        
-            
             }
 
     sessionLogout() {
@@ -100,13 +76,5 @@ export class AppLayoutComponent implements OnInit{
         this.router.navigateByUrl("/app/main");
     } 
 
-    switchTheme() {
-        if (this.theme.name === 'light') {
-          this.theme = this.themes[1];
-        } else {
-          this.theme = this.themes[0];
-        }
-        localStorage.setItem('theme', JSON.stringify(this.theme));
-        this.linkRef.href = this.theme.href;
-      }
+    
 }
