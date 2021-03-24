@@ -30,9 +30,11 @@
       </thead>
       <tbody>
         <tr>
-          <td class="textarea-on">
-            <label>관리자 그룹</label>
+          <ng-container *ngFor = "let group of groupsList">
+          <td class="textarea-on" *ngIf = "group.id == id">
+            <label>{{group.name}}</label>
           </td>
+        </ng-container>
           <td class="pd-text-box">
             <div class="clr-textarea-wrapper ">
               <textarea id="token_key" [(ngModel)]="tokenVal" placeholder="Token Value" class="clr-textarea wd100 mh120"></textarea>
