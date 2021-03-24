@@ -3,6 +3,8 @@ import { ActivatedRoute } from '@angular/router';
 import { DomSanitizer, SafeResourceUrl, SafeUrl} from '@angular/platform-browser';
 import { GroupsService } from '../groups.service';
 import { Router } from '@angular/router';
+import { Groups } from '../groups';
+import { AdminInfo } from '../../user/user';
 
 @Component({
   selector: 'app-register',
@@ -11,6 +13,9 @@ import { Router } from '@angular/router';
 })
 export class RegisterComponent implements OnInit {
 
+  adminCli : AdminInfo = new AdminInfo();
+  groups : Groups = new Groups();
+  groupsList : Groups[];
   url:SafeResourceUrl;
   id:string;
   tokenVal:string = "";
@@ -26,7 +31,17 @@ export class RegisterComponent implements OnInit {
       });
     }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.adminCli = JSON.parse(localStorage.getItem("cli")) as AdminInfo; 
+
+    this.groupsService.groupList(this.adminCli).subscribe(res=> {
+
+      if(res.status == 200) {
+        this.groupsList = res.data as Groups[]
+        console.log(this.groupsList)
+      }
+    });
+  }
 
   registerToken() : void {
     console.log("token : " + this.tokenVal)
