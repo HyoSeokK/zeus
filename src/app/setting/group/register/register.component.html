@@ -30,11 +30,9 @@
       </thead>
       <tbody>
         <tr>
-          <ng-container *ngFor = "let group of groupsList">
-          <td class="textarea-on" *ngIf = "group.id == id">
-            <label>{{group.name}}</label>
+          <td class="textarea-on">
+            <label>{{name}}</label>
           </td>
-        </ng-container>
           <td class="pd-text-box">
             <div class="clr-textarea-wrapper ">
               <textarea id="token_key" [(ngModel)]="tokenVal" placeholder="Token Value" class="clr-textarea wd100 mh120"></textarea>

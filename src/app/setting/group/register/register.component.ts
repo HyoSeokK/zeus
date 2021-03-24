@@ -18,6 +18,7 @@ export class RegisterComponent implements OnInit {
   groupsList : Groups[];
   url:SafeResourceUrl;
   id:string;
+  name:string;
   tokenVal:string = "";
 
   constructor( 
@@ -29,6 +30,7 @@ export class RegisterComponent implements OnInit {
         this.id=params['key']
         console.log("key : " + this.id)
       });
+      
     }
 
   ngOnInit(): void {
@@ -39,8 +41,15 @@ export class RegisterComponent implements OnInit {
       if(res.status == 200) {
         this.groupsList = res.data as Groups[]
         console.log(this.groupsList)
+        for(var i=0; i<this.groupsList.length; i++){
+          if(this.id == this.groupsList[i].id){
+            this.name = this.groupsList[i].name
+          }
+        }
       }
     });
+    
+    
   }
 
   registerToken() : void {
