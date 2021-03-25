@@ -13,9 +13,9 @@ export class User {
 }
 
 export class UserAttribute {
-    departmentNm : string;
-    position : string;
-    phoneNumber : string;
+    departmentNm : string[] = [];
+    position : string[] = [];
+    phoneNumber : string[] = [];
 }
 
 export class UserCredentials {

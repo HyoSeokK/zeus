@@ -21,7 +21,8 @@ export class GroupComponent implements OnInit {
     this.router.navigateByUrl("/app/setting/group/register/"+key);
   }
   deleteGroupKey(key : string) : any {
-    this.groupService.addAttribute(key, "").subscribe(res => {
+    this.adminCli = JSON.parse(localStorage.getItem("cli")) as AdminInfo; 
+    this.groupService.addAttribute(key, "", this.adminCli).subscribe(res => {
       if(res.data == "") {
           console.log("Success User created")
           alert("삭제했습니다.")

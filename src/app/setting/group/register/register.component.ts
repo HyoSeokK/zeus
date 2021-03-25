@@ -46,7 +46,7 @@ export class RegisterComponent implements OnInit {
   registerToken() : void {
     console.log("token : " + this.tokenVal)
 
-    this.groupsService.addAttribute(this.id, this.tokenVal).subscribe(res => {
+    this.groupsService.addAttribute(this.id, this.tokenVal, this.adminCli).subscribe(res => {
       if(res.data == "") {
           console.log("Success User created")
           alert("등록했습니다.")

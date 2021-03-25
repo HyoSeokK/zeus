@@ -13,8 +13,8 @@ const userListEndpoint = USER_BASE_URL + "/user_list"
 
 class postClass {
     id : string;
-    user : User;
-    admin : AdminInfo;
+    user : User = new User();
+    admin : AdminInfo = new AdminInfo();
 }
 
 @Injectable({
@@ -26,14 +26,14 @@ export class UserService {
     constructor(private httpClient:HttpClient) {}
 
     userList(admininfo : AdminInfo) : any {
-
+        this.postData = new postClass();
         this.postData.admin = admininfo as AdminInfo;
         console.log("postData : " + JSON.stringify(this.postData))
 
         return this.httpClient
             .post<HttpResponse<any>> (
                 userListEndpoint+"/all",
-                admininfo,
+                this.postData,
                 HTTP_OPTIONS
             ).pipe(map(res => {
                 console.log(res)
@@ -42,7 +42,7 @@ export class UserService {
     }
 
     createUser(userinfo : User, admininfo : AdminInfo) : any {
-    
+        this.postData = new postClass();
         this.postData.user = userinfo as User;
         this.postData.admin = admininfo as AdminInfo;
         
@@ -59,21 +59,27 @@ export class UserService {
             }));
     }
 
-
+// 사용자 수정 시 기본 정보
     updateUserInfo(userid : string, admininfo : AdminInfo) : any {
+        this.postData = new postClass();
+        this.postData.admin = admininfo as AdminInfo;
+        
+        console.log("postData : " + JSON.stringify(this.postData));
 
         return this.httpClient
             .post<HttpResponse<any>> (
                 userListEndpoint+"/"+userid,
-                admininfo,
-                HTTP_OPTIONS
+                this.postData,
+                HTTP_OPTIONS,
             ).pipe(map(res => {
                 console.log(res)
                 return res;
             }));
     }
 
+    // 사용자 수정
     updateUser(userinfo : User, admininfo : AdminInfo) : any {
+        this.postData = new postClass();
         this.postData.user = userinfo as User;
         this.postData.admin = admininfo as AdminInfo;
         
@@ -92,7 +98,7 @@ export class UserService {
     }
 
     updateUserCredentials(userid : string, admininfo : AdminInfo) : any {
-        
+        this.postData = new postClass();
         this.postData.admin = admininfo as AdminInfo;
         
         console.log("postData : " + JSON.stringify(this.postData));
@@ -111,6 +117,7 @@ export class UserService {
 
 
     deleteUser(userid : string, admininfo : AdminInfo) : any {
+        this.postData = new postClass();
         this.postData.admin = admininfo as AdminInfo;
         
         return this.httpClient

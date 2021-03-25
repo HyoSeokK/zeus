@@ -78,9 +78,9 @@ export class RegisterComponent implements OnInit {
     this.userInfo.lastName = this.userForm.controls.userLastName.value;
     this.userInfo.email = this.userForm.controls.userEmail.value;
     this.userInfo.enabled = "true"
-    this.userAttribute.departmentNm = this.userForm.controls.userDepartmentNm.value;
-    this.userAttribute.position = this.userForm.controls.userPosition.value;
-    this.userAttribute.phoneNumber = this.userForm.controls.userPhoneNumber.value;
+    this.userAttribute.departmentNm.push(this.userForm.controls.userDepartmentNm.value);
+    this.userAttribute.position.push(this.userForm.controls.userPosition.value);
+    this.userAttribute.phoneNumber.push(this.userForm.controls.userPhoneNumber.value);
 
     this.userCredentials.push(new UserCredentials("password", this.userForm.controls.password.value, true))
     this.userInfo.credentials = this.userCredentials;
@@ -90,7 +90,7 @@ export class RegisterComponent implements OnInit {
 
     
     if(this.userInfo.username != "" && this.userInfo.firstName != "" && this.userInfo.lastName != "" &&
-      this.userAttribute.departmentNm != "" && this.userAttribute.position != "" && this.userInfo.email != "" && this.userForm.controls.password.value != "") {
+      this.userAttribute.departmentNm[0] != "" && this.userAttribute.position[0] != "" && this.userInfo.email != "" && this.userForm.controls.password.value != "") {
         if(this.EmailCheck() == false){
           this.notifyservice.showWarning("이메일 형식이 맞지 않습니다.","")
         }else if(this.userForm.controls.password.value != this.userForm.controls.confirmPassword.value){
