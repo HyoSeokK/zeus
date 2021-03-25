@@ -7,6 +7,7 @@ export class User {
     email : string;
     enabled : string;
     createdTimestamp : number;
+    convertcreatedTimestamp : string;
     attributes : UserAttribute;
     credentials : Array<UserCredentials>;
     groups : Array<string>;

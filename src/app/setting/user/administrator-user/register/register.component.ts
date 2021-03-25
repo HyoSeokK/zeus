@@ -19,6 +19,8 @@ function passwordMatchValidator(password: string): ValidatorFn {
   templateUrl: './register.component.html',
   styleUrls: ['./register.component.css']
 })
+
+
 export class RegisterComponent implements OnInit {
   userInfo : User = new User();
   userAttribute : UserAttribute = new UserAttribute();
@@ -78,16 +80,6 @@ export class RegisterComponent implements OnInit {
     this.userInfo.lastName = this.userForm.controls.userLastName.value;
     this.userInfo.email = this.userForm.controls.userEmail.value;
     this.userInfo.enabled = "true"
-    this.userAttribute.departmentNm.push(this.userForm.controls.userDepartmentNm.value);
-    this.userAttribute.position.push(this.userForm.controls.userPosition.value);
-    this.userAttribute.phoneNumber.push(this.userForm.controls.userPhoneNumber.value);
-
-    this.userCredentials.push(new UserCredentials("password", this.userForm.controls.password.value, true))
-    this.userInfo.credentials = this.userCredentials;
-    this.userInfo.attributes = this.userAttribute;
-
-    this.userInfo.groups = this.groups
-
     
     if(this.userInfo.username != "" && this.userInfo.firstName != "" && this.userInfo.lastName != "" &&
       this.userAttribute.departmentNm[0] != "" && this.userAttribute.position[0] != "" && this.userInfo.email != "" && this.userForm.controls.password.value != "") {
@@ -97,14 +89,39 @@ export class RegisterComponent implements OnInit {
           this.notifyservice.showWarning("비밀번호를 확인해주세요.","")
         }
         else{
+          this.userAttribute.departmentNm.push(this.userForm.controls.userDepartmentNm.value);
+          this.userAttribute.position.push(this.userForm.controls.userPosition.value);
+          this.userAttribute.phoneNumber.push(this.userForm.controls.userPhoneNumber.value);
+
+          this.userCredentials.push(new UserCredentials("password", this.userForm.controls.password.value, true))
+          this.userInfo.credentials = this.userCredentials;
+          this.userInfo.attributes = this.userAttribute;
+
+          this.userInfo.groups = this.groups
           console.log("Create User Json : " + JSON.stringify(this.userInfo));
           this.userService.createUser(this.userInfo, this.adminCli).subscribe(res=> {
+            if(res.data !=""){
+            var datacheck = JSON.parse(res.data)
+            }
             if(res.data == "") {
                 this.notifyservice.showSuccess("등록 완료했습니다.", "관리자 등록")
                 this.router.navigateByUrl("/app/setting/user/admin");
-            } else {
-                this.notifyservice.showError("등록 실패했습니다.", "관리자 등록")
-                console.log("Failed Create USer");
+            } else if(datacheck.errorMessage == "User exists with same username"){
+                this.notifyservice.showError("등록 실패했습니다. id를 확인해주세요", "관리자 등록")
+                this.userInfo  = new User();
+                this.userAttribute = new UserAttribute();
+                this.userCredentials = new Array<UserCredentials>(); 
+            } else if(datacheck.errorMessage == "User exists with same email"){
+              this.notifyservice.showError("등록 실패했습니다. email을 확인해주세요", "관리자 등록")
+              this.userInfo  = new User();
+              this.userAttribute = new UserAttribute();
+              this.userCredentials = new Array<UserCredentials>();
+            }else{
+              this.notifyservice.showError("등록 실패했습니다.", "관리자 등록")
+              this.userInfo  = new User();
+              this.userAttribute = new UserAttribute();
+              this.userCredentials = new Array<UserCredentials>();
+              console.log("Failed Create USer");      
             }
           });
         }

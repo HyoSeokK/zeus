@@ -4,6 +4,7 @@ import { UserService } from '../user.service';
 import { User, AdminInfo } from '../user';
 
 
+
 @Component({
   selector: 'app-administrator-user',
   templateUrl: './administrator-user.component.html',
@@ -16,14 +17,14 @@ export class AdministratorUserComponent implements OnInit {
   adminCli : AdminInfo = new AdminInfo();
   userInfo : User = new User();
 
+  
   constructor(
     private router:Router,
     public userService : UserService) {}
 
   ngOnInit(): void {
-    this.adminCli = JSON.parse(localStorage.getItem("cli")) as AdminInfo; 
+    this.adminCli = JSON.parse(localStorage.getItem("cli")) as AdminInfo;
     this.loadUserList()
-    
   }
 
   loadUserList() : void {
@@ -31,10 +32,17 @@ export class AdministratorUserComponent implements OnInit {
 
       if(res.status == 200) {
         this.userInfoList = res.data as User[]
-        console.log(this.userInfoList)
+        for(var i=0; i<this.userInfoList.length; i++){
+          var datetime = new Date(this.userInfoList[i].createdTimestamp)
+          this.userInfoList[i].convertcreatedTimestamp = datetime.getUTCFullYear() + "-" + ("00" + (datetime.getMonth() + 1)).slice(-2) + "-" + datetime.getDate()+ " "
+          + datetime.getHours() + ":" +("00" + datetime.getMinutes()).slice(-2);
+
+          console.log(datetime.getUTCFullYear())
+        }   
       } else {
 
       }
+       
     });
   }
   goToRegisterUser(): void {

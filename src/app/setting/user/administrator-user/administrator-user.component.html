@@ -14,13 +14,13 @@
     </div>
 
     <button class="btn btn-primary" (click)="goToRegisterUser()">
-      <clr-icon shape="plus"></clr-icon>신규등록
+      <clr-icon shape="check"></clr-icon>신규등록
     </button>
     <button class="btn btn-primary" [disabled] = "check" (click)="updateUser()">
-      <clr-icon shape="sync"></clr-icon>정보변경
+      <clr-icon shape="check"></clr-icon>정보변경
     </button>
     <button class="btn btn-line" [disabled] = "check" (click)="deleteUser()">
-      <clr-icon shape="ban"></clr-icon>관리자삭제
+      <clr-icon shape="times"></clr-icon>관리자삭제
     </button>
     <table class="table custom-table">
       <caption>
@@ -55,7 +55,7 @@
           <td>{{userList.firstName}}{{userList.lastName}}</td>
           <td>{{userList.attributes.departmentNm}}({{userList.attributes.position}})</td>
           <td>{{userList.email}}</td>
-          <td>{{userList.CreatedTimestamp}}</td>
+          <td>{{userList.convertcreatedTimestamp}}</td>
           <td>2020.10.12 13:10</td>
           <td>등록완료</td>
         </tr>
