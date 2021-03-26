@@ -8,7 +8,7 @@ export function initializeKeycloak(keycloak: KeycloakService) {
         config: {
           url: 'https://docker.jointree.co.kr:8443/auth/',
           realm: 'parthenon',
-          clientId: 'zeus_ces',
+          clientId: 'zeus',
 
         },
         initOptions : {
