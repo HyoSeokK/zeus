@@ -16,6 +16,8 @@ export class SmtpService {
 
   private smtpGetUri : string = SMTP_BASE_URL + "/smtpget";
 
+  private sendMailUri : string = SMTP_BASE_URL + "/sendmail";
+
   constructor(private http: HttpClient) { }
 
   public getSmtp() {
@@ -42,6 +44,17 @@ export class SmtpService {
 
   public saveSmtp(AdminAddress:string,SmtpAddress: string, Port: string, Password: string) {
     return this.http.post(this.saveUri,JSON.stringify({
+      'AdminAddress':AdminAddress, 'SmtpAddress':SmtpAddress,'Port':Port,
+          'Password':Password
+    }),
+    ).pipe(
+      catchError(error => observableThrowError(error)),);
+    
+    
+  }
+
+  public sendSmtp(AdminAddress:string,SmtpAddress: string, Port: string, Password: string) {
+    return this.http.post(this.sendMailUri,JSON.stringify({
       'AdminAddress':AdminAddress, 'SmtpAddress':SmtpAddress,'Port':Port,
           'Password':Password
     }),
