@@ -1,12 +1,12 @@
 {   
     "/get/*": {
-        "target": "http://127.0.0.1:3000",
+        "target": "http://192.168.0.214:32104",
         "secure": false,
         "changeOrigin": true, 
         "logLevel": "debug"
     },
     "/api/*": {
-        "target": "http://127.0.0.1:3000",
+        "target": "http://192.168.0.214:32104",
         "secure": false,
         "changeOrigin": true, 
         "logLevel": "debug"
