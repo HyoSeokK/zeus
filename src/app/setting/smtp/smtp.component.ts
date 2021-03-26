@@ -65,6 +65,22 @@ export class SmtptestComponent implements OnInit {
       
   }
 
+  onSend(){
+    this.smtpservice.sendSmtp(this.smtpInfo[0].AdminAddress,this.smtpInfo[0].SmtpAddress,this.smtpInfo[0].Port,
+      this.smtpInfo[0].Password)
+      .subscribe(() =>{
+        this.notifyservice.showSuccess("메일이 전송 되었습니다","");
+        this.ngOnInit();
+
+      },
+      error => {
+        console.log(error)
+        this.notifyservice.showError("메일 전송에 실패하였습니다","");
+      }     
+        
+      )
+  }
+
   onReset(){
     this.smtpInfo[0].AdminAddress = "";
     this.smtpInfo[0].SmtpAddress = "";
