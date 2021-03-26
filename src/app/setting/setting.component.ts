@@ -158,6 +158,7 @@ export class SettingComponent implements OnInit {
                 this.authService.saveAuth(this.adminCli).subscribe(res=>{
                     if(res.status == 200 && res.data.data) {
                         this.authLen = res.data.len;
+                        //this.authList[0].push(this.adminCli);
                     }
                 });
                 this.authLen = 1;
