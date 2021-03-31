@@ -50,7 +50,8 @@ export class SettingComponent implements OnInit {
             this.authLen = res.len
             this.authList = res.data as AdminInfo[]
         });
-        if (this.auth == true && this.authLen > 0) {
+        if (this.auth == true && this.authLen > 0) { // 사용자 등록 권한이 ON이고 Auth 정보도 등록되어 있다면
+            // adminCli Obj에 Auth 정보들을 세팅한다.
             this.adminCli.adminId = this.authList[0].adminId;
             this.adminCli.adminPw = this.authList[0].adminPw;
             this.adminCli.clientId = this.authList[0].clientId;
@@ -115,6 +116,14 @@ export class SettingComponent implements OnInit {
             if(this.authLen < 1) {
                 this.isModalVisible = true;
                 this.url = 'setting'
+            } else { // DB에 저장된 Auth 정보가 있다면 adminCli Obj에 Auth 정보 세팅
+                this.adminCli.adminId = this.authList[0].adminId;
+                this.adminCli.adminPw = this.authList[0].adminPw;
+                this.adminCli.clientId = this.authList[0].clientId;
+                this.adminCli.clientSecret = this.authList[0].clientSecret;
+                this.adminCli.tokenUrl = this.authList[0].tokenUrl;
+        
+                localStorage.setItem("cli", JSON.stringify(this.adminCli))
             }
         }
         localStorage.setItem("env", JSON.stringify(env))
@@ -190,6 +199,8 @@ export class SettingComponent implements OnInit {
             this.router.navigateByUrl("/app/setting/group");
         } else if (this.url == "admin") {
             this.router.navigateByUrl("/app/setting/user/admin");
+        } else if(this.url == 'dev'){
+            this.router.navigateByUrl("/app/setting/user/developer");
         } else {
             this.isModalVisible = false;
         }

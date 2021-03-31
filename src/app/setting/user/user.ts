@@ -5,7 +5,7 @@ export class User {
     firstName : string;
     lastName : string;
     email : string;
-    enabled : string;
+    enabled : boolean;
     createdTimestamp : number;
     convertcreatedTimestamp : string;
     attributes : UserAttribute;

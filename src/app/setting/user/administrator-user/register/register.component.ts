@@ -4,6 +4,10 @@ import { User, UserAttribute, UserCredentials, AdminInfo } from '../../user';
 import { UserService } from '../../user.service';
 import { Router } from '@angular/router';
 import { NotificationService } from '../../../../services/notification.service';
+import { ActivatedRoute } from '@angular/router';
+import { THEME_ARRAY, ThemeInterface } from '../../../../services/theme';
+import { ThemeService } from '../../../../services/app-theme.service'
+import { clone } from '../../../../utils/utils'
 
 function passwordMatchValidator(password: string): ValidatorFn {
   return (control: FormControl) => {
@@ -19,127 +23,17 @@ function passwordMatchValidator(password: string): ValidatorFn {
   templateUrl: './register.component.html',
   styleUrls: ['./register.component.css']
 })
-
-
 export class RegisterComponent implements OnInit {
-  userInfo : User = new User();
-  userAttribute : UserAttribute = new UserAttribute();
-  userCredentials : UserCredentials[] = new Array<UserCredentials>();
-  adminCli : AdminInfo = new AdminInfo();
-  groups : string[] = [];
+  message: string;
 
-  constructor(
-    private router:Router,
-    public userService : UserService,
-    private fb: FormBuilder,
-    private notifyservice: NotificationService) { 
-      this.adminCli = JSON.parse(localStorage.getItem("cli")) as AdminInfo;
-      this.userForm = this.fb.group({
-        userId : ['',[]],
-        userFirstname : ['',[]],
-        userLastName : ['',[]],
-        userEmail : ['',[
-          Validators.email,
-          Validators.required
-        ]],
-        userDepartmentNm : ['',[]],
-        userPosition : ['',[]],
-        userPhoneNumber : ['',[]],
-        password: ['', [
-          Validators.required,
-        ]],
-        confirmPassword: ['', [
-          Validators.required,
-          passwordMatchValidator('password')
-        ]]
-      });
+  constructor(public userService : UserService,){}
 
-    }
-
-    userForm = new FormGroup({
-      userId : new FormControl(''),
-      userFirstname : new FormControl(''),
-      userLastName : new FormControl(''),
-      userEmail : new FormControl(''),
-      userDepartmentNm : new FormControl(''),
-      userPosition : new FormControl(''),
-      userPhoneNumber : new FormControl(''),
-      password : new FormControl(''),
-      confirmPassword : new FormControl(''),
-    });
-
-  ngOnInit(): void {}
-
-  
-
-  onSubmit() {
-    
-    this.groups.push("administrator")
-    this.userInfo.username = this.userForm.controls.userId.value;
-    this.userInfo.firstName = this.userForm.controls.userFirstname.value;
-    this.userInfo.lastName = this.userForm.controls.userLastName.value;
-    this.userInfo.email = this.userForm.controls.userEmail.value;
-    this.userInfo.enabled = "true"
-    
-    if(this.userInfo.username != "" && this.userInfo.firstName != "" && this.userInfo.lastName != "" &&
-      this.userAttribute.departmentNm[0] != "" && this.userAttribute.position[0] != "" && this.userInfo.email != "" && this.userForm.controls.password.value != "") {
-        if(this.EmailCheck() == false){
-          this.notifyservice.showWarning("이메일 형식이 맞지 않습니다.","")
-        }else if(this.userForm.controls.password.value != this.userForm.controls.confirmPassword.value){
-          this.notifyservice.showWarning("비밀번호를 확인해주세요.","")
-        }
-        else{
-          this.userAttribute.departmentNm.push(this.userForm.controls.userDepartmentNm.value);
-          this.userAttribute.position.push(this.userForm.controls.userPosition.value);
-          this.userAttribute.phoneNumber.push(this.userForm.controls.userPhoneNumber.value);
-
-          this.userCredentials.push(new UserCredentials("password", this.userForm.controls.password.value, true))
-          this.userInfo.credentials = this.userCredentials;
-          this.userInfo.attributes = this.userAttribute;
-
-          this.userInfo.groups = this.groups
-          console.log("Create User Json : " + JSON.stringify(this.userInfo));
-          this.userService.createUser(this.userInfo, this.adminCli).subscribe(res=> {
-            if(res.data !=""){
-            var datacheck = JSON.parse(res.data)
-            }
-            if(res.data == "") {
-                this.notifyservice.showSuccess("등록 완료했습니다.", "관리자 등록")
-                this.router.navigateByUrl("/app/setting/user/admin");
-            } else if(datacheck.errorMessage == "User exists with same username"){
-                this.notifyservice.showError("등록 실패했습니다. id를 확인해주세요", "관리자 등록")
-                this.userInfo  = new User();
-                this.userAttribute = new UserAttribute();
-                this.userCredentials = new Array<UserCredentials>(); 
-            } else if(datacheck.errorMessage == "User exists with same email"){
-              this.notifyservice.showError("등록 실패했습니다. email을 확인해주세요", "관리자 등록")
-              this.userInfo  = new User();
-              this.userAttribute = new UserAttribute();
-              this.userCredentials = new Array<UserCredentials>();
-            }else{
-              this.notifyservice.showError("등록 실패했습니다.", "관리자 등록")
-              this.userInfo  = new User();
-              this.userAttribute = new UserAttribute();
-              this.userCredentials = new Array<UserCredentials>();
-              console.log("Failed Create USer");      
-            }
-          });
-        }
-      }
-      else{
-        this.notifyservice.showWarning("입력값을 확인해주세요","")
-      }
-         
-          
-    }
-
-  EmailCheck():boolean{
-    var check:boolean;
-
-    var regexp = new RegExp(/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/);
-
-    check = regexp.test(this.userInfo.email);
-
-    return check
+  ngOnInit(): void {
+    this.userService.currentMessage.subscribe(message => this.message = message)
+    this.sendMessage()
   }
+  sendMessage() {
+    this.userService.sendMessage("Administrator");
+  }
+  
 }

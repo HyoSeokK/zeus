@@ -7,7 +7,8 @@ import { RegisterComponent as AdminRegister } from './administrator-user/registe
 import { AdministratorUserComponent } from './administrator-user/administrator-user.component';
 import { DeveloperUserComponent } from './developer-user/developer-user.component';
 import { RegisterComponent } from './developer-user/register/register.component';
-import { AdminUpdateComponent } from './administrator-user/update/update.component'
+import { AdminUpdateComponent } from './administrator-user/update/update.component';
+import { CommonComponent } from './common/common.component'
 
 @NgModule({
     imports:[
@@ -20,9 +21,10 @@ import { AdminUpdateComponent } from './administrator-user/update/update.compone
         AdminRegister,
         DeveloperUserComponent,
         RegisterComponent,
-        AdminUpdateComponent, 
+        AdminUpdateComponent,
+        CommonComponent, 
     ],
-    exports:[],
+    exports:[CommonComponent],
     providers:[]
 })
 export class UserModule {}

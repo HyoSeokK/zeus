@@ -32,7 +32,7 @@ export class GroupsService {
         this.postData.admin = admininfo
         return this.httpClient
             .post<HttpResponse<any>> (
-                groupsListEndpoint,
+                groupsListEndpoint+"/all",
                 this.postData,
                 HTTP_OPTIONS
             ).pipe(map(res => {
@@ -40,6 +40,22 @@ export class GroupsService {
                 return res;
             }));
     }
+
+    groupListByName(admininfo : AdminInfo, groupName : string) : any {
+        console.log("groupService : " + JSON.stringify(admininfo))
+        this.postData.admin = admininfo
+        return this.httpClient
+            .post<HttpResponse<any>> (
+                groupsListEndpoint+"/" + groupName,
+                this.postData,
+                HTTP_OPTIONS
+            ).pipe(map(res => {
+                console.log(res)
+                return res;
+            }));
+    }
+
+    
 
     addAttribute(key : string, token : string, admininfo : AdminInfo) : any {
         this.groupObj.id = key

@@ -7,7 +7,8 @@
     "build": "ng build",
     "test": "ng test",
     "lint": "ng lint",
-    "e2e": "ng e2e"
+    "e2e": "ng e2e",
+    "lite": "lite-server"
   },
   "private": true,
   "dependencies": {
@@ -27,6 +28,7 @@
     "@clr/ui": "^5.0.2",
     "@webcomponents/webcomponentsjs": "^2.5.0",
     "angular-svg-icon": "^11.2.0",
+    "expres": "0.0.5",
     "keycloak-angular": "^8.1.0",
     "keycloak-js": "^12.0.3",
     "ngx-toastr": "^13.2.1",
@@ -40,6 +42,7 @@
     "@angular/compiler-cli": "~11.1.1",
     "@types/jasmine": "~3.6.0",
     "@types/node": "^12.11.1",
+    "angular-cli-ghpages": "^1.0.0-rc.1",
     "codelyzer": "^6.0.0",
     "jasmine-core": "~3.6.0",
     "jasmine-spec-reporter": "~5.0.0",
@@ -48,6 +51,7 @@
     "karma-coverage": "~2.0.3",
     "karma-jasmine": "~4.0.0",
     "karma-jasmine-html-reporter": "^1.5.0",
+    "lite-server": "^2.6.1",
     "protractor": "~7.0.0",
     "ts-node": "~8.3.0",
     "tslint": "~6.1.0",

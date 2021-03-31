@@ -2,8 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { UserService } from '../user.service';
 import { User, AdminInfo } from '../user';
-
-
+import { GroupsService } from '../../group/groups.service';
+import { Groups } from '../../group/groups';
 
 @Component({
   selector: 'app-administrator-user',
@@ -16,19 +16,28 @@ export class AdministratorUserComponent implements OnInit {
   userInfoList : User[]
   adminCli : AdminInfo = new AdminInfo();
   userInfo : User = new User();
-
+  groupsList : Groups[]
   
   constructor(
     private router:Router,
-    public userService : UserService) {}
+    public userService : UserService,
+    public groupService : GroupsService) {
+      this.adminCli = JSON.parse(localStorage.getItem("cli")) as AdminInfo;
 
-  ngOnInit(): void {
-    this.adminCli = JSON.parse(localStorage.getItem("cli")) as AdminInfo;
-    this.loadUserList()
-  }
+      // loading administrator group member
+      this.groupService.groupListByName(this.adminCli, "administrator").subscribe(res=> {
+        if(res.status == 200) {
+            this.groupsList = res.data as Groups[]
+            console.log("grouplist" + JSON.stringify(this.groupsList))
+            this.loadUserList()
+        }
+      });
+    }
+
+  ngOnInit(): void {}
 
   loadUserList() : void {
-    this.userService.userList(this.adminCli).subscribe(res=> {
+    this.userService.userListByGroup(this.adminCli, this.groupsList[0].id).subscribe(res=> {
 
       if(res.status == 200) {
         this.userInfoList = res.data as User[]
@@ -36,8 +45,6 @@ export class AdministratorUserComponent implements OnInit {
           var datetime = new Date(this.userInfoList[i].createdTimestamp)
           this.userInfoList[i].convertcreatedTimestamp = datetime.getUTCFullYear() + "-" + ("00" + (datetime.getMonth() + 1)).slice(-2) + "-" + datetime.getDate()+ " "
           + datetime.getHours() + ":" +("00" + datetime.getMinutes()).slice(-2);
-
-          console.log(datetime.getUTCFullYear())
         }   
       } else {
 

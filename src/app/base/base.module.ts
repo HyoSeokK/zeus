@@ -7,6 +7,7 @@ import { SettingModule } from '../setting/setting.module'
 import { UserModule } from '../setting/user/user.module'
 
 import { AppLayoutComponent } from '../base/layout/app-layout'
+import { InvitationAppLayoutComponent } from '../base/invitationLayout/invitation-layout';
 
 @NgModule({
     imports: [
@@ -17,10 +18,10 @@ import { AppLayoutComponent } from '../base/layout/app-layout'
         UserModule
     ],
     declarations:[
-        AppLayoutComponent
+        AppLayoutComponent, InvitationAppLayoutComponent
     ],
     exports:[
-        AppLayoutComponent
+        AppLayoutComponent, InvitationAppLayoutComponent
     ]
 })
 export class BaseModule {}

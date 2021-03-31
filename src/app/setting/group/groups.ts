@@ -1,4 +1,5 @@
 export class Groups {
+    selected : true;
     id : string;
     name : string;
     path : string;

@@ -6,7 +6,7 @@ import {topMenu} from './topmenu'
 import {subMenu} from './submenu'
 import {topMenuIcon} from './topmenuicon'
 import { AppLayoutComponent } from 'src/app/base/layout/app-layout';
-import {NotificationService} from '../../services/notification.service'
+import { NotificationService } from '../../services/notification.service'
 
 
 @Component({

@@ -14,18 +14,29 @@
     </div>
   
     <form clrForm class="formBox">
-      <clr-input-container>
+
+      <clr-combobox-container>
         <label>접속권한</label>
-        <input clrInput placeholder="Access rights" />
-      </clr-input-container>
+        <clr-combobox [(ngModel)]="accessAuth" name = "invitationAuth">
+          <clr-options>
+            <ng-container *ngFor = "let group of groups">
+          <clr-option clrValue="{{group.name}}">{{group.name}}</clr-option>
+        </ng-container>
+        </clr-options>
+      </clr-combobox>
+      </clr-combobox-container>
+
       <clr-input-container>
         <label>Email 주소</label>
-        <input clrInput placeholder="E-mail" />
+        <input clrInput placeholder="E-mail" [(ngModel)]="email" name="email" />
       </clr-input-container>
+
     </form>
+
     <div class="btn-left">
-      <button class="btn btn-primary">
+      <button class="btn btn-primary" (click)="invitation()">
         <clr-icon shape="user"></clr-icon>초대
       </button>
     </div>
+
   </div>

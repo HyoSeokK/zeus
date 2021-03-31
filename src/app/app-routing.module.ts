@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AppLayoutComponent } from '../app/base/layout/app-layout';
+import { InvitationAppLayoutComponent } from '../app/base/invitationLayout/invitation-layout';
 import { ProjectListComponent } from '../app/projects/list/projects.list';
 import { TargetMenuComponent } from '../app/projects/target-menu/target-menu.component';
 import { SettingComponent } from '../app/setting/setting.component';
@@ -36,10 +37,14 @@ const routes: Routes = [
     pathMatch:'full', 
   },
   {
+    path:'user/invitation/:accessAuth',
+    component: InvitationAppLayoutComponent
+  },
+  {
     path:'app',
     component:AppLayoutComponent,
-    canActivate: [KeycloakGuard],
-    data : {roles:['superadmin', 'administrator']},
+    //canActivate: [KeycloakGuard],
+    //data : {roles:['superadmin', 'administrator']},
     children:[
       {
         path:'main',

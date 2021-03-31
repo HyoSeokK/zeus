@@ -3,7 +3,7 @@ import { throwError as observableThrowError, Observable, of } from "rxjs";
 import { HttpClient, HttpParams, HttpResponse } from '@angular/common/http';
 import { catchError } from 'rxjs/operators';
 import { buildHttpRequestOptionsWithObserveResponse, SMTP_BASE_URL } from '../utils/utils';
-import {smtpInfo} from '../setting/smtp/smtpInfo'
+import { smtpInfo } from '../setting/smtp/smtpInfo'
 
 @Injectable({
   providedIn: 'root'
