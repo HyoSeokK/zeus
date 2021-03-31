@@ -11,7 +11,7 @@
 .mt0 {margin-top:0 !important;}
 .mb5 { margin-bottom: 5px !important;}
 .mr30 { margin-right: 1.5rem;}
-
+.mb50 { margin-bottom: 50px !important;}
 .content-area { background-color: var(--color-abg); }
 .clr-vertical-nav .nav-group-text,
 .clr-vertical-nav .nav-link { padding-left: 1.8rem; }
@@ -84,8 +84,8 @@ margin: 100px 0;
 .formBox input[name="password"] { width:100%!important; min-width: 130px;}
 .formBox input[name="menu_url"] { width:110%!important; min-width: 130px;}
 .formBox  ::-webkit-input-placeholder {
-  color:var(--clr-forms-placeholder-color, #8c8c8c) !important;
-  opacity: 0.54 !important;
+  color: var(--color-input-place) !important;
+  opacity:  1!important;
 }
 
 .list-form { display: flex; align-items: center; }
@@ -93,7 +93,7 @@ margin: 100px 0;
 
 /* 데이터 기간 설정 수집 기간 (인풋 셀렉)*/
 .custom-table th{padding: 0.6rem 0.6rem 0.6rem !;}
-.custom-table td{font-size:0.7rem !important}
+.custom-table td{font-size:0.7rem !important; background-color: var(--color-table-td);}
 .data-array { height:100%;}
 .data-array .clr-form-control { flex-direction: row !important; justify-content: center;}
 .data-array .clr-control-container { margin-top:-2px !important;}
@@ -102,7 +102,7 @@ margin: 100px 0;
 /* URL 메뉴 박스 */
 .con-box { display: flex; justify-content: space-between; flex-wrap: wrap; }
 .con-box > .con-box-item { width:100%; position:relative; }
-.con-box-h2-line { border-bottom: 1px solid #ccc; margin-top:1rem !important; margin-bottom: 0.6rem !important;}
+.con-box-h2-line { border-bottom: 1px solid #363A41; margin-top:1rem !important; margin-bottom: 0.6rem !important;}
 
 @media (min-width: 768px) {
 .con-box .clr-col-md-2 { max-width: 100%; flex:0 0 50%;}
@@ -132,7 +132,7 @@ margin: 100px 0;
 .clr-input-group .clr-input::placeholder { color:var(--color-toggle-bg); opacity: 1;}
 
 /* H1 TITLE BOX STYLE  */
-.titleBox { display: flex; width:100%; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--color-line-border); padding-bottom: 0.3rem; margin-bottom: 1.525rem;}
+.titleBox { display: flex; width:100%; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--color-line); padding-bottom: 0.3rem; margin-bottom: 1.525rem;}
 .titleBox > div > a { color:var(--color-sublink); }
 .titleBox > div > clr-icon { color:var(--color-sublink); }
 .titleBox > div > a.link{ color:var(--color-sublink-span); }
@@ -188,10 +188,32 @@ table.pl50 > tbody > tr > td { padding-left: 2rem !important; vertical-align: mi
   table.pl50 > thead > tr > th { padding-left: 0.5rem !important;}
   table.pl50 > tbody > tr > td { padding-left: 0.5rem !important;}
 }
-
 .clr-textarea-wrapper { margin-bottom: 5px;}
-
 .textarea-on { vertical-align: top !important; padding-top:20px !important;}
 
-.target { width : 87.5vw; height: 87vw; }
-.innerDiv { padding: 2rem !important; }
+.svg-icon-container  { display: flex; margin:0.3rem 1rem 1rem 1rem;}
+.svg-icons { fill : var(--color-svg-fill); width:28px; margin-right:10px; cursor: pointer;}
+.svg-icons.svg-dash { width:18px; vertical-align: middle; margin-right: 3px;}
+
+.con-box-head { padding:0 !important;}
+.con-box-header {
+  border-bottom: 1px solid var(--color-line);
+  margin:0 !important;
+}
+.con-box-header > h2 {
+  margin:0 !important;
+  font-size: 1.1rem !important;
+  font-weight: bold !important;
+}
+.bd-none { border-top:none !important; border-radius: 0 0 10px 10px;}
+.nav-text-color { color:var(--color-nav-text)!important;}
+
+.formbox-pd { padding:1.5rem 2rem 1.5rem 2rem !important; }
+.con-box-header + .textBox { padding:15px 30px !important; margin-top:5px !important;}
+.con-box-body .clr-form-horizontal .clr-input-group { width:66% !important;}
+
+.con-box-header { border:1px solid var(--color-line); border-radius: 10px 10px 0 0; background-color: var(--color-bg); padding:15px 15px 12px 46px;}
+.con-box-body { border-radius: 5px 5px 0 0 ;}
+.con-box-item.flex-column { display: flex; flex-flow: column; background:var(--color-abg); border:none; padding:0;}
+.text-box-pd { padding:0 40px 80px 50px !important; }
+.textBox.bdpd { border:none; padding:23px 0px;}
