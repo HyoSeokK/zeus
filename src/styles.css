@@ -83,6 +83,8 @@ margin: 100px 0;
 .formBox .clr-input { width:35% !important; min-width: 180px;}
 .formBox input[name="password"] { width:100%!important; min-width: 130px;}
 .formBox input[name="menu_url"] { width:110%!important; min-width: 130px;}
+
+.modalFormInput[name="formTokenUrl"] { width:100%!important; min-width: 130px;}
 .formBox  ::-webkit-input-placeholder {
   color: var(--color-input-place) !important;
   opacity:  1!important;
@@ -171,6 +173,7 @@ margin: 100px 0;
 .bibox .felx-box-wrap .flex-box-item {}
 .fx100{flex:0 0 100% !important;}
 .fx40 { flex:40%;}
+.fx50 { flex:80%;}
 
 .bibox .clr-combobox-options { min-height:10.6rem !important;}
 .flex-box-wrap .clr-input { width: 60% !important;}

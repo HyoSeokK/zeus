@@ -21,34 +21,15 @@
     <button class="btn btn-line" [disabled] = "check" (click)="deleteUser()">
       <clr-icon shape="ban"></clr-icon>관리자삭제
     </button>
-<!--
-    <select clrSelect name="options" [(ngModel)]="groupName" (ngModelChange)="changeValueGroup($event)">
-      <ng-container *ngFor = "let group of groupsList">
-        <option value="{{group.id}}">{{group.name}}</option>
-      </ng-container>
-    </select>
--->
 
-    <clr-combobox-container>
-      <clr-combobox (ngModelChange)="changeValueGroup($event)" [(ngModel)]="groupName" name="myState" [disabled]="disabled">
-        
-        <clr-options>
-          <ng-container *ngFor = "let group of groupsList">
-            <clr-option id="{{group.name}}" [clrValue]="group">{{group.name}}</clr-option>
-          </ng-container>
-        </clr-options>
-
-        <!--
-        <clr-options> 
-          <clr-option *clrOptionItems="let group of groupsList; field:'name'" [clrValue]="group">{{group.name}}</clr-option> 
-        </clr-options> 
--->
-        
-        
-      
-      </clr-combobox>
-    </clr-combobox-container>
-
+    <div class="btn-left">
+      <select clrSelect name="options" [(ngModel)]="groupName" (ngModelChange)="changeValueGroup($event)">
+        <ng-container *ngFor = "let group of groupsList">
+          <option value="{{group.id}}">{{group.name}}</option>
+        </ng-container>
+      </select>
+    </div>
+    
     <table class="table custom-table">
       <caption>
       </caption>

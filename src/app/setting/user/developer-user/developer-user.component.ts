@@ -50,8 +50,8 @@ export class DeveloperUserComponent implements OnInit{
 
   changeValueGroup(event:any) : string {
     console.log(event)
-    this.groupName = event.id;
-    this.loadUserByGroup(event.id)
+    this.groupName = event;
+    this.loadUserByGroup(event)
     return this.groupName
   }
 

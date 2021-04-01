@@ -40,27 +40,41 @@
       </div>
 
       <div class="modal-body">
-        <form clrForm  [formGroup]="adminCliForm">
-          <clr-input-container>
-            <label>Admin ID</label>
-            <input clrInput placeholder="Admin ID" formControlName="id"/>
-          </clr-input-container>
-          <clr-input-container>
-            <label>Admin PW</label>
-            <input clrInput placeholder="Admin PW" formControlName="pw"/>
-          </clr-input-container>
-          <clr-input-container>
-            <label>ClientID</label>
-            <input clrInput placeholder="Client ID" formControlName="client" />
-          </clr-input-container>
-          <clr-input-container>
-            <label>Client Secret</label>
-            <input clrInput placeholder="Client Secret" formControlName="secret"/>
-          </clr-input-container>
-          <clr-input-container>
-            <label>Token URL</label>
-            <input clrInput placeholder="Access Token URL" formControlName="url" />
-          </clr-input-container>
+        <form clrForm [formGroup]="adminCliForm" class="formBox bibox">
+          <div class="flex-box-wrap fx40">
+            <div class="flex-box-item">
+              <clr-input-container>
+                <label>Admin Id</label>
+                <input clrInput placeholder="Admin ID" formControlName="id" />
+              </clr-input-container>
+            </div>
+            <div class="flex-box-item">
+              <clr-input-container>
+                <label>Admin Pw</label>
+                <input clrInput placeholder="Admin PW" formControlName="pw"/>
+              </clr-input-container>
+            </div>
+            <div class="flex-box-item">
+              <clr-input-container>
+                <label>ClientId</label>
+                <input clrInput placeholder="Client ID" formControlName="client" />
+              </clr-input-container>
+            </div>
+            <div class="flex-box-item">
+              <clr-input-container>
+                <label>Client Secret</label>
+                <input clrInput placeholder="Client Secret" formControlName="secret" />
+              </clr-input-container>
+            </div>
+            <div class="flex-box-item">
+              <clr-input-container>
+                <label>Token URL</label>
+                <input clrInput placeholder="Access Token URL" formControlName="url" name="formTokenUrl" />
+              </clr-input-container>
+            </div>
+          </div>
+          
+          
         </form>
       </div>
       
