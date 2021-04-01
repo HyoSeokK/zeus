@@ -68,6 +68,7 @@ margin: 100px 0;
 
 /* BUTTON RIGHT BOTTOM */
 .btn-left { display:flex; justify-content: flex-end;}
+.btn-left > button { width:140px; height:40px; } /*수정*/
 .btn-right { display:flex; justify-content: flex-start;}
 .btn-left button:last-child { margin-right:0;}
 .btn-layer { position:absolute; right:22px; top:40px; }
@@ -78,11 +79,10 @@ margin: 100px 0;
 .formBox clr-input-container,.formBox clr-toggle-container, .formBox clr-password-container, .formBox clr-datalist-container { margin-bottom: 15px; }
 
 /*  INPUT STYLE CSS */
-.clr-combobox-wrapper { min-height: 1.83rem !important; padding:4px ​1.2rem 0 0.3rem !important;}
+.clr-combobox-wrapper { min-height: 1rem !important; padding:4px ​1.2rem 0 0.3rem !important; margin-bottom: 0.8rem;}/*수정*/
 .clr-combobox-options { min-width: 9.2rem !important; }
 .formBox .clr-input { width:35% !important; min-width: 180px;}
 .formBox input[name="password"] { width:100%!important; min-width: 130px;}
-.formBox input[name="menu_url"] { width:110%!important; min-width: 130px;}
 .formBox  ::-webkit-input-placeholder {
   color: var(--color-input-place) !important;
   opacity:  1!important;
@@ -171,6 +171,7 @@ margin: 100px 0;
 .bibox .felx-box-wrap .flex-box-item {}
 .fx100{flex:0 0 100% !important;}
 .fx40 { flex:40%;}
+.fx40 .clr-combobox-container > .clr-combobox { background-color: #fff;}
 
 .bibox .clr-combobox-options { min-height:10.6rem !important;}
 .flex-box-wrap .clr-input { width: 60% !important;}
@@ -178,6 +179,7 @@ margin: 100px 0;
 .mg1 { margin:0 !important;}
 .mw10 { min-width: 9.6rem !important;}
 .wd100 { width:100% !important;}
+.wd100 > button {width:140px; height:40px;}/*수정*/
 .mh120 { min-height: 120px ;}
 .pd-text-box { padding:1rem 2.5rem 1rem 2.5rem !important;}
 
@@ -215,5 +217,6 @@ table.pl50 > tbody > tr > td { padding-left: 2rem !important; vertical-align: mi
 .con-box-header { border:1px solid var(--color-line); border-radius: 10px 10px 0 0; background-color: var(--color-bg); padding:15px 15px 12px 46px;}
 .con-box-body { border-radius: 5px 5px 0 0 ;}
 .con-box-item.flex-column { display: flex; flex-flow: column; background:var(--color-abg); border:none; padding:0;}
+.con-box-item > button {width:140px; height:40px;} /*수정*/
 .text-box-pd { padding:0 40px 80px 50px !important; }
 .textBox.bdpd { border:none; padding:23px 0px;}

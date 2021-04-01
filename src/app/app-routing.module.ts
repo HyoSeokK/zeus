@@ -38,8 +38,8 @@ const routes: Routes = [
   {
     path:'app',
     component:AppLayoutComponent,
-    canActivate: [KeycloakGuard],
-    data : {roles:['superadmin', 'administrator']},
+    /* canActivate: [KeycloakGuard],
+    data : {roles:['superadmin', 'administrator']}, */
     children:[
       {
         path:'main',

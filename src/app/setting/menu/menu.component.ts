@@ -14,6 +14,8 @@ import {NotificationService} from '../../services/notification.service'
   templateUrl: './menu.component.html',
   styleUrls: ['./menu.component.css']
 })
+
+
 export class MenuComponent implements OnInit {
   TopDeleteclick : boolean = true;
   SubDeleteclick : boolean = true;
@@ -37,6 +39,10 @@ export class MenuComponent implements OnInit {
   SubMenuAddList : Array<subMenu>=new Array<subMenu>();
   TopopenModal = false;
   SubopenModal = false;
+  MenuOrderArr : string[] = ["1","2","3","4","5","6","7","8","9","10","11","12","13","14","15"]
+  SubMenuOrderArr : string[] = ["1","2","3","4","5","6","7","8","9","10","11","12","13","14","15"]
+
+
   
 
   constructor(private topmenuservice: TopmenuserviceService,
@@ -49,7 +55,8 @@ export class MenuComponent implements OnInit {
     .subscribe(resp => {
       this.topMenuCodeList = resp.body as topMenu[]
       this.TopMenuList = resp.body as topMenu[]
-    })
+    }
+    )
 
     this.topmenuservice.getTopMenuIcon()
     .subscribe(resp => {
@@ -60,26 +67,30 @@ export class MenuComponent implements OnInit {
     .subscribe(resp => {
       this.SubMenuList = resp.body as subMenu[]
     })
-
+    
      this.AppLayout.ngOnInit();
-     
-     
+    
   }
   onTopMenuSave(){
     var check = 0;
     this.TopMenuobj = new topMenu();
     this.TopMenuobj.top_menu_code = this.topMenu.top_menu_code
+    this.TopMenuobj.top_menu_order = this.topMenu.top_menu_order
     for(var i = 0; i<this.TopMenuList.length; i++){
       if(this.TopMenuobj.top_menu_code == this.TopMenuList[i].top_menu_code){
           this.notifyservice.showWarning("이미 존재하는 TopMenuCode입니다","");
           check = 0;
           break;
-        }else {
+        }else if(this.TopMenuobj.top_menu_order == this.TopMenuList[i].top_menu_order){
+          this.notifyservice.showWarning("존재하는 MenuOrder 입니다.","");
+          check = 0;
+          break;
+        }
+        else {
           check = 1;
-    }
+         }
   }
     this.TopMenuobj.top_menu_name = this.topMenu.top_menu_name
-    this.TopMenuobj.top_menu_order = this.topMenu.top_menu_order
     for(var i = 0; i<this.topMenuIcon.length; i++){
       if(this.topMenu.icon_code == this.topMenuIcon[i].icon_description){
         this.TopMenuobj.icon_code = this.topMenuIcon[i].icon_code
@@ -193,6 +204,7 @@ export class MenuComponent implements OnInit {
     this.update = false;
     this.save = true;
     this.MenuGet = true;
+    
   }
 
   onSubMenuGet(subMenu){
@@ -317,7 +329,7 @@ export class MenuComponent implements OnInit {
 
     onTopMenuUpdate(){
       if(this.topMenu.top_menu_name != null && this.topMenu.top_menu_code != null && this.topMenu.top_menu_order != null && this.topMenu.icon_code !=null &&
-        this.topMenu.top_menu_order != "" && this.topMenu.top_menu_name != "" && this.topMenu.icon_code != ""){
+        this.topMenu.top_menu_name != "" && this.topMenu.icon_code != ""){
         for(var i = 0; i<this.topMenuIcon.length; i++){
           if(this.topMenu.icon_code == this.topMenuIcon[i].icon_description){
             this.topMenu.icon_code = this.topMenuIcon[i].icon_code
@@ -385,12 +397,13 @@ export class MenuComponent implements OnInit {
   onTopReset(){
       this.topMenu.top_menu_code = "";
       this.topMenu.top_menu_name = "";
-      this.topMenu.top_menu_order = "";
+      this.topMenu.top_menu_order = null;
       this.topMenu.icon_code = "";
       this.TopDeleteclick = true;
       this.save = false;
       this.update = true;
       this.MenuGet = false;
+      this.TopMenuAddList = [];
     }
 
   onSubReset(){
@@ -403,17 +416,19 @@ export class MenuComponent implements OnInit {
       this.subsave = false;
       this.subupdate = true;
       this.subMenuGet = false;
+      this.SubMenuAddList = [];
     }
     
   onTopCancel(){
       this.topMenu.top_menu_code = "";
       this.topMenu.top_menu_name = "";
-      this.topMenu.top_menu_order = "";
+      this.topMenu.top_menu_order = null;
       this.topMenu.icon_code = "";
       this.TopDeleteclick = true;
       this.save = false;
       this.update = true;
       this.MenuGet = false;
+      this.TopMenuAddList = [];
     }
 
   onSubCancel(){
@@ -426,5 +441,6 @@ export class MenuComponent implements OnInit {
       this.subsave = false;
       this.subupdate = true;
       this.subMenuGet = false;
+      this.SubMenuAddList = [];
     }
 }
