@@ -1,0 +1,60 @@
+<form clrForm class="formBox" [formGroup]="userForm">
+    <clr-input-container>
+      <label>사용자ID</label>
+      <input clrInput placeholder="User Id" formControlName="userId" required/>
+      <clr-control-error>
+        ID를 입력해주세요.
+      </clr-control-error>
+    </clr-input-container>
+        <clr-password-container>
+            <label>신규비밀번호</label>
+            <input clrPassword formControlName="password" placeholder="Password"/>
+            <clr-control-error *clrIfError="'required'">비밀번호를 입력해주세요.</clr-control-error>
+        </clr-password-container>
+        <clr-password-container>
+          <label>비밀번호 확인</label>
+          <input clrPassword formControlName="confirmPassword" placeholder="Password"/>
+          <clr-control-error *clrIfError="'required'">비밀번호를 입력해주세요.</clr-control-error>
+          <clr-control-error *clrIfError="'mismatch'">비밀번호가 일치하지 않습니다</clr-control-error>
+        </clr-password-container>
+
+    
+    <clr-input-container>
+      <label>성</label>
+      <input clrInput placeholder="Name" formControlName="userFirstname" required/>
+      <clr-control-error>성을 입력해주세요.</clr-control-error>
+    </clr-input-container>
+    <clr-input-container>
+      <label>이름</label>
+      <input clrInput placeholder="Name" formControlName="userLastName" required/>
+      <clr-control-error>이름을 입력해주세요.</clr-control-error>
+    </clr-input-container>
+    <clr-input-container>
+      <label>부서명</label>
+      <input clrInput placeholder="Department" formControlName="userDepartmentNm" required/>
+      <clr-control-error>부서명을 입력해주세요.</clr-control-error>
+    </clr-input-container>
+    <clr-input-container>
+      <label>직급</label>
+      <input clrInput placeholder="Position" formControlName="userPosition" required/>
+      <clr-control-error>직급을 입력해주세요.</clr-control-error>
+    </clr-input-container>
+    <clr-input-container>
+      <label>Email 주소</label>
+      <input clrInput placeholder="E-mail" formControlName="userEmail" required/>
+      <clr-control-error *clrIfError="'required'">이메일을 입력해주세요.</clr-control-error>
+      <clr-control-error *clrIfError="'email'">이메일형식을 확인해주세요.</clr-control-error>
+    </clr-input-container>
+    <clr-input-container>
+      <label>전화번호(선택)</label>
+      <input clrInput placeholder="Number" formControlName="userPhoneNumber"/>  
+    </clr-input-container>
+  </form>
+  <div class="btn-left">
+    <button class="btn btn-primary">
+      <clr-icon shape="times"></clr-icon>취소
+    </button>
+    <button class="btn btn-primary" (click)="onSubmit()">
+      <clr-icon shape="check"></clr-icon>저장
+    </button>
+  </div>
