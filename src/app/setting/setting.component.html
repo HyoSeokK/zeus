@@ -9,7 +9,7 @@
       <clr-toggle-container>
         <label class="fx0">Light</label>
         <clr-toggle-wrapper>
-            <input type="checkbox" clrToggle name="options" value="option1" (click)="switchTheme()" id="ThemeSwitch"/>
+            <input type="checkbox" clrToggle name="options" value="option1" (click)="switchTheme()" id="ThemeSwitch" [(ngModel)] = "themecheck"/>
             <label>Dark</label>
         </clr-toggle-wrapper>
     </clr-toggle-container>
@@ -91,7 +91,7 @@
         </div>
         <div>
           <button class="btn btn-primary" (click)="auth ? goToAdminApiManageLink('groups') : isModalVisible = true; url = 'groups'">
-            <clr-icon shape="recycle"></clr-icon>권한 관리
+            <clr-icon shape="user"></clr-icon>권한 관리
           </button>
         </div>
       </div>
@@ -104,7 +104,7 @@
         </div>
         <div>
           <button class="btn btn-primary" (click)="auth ? goToAdminApiManageLink('admin') : isModalVisible = true; url = 'admin'">
-            <clr-icon shape="recycle"></clr-icon>관리자 관리
+            <clr-icon shape="user"></clr-icon>관리자 관리
           </button>
         </div>
       </div>
@@ -184,6 +184,7 @@
       </div>
     </div>
     
+    <ng-container *ngIf = "role == 'superadmin'; else roleother">
     <div class="textBox setBox">
       <div>
         <h3>YAML 관리</h3>
@@ -250,5 +251,8 @@
           </clr-toggle-container>
         </div>
     </div>
-    
+  </ng-container>
+  <ng-template #roleother>
+
+  </ng-template>
   </div>

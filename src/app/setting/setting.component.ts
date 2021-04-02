@@ -7,6 +7,7 @@ import { EnvSetting } from '../utils/utils.env';
 import { AdminInfo } from './user/user';
 import { FormControl, FormGroup } from '@angular/forms';
 import { AuthService } from './setting.service'
+import { KeycloakService } from 'keycloak-angular';
 
 import '@cds/core/toggle/register.js';
 
@@ -31,11 +32,14 @@ export class SettingComponent implements OnInit {
     authLen : number
     auth:boolean;
     menuDiv : string;
+    role : string;
+    themecheck : boolean;
 
     constructor(
         private router:Router,
         public theme:ThemeService,
         public authService:AuthService,
+        protected readonly keycloak: KeycloakService
         ) {}
 
     ngOnInit() {
@@ -44,6 +48,11 @@ export class SettingComponent implements OnInit {
             console.log("env : " + JSON.stringify(this.env))
             this.styleMode = this.env.themeSettingVal;
             this.auth = this.env.userRegisterAuth
+        }
+        if(this.styleMode == "DARK"){
+            this.themecheck = true;
+        }else if(this.styleMode == "LIGHT"){
+            this.themecheck = false;
         }
 
         this.authService.authList().subscribe(res => {
@@ -60,6 +69,8 @@ export class SettingComponent implements OnInit {
       
             localStorage.setItem("cli", JSON.stringify(this.adminCli))
         }
+        this.role = this.keycloak.getUsername();
+        console.log("role : " + this.role)
     }
 
     switchTheme() {

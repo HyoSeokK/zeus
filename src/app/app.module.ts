@@ -15,6 +15,7 @@ import { KeycloakAngularModule, KeycloakService } from 'keycloak-angular';
 import { initializeKeycloak, initConfig } from './app.initialize';
 import {ToastrModule} from 'ngx-toastr';
 import { AppMainComponent } from './app-main/app-main.component';
+import { TopmenuserviceService } from './services/topmenuservice.service';
 
 
 @NgModule({
@@ -46,7 +47,14 @@ import { AppMainComponent } from './app-main/app-main.component';
       useFactory: initConfig,
       multi: true,
       deps: [AppConfigService],
-    }
+    },
+    /* {
+      provide: APP_INITIALIZER,
+      useFactory: initTopMenu,
+      multi: true,
+      deps: [TopmenuserviceService],
+    } */
+
   ],
   bootstrap: [AppComponent]
 })

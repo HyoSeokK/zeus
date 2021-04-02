@@ -38,11 +38,12 @@
             </clr-options>
           </clr-combobox>
           </clr-combobox-container>
-    
-          <clr-input-container>
+          
+          <clr-textarea-container>
             <label>LINK URL</label>
-            <input clrInput placeholder="URL" name="menu_url" [(ngModel)] = "topMenu.top_menu_target_url" />
-          </clr-input-container>
+            <textarea clrTextarea placeholder="URL" [(ngModel)] = "topMenu.top_menu_target_url" name="menu_url" style="resize: none; width: 630px; height: 100px;"></textarea>
+          </clr-textarea-container>
+          
           <clr-input-container>
             <label>New Window</label>
           </clr-input-container>
@@ -96,7 +97,12 @@
             <clr-tree-node >
               <ng-container *ngFor = "let topMenuIcon of topMenuIcon">
               <ng-container *ngIf = "TopMenu.icon_code == topMenuIcon.icon_code">
+                <ng-container *ngIf = "topMenuIcon.icon_code == 'icon-000'; else other">
+
+                </ng-container>
+                <ng-template #other>
                 <clr-icon [attr.shape]="topMenuIcon.icon_name"></clr-icon>
+              </ng-template>
               </ng-container> 
             </ng-container>  
               <p (click) = "onTopMenuGet(TopMenu)">{{TopMenu.top_menu_name}}</p>
@@ -104,7 +110,12 @@
                 <ng-container *ngIf = "TopMenu.top_menu_code == SubMenu.top_menu_code">
                   <ng-container *ngFor = "let topMenuIcon of topMenuIcon">
                   <ng-container *ngIf = "SubMenu.icon_code == topMenuIcon.icon_code">
+                    <ng-container *ngIf = "topMenuIcon.icon_code == 'icon-000'; else other">
+
+                    </ng-container>
+                    <ng-template #other>
                     <clr-icon [attr.shape]="topMenuIcon.icon_name"></clr-icon>
+                  </ng-template>
                   </ng-container>
                 </ng-container>
                 {{SubMenu.sub_menu_name}}
