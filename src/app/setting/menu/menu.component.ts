@@ -55,7 +55,7 @@ export class MenuComponent implements OnInit {
     .subscribe(resp => {
       this.topMenuCodeList = resp.body as topMenu[]
       this.TopMenuList = resp.body as topMenu[]
-    }
+    } 
     )
 
     this.topmenuservice.getTopMenuIcon()

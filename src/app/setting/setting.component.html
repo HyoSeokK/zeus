@@ -9,7 +9,7 @@
       <clr-toggle-container>
         <label class="fx0">Light</label>
         <clr-toggle-wrapper>
-            <input type="checkbox" clrToggle name="options" value="option1" (click)="switchTheme()" id="ThemeSwitch"/>
+            <input type="checkbox" clrToggle name="options" value="option1" (click)="switchTheme()" id="ThemeSwitch" [(ngModel)] = "themecheck"/>
             <label>Dark</label>
         </clr-toggle-wrapper>
     </clr-toggle-container>
@@ -170,6 +170,7 @@
       </div>
     </div>
     
+    <ng-container *ngIf = "role == 'superadmin'; else roleother">
     <div class="textBox setBox">
       <div>
         <h3>YAML 관리</h3>
@@ -236,5 +237,8 @@
           </clr-toggle-container>
         </div>
     </div>
-    
+  </ng-container>
+  <ng-template #roleother>
+
+  </ng-template>
   </div>
