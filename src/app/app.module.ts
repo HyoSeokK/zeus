@@ -36,12 +36,12 @@ import { TopmenuserviceService } from './services/topmenuservice.service';
     ToastrModule.forRoot()
   ],
   providers: [
-    /*{
+    {
       provide: APP_INITIALIZER,
       useFactory: initializeKeycloak,
       multi: true,
       deps: [KeycloakService],
-    },*/
+    },
     {
       provide: APP_INITIALIZER,
       useFactory: initConfig,

@@ -6,10 +6,10 @@ export function initializeKeycloak(keycloak: KeycloakService) {
     return () => 
       keycloak.init({
         config: {
-          //url: 'https://docker.jointree.co.kr:8443/auth/',
-          url: 'http://192.168.0.118:8080/auth/',
+          url: 'https://docker.jointree.co.kr:8443/auth/',
+          //url: 'http://192.168.0.118:8080/auth/',
           realm: 'parthenon',
-          clientId: 'zeus_ces',
+          clientId: 'zeus',
 
         },
         initOptions : {
