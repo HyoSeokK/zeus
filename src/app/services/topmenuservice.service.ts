@@ -5,8 +5,9 @@ import { topMenuIcon } from '../setting/menu/topmenuicon'
 import { throwError as observableThrowError } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
 
-import { buildHttpRequestOptionsWithObserveResponse} from '../utils/utils'
+import { buildHttpRequestOptionsWithObserveResponse, HTTP_OPTIONS} from '../utils/utils'
 import { MENU_BASE_URL } from '../utils/utils';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -20,7 +21,7 @@ export class TopmenuserviceService {
   private saveTopUrl : string = MENU_BASE_URL + "/topmenusaveUrl";
   private deleteTopUrl : string = MENU_BASE_URL + "/topmenudeleteUrl";
   private updateTopUrl : string = MENU_BASE_URL + "/topmenuupdate";
-  
+  /* topMenu: topMenu[]; */
  
 
   constructor(private http: HttpClient) { }
@@ -34,6 +35,15 @@ export class TopmenuserviceService {
     .pipe(
       catchError(error => observableThrowError(error)),);  
   }
+  /* async getTopMenu() : Promise<Observable<topMenu[]>> {
+    return this.http
+    .get(this.getTopMenuUri,HTTP_OPTIONS)
+    .pipe(map(resp => {
+      this.topMenu = resp as topMenu[]
+      return this.topMenu;
+    }))
+    
+  } */
 
   public getTopMenuIcon(){
     let params = new HttpParams();

@@ -29,7 +29,7 @@ export class SmtptestComponent implements OnInit {
     })
     
   }
-  onSubmit(){
+  onTest(){
     if(this.EmailCheck() == false){
       this.notifyservice.showWarning("입력값을 확인해주세요","")
     }else{
@@ -84,6 +84,7 @@ export class SmtptestComponent implements OnInit {
   onReset(){
     this.smtpInfo[0].AdminAddress = "";
     this.smtpInfo[0].SmtpAddress = "";
+    this.smtpInfo[0].Password = "";
   }
   
   EmailCheck():boolean{

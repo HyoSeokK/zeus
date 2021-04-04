@@ -12691,16 +12691,16 @@ clr-datalist-container .clr-input-group {
 .clr-combobox-wrapper {
   position: relative;
   padding: 0 1.2rem 0 0.3rem;
-  min-height: 1.2rem;
-  min-width: 8.4rem;
+  width: 180px;
+  height: 24px;
   /* clr-combobox-font-size */
   font-size: 0.65rem;
   color: #eaedf0;
   border-bottom: 0.05rem solid #363A41;
   display: inline-block;
-  /* clr-combobox-input-background-color */
+  /* clr-combobox-input-background-color 수정*/
   background-color: #14161a;
-  border: 0.05rem solid #363A41;
+  border: none;
   border-bottom: 0.05rem solid #bbb;
   /* clr-combobox-border-radius */
   border-radius: 0.15rem;

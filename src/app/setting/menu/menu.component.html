@@ -32,36 +32,52 @@
        </div>
       </div>
        <div class="flex-box-wrap fx40">
-        <clr-input-container>
-          <label>Menu Order</label>
-          <input clrInput placeholder="Order" name="top_menu_order" [(ngModel)] = "topMenu.top_menu_order"/>
-        </clr-input-container>
+          <clr-combobox-container>
+            <label>Top Menu Order</label>
+            <clr-combobox [(ngModel)] = "topMenu.top_menu_order" name="top_menu_order">
+              <clr-options>
+                <ng-container *ngFor="let MenuOrderArr of MenuOrderArr">
+                      <clr-option clrValue="{{MenuOrderArr}}" calss="mw10">{{MenuOrderArr}}</clr-option>
+                </ng-container>
+              </clr-options>
+            </clr-combobox>
+          </clr-combobox-container>
         <clr-combobox-container>
           <label>Top Menu Icon</label>
           <clr-combobox [(ngModel)] = "topMenu.icon_code" name = "top_menu_icon" >
             <clr-options> 
-              <ng-container *ngFor = "let topMenuIcon of topMenuIcon">       
+              <ng-container *ngFor = "let topMenuIcon of topMenuIcon">
+                <ng-container *ngIf = "topMenuIcon.icon_code == 'icon-000'; else other">
+                  <clr-option clrValue="{{topMenuIcon.icon_description}}" class="mw10">
+                    {{topMenuIcon.icon_description}}
+                  </clr-option>
+                </ng-container>
+                <ng-template #other>
             <clr-option clrValue="{{topMenuIcon.icon_description}}" class="mw10">
               <clr-icon [attr.shape]="topMenuIcon.icon_name"></clr-icon> {{topMenuIcon.icon_description}}
             </clr-option>
+          </ng-template>    
             </ng-container>
           </clr-options>
         </clr-combobox>
         </clr-combobox-container>
+        
         </div>
         <div class="wd100">
+          <button class="btn" (click) = "onTopOpenModal()" [disabled] = "TopDeleteclick">
+            <clr-icon shape="times"></clr-icon>삭제
+          </button>
+          <button class="btn btn-info-outline" (click) = "onTopCancel()">
+            <clr-icon shape="times"></clr-icon>취소
+          </button> 
         <button class="btn btn-primary" (click) = "onTopMenuSave()" [hidden]="save">
           <clr-icon shape="success-standard"></clr-icon>저장
         </button>
         <button class="btn btn-primary" [hidden] = "update" (click) = "onTopMenuUpdate()">
           <clr-icon shape="success-standard"></clr-icon>수정
         </button>
-        <button class="btn" (click) = "onTopOpenModal()" [disabled] = "TopDeleteclick">
-          <clr-icon shape="times"></clr-icon>삭제
-        </button>
-        <button class="btn btn-info-outline" (click) = "onTopCancel()">
-          <clr-icon shape="times"></clr-icon>취소
-        </button>
+        
+        
       </div>
       </form>
 
@@ -81,10 +97,16 @@
         </div>
         </div>
         <div class="flex-box-wrap fx40">
-        <clr-input-container>
-          <label>Menu Order</label>
-          <input clrInput placeholder="Order" name="sub_menu_order" [(ngModel)] = "subMenu.sub_menu_order"/>
-        </clr-input-container>
+          <clr-combobox-container>
+            <label>Sub Menu Order</label>
+            <clr-combobox [(ngModel)] = "subMenu.sub_menu_order" name="sub_menu_order">
+              <clr-options>
+                <ng-container *ngFor="let SubMenuOrderArr of SubMenuOrderArr">
+                      <clr-option clrValue="{{SubMenuOrderArr}}" calss="mw10">{{SubMenuOrderArr}}</clr-option>
+                </ng-container>
+              </clr-options>
+            </clr-combobox>
+          </clr-combobox-container>
       
         <clr-combobox-container>
           <label>Top Menu Name</label>
@@ -102,27 +124,34 @@
           <clr-combobox [(ngModel)] = "subMenu.icon_code" name = "sub_menu_icon">
             <clr-options> 
               <ng-container *ngFor = "let topMenuIcon of topMenuIcon">
-            <clr-option clrValue="{{topMenuIcon.icon_description}}">
+                <ng-container *ngIf = "topMenuIcon.icon_code == 'icon-000'; else other">
+                  <clr-option clrValue="{{topMenuIcon.icon_description}}" class="mw10">
+                    {{topMenuIcon.icon_description}}
+                  </clr-option>
+                </ng-container>
+                <ng-template #other>
+            <clr-option clrValue="{{topMenuIcon.icon_description}}" class="mw10">
               <clr-icon [attr.shape]="topMenuIcon.icon_name"></clr-icon> {{topMenuIcon.icon_description}}
             </clr-option>
+          </ng-template>    
             </ng-container>
           </clr-options>
         </clr-combobox>
         </clr-combobox-container>
       
       <div class="wd100">
-        <button class="btn btn-primary" (click) = "onSubMenuSave()" [hidden]="subsave">
-          <clr-icon shape="success-standard"></clr-icon>저장
-        </button>
-        <button class="btn btn-primary" (click) = "onSubMenuUpdate()" [hidden] = "subupdate">
-          <clr-icon shape="success-standard"></clr-icon>수정
-        </button>
         <button class="btn" (click) = "onSubOpenModal()" [disabled] = "SubDeleteclick">
           <clr-icon shape="times"></clr-icon>삭제
         </button>
         <button class="btn btn-info-outline" (click) = "onSubCancel()">
           <clr-icon shape="times"></clr-icon>취소
         </button>
+        <button class="btn btn-primary" (click) = "onSubMenuSave()" [hidden]="subsave">
+          <clr-icon shape="success-standard"></clr-icon>저장
+        </button>
+        <button class="btn btn-primary" (click) = "onSubMenuUpdate()" [hidden] = "subupdate">
+          <clr-icon shape="success-standard"></clr-icon>수정
+        </button>  
       </div>
       </form>
     </div>
@@ -157,7 +186,12 @@
           <clr-tree-node (click) = "onTopMenuGet(TopMenu)">
             <ng-container *ngFor = "let topMenuIcon of topMenuIcon">
             <ng-container *ngIf = "TopMenu.icon_code == topMenuIcon.icon_code">
+              <ng-container *ngIf = "topMenuIcon.icon_code == 'icon-000'; else other">
+
+              </ng-container>
+              <ng-template #other>
               <clr-icon [attr.shape]="topMenuIcon.icon_name"></clr-icon>
+            </ng-template>
             </ng-container> 
           </ng-container>  
             {{TopMenu.top_menu_name}} 
@@ -165,7 +199,12 @@
               <ng-container *ngIf = "TopMenu.top_menu_code == SubMenu.top_menu_code">
                 <ng-container *ngFor = "let topMenuIcon of topMenuIcon">
                 <ng-container *ngIf = "SubMenu.icon_code == topMenuIcon.icon_code">
+                  <ng-container *ngIf = "topMenuIcon.icon_code == 'icon-000'; else other">
+
+                  </ng-container>
+                  <ng-template #other>
                   <clr-icon [attr.shape]="topMenuIcon.icon_name"></clr-icon>
+                </ng-template>
                 </ng-container>
               </ng-container>
               {{SubMenu.sub_menu_name}}

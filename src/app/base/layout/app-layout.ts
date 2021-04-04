@@ -45,6 +45,8 @@ export class AppLayoutComponent implements OnInit{
     }
 
     ngOnInit() {
+        /* this.topMenu = JSON.parse(localStorage.getItem("topmenu")) as topMenu[]
+        console.log("topMenu : " + this.topMenu) */
         this.topmenuservice.getTopMenu()
         .subscribe(resp => {
             this.topMenu = resp.body as topMenu[]

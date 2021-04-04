@@ -12145,6 +12145,7 @@ _:-ms-input-placeholder .progress-block > label,
   /* add */
   margin-bottom:0.5rem;
 }
+
 .clr-form-horizontal.clr-row .clr-control-label {
   width: auto;
 }
@@ -13914,8 +13915,7 @@ clr-datalist-container .clr-input-group {
 .clr-combobox-wrapper {
   position: relative;
   padding: 0 1.2rem 0 0.3rem;
-  min-height: 1.2rem;
-  min-width: 8.4rem;
+  height: 24px;
   /* clr-combobox-font-size */
   font-size: 0.65rem;
   font-size: var(--clr-combobox-font-size, 0.65rem);
@@ -13927,10 +13927,9 @@ clr-datalist-container .clr-input-group {
   border-bottom-color: #b3b3b3;
   border-bottom-color: var(--clr-forms-border-color, #b3b3b3);
   display: inline-block;
-  /* clr-combobox-input-background-color */
-  background-color: #f2f2f2;
-  background-color: var(--clr-combobox-input-background-color, #f2f2f2);
-  border: 0.05rem solid #e8e8e8;
+  /* clr-combobox-input-background-color 수정*/
+  background-color: var(--clr-combobox-input-background-color, #fff);
+  border: none;
   border-bottom: 0.05rem solid #b3b3b3;
   /* clr-combobox-border-radius */
   border-radius: 0.15rem;
@@ -13938,7 +13937,7 @@ clr-datalist-container .clr-input-group {
 }
 .clr-combobox-wrapper.multi {
   min-width: 18rem;
-  padding-bottom: 0.15rem;
+  
 }
 .clr-combobox-wrapper .clr-input.clr-combobox-input:focus {
   background: none;
