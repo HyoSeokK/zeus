@@ -1,10 +1,10 @@
 export class User {
-    id : string;
+    id : string = "";
     checked : true;
-    username : string;
-    firstName : string;
-    lastName : string;
-    email : string;
+    username : string = "";
+    firstName : string = "";
+    lastName : string = "";
+    email : string = "";
     enabled : boolean;
     createdTimestamp : number;
     convertcreatedTimestamp : string;

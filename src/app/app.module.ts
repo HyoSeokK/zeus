@@ -35,12 +35,12 @@ import { AppMainComponent } from './app-main/app-main.component';
     ToastrModule.forRoot()
   ],
   providers: [
-    {
+    /*{
       provide: APP_INITIALIZER,
       useFactory: initializeKeycloak,
       multi: true,
       deps: [KeycloakService],
-    },
+    },*/
     {
       provide: APP_INITIALIZER,
       useFactory: initConfig,

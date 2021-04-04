@@ -14,7 +14,7 @@
         <form clrForm class="formBox">
           <clr-input-container>
             <label>성</label>
-            <input clrInput placeholder="Name" name="firstname" [(ngModel)]="this.user.firstName"/>
+            <input clrInput placeholder="Name" name="firstname" [(ngModel)]="this.user.firstName" />
           </clr-input-container>
           <clr-input-container>
             <label>이름</label>
@@ -35,13 +35,11 @@
             </clr-input-container>
           </div>
 
-          
           <clr-input-container>
             <label>Email 주소</label>
             <input clrInput placeholder="E-mail" name="email" [(ngModel)]="this.user.email"/>
           </clr-input-container>
           
-
           <div *ngFor="let x of this.userAttribute.phoneNumber; let i = index;">
             <clr-input-container>
               <label>전화번호</label>

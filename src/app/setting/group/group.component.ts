@@ -40,6 +40,12 @@ export class GroupComponent implements OnInit {
     console.log("this admincli : " + JSON.stringify(this.adminCli))
     this.groupService.groupList(this.adminCli).subscribe(res=> {
 
+      console.log("group res : " + JSON.stringify(res))
+      if(res.status == 502 || res.status == false) {
+        console.log(res.message)
+        return
+      }
+
       if(res.status == 200) {
         this.groupsList = res.data as Groups[]
         console.log(this.groupsList)

@@ -401,6 +401,11 @@ textarea {
   --color-nav-sub:#00f;
   --color-nav-text:#666;
 
+  --color-scroll-bar: #ccc;
+  --color-scroll-thumb: #818181;
+  --color-scroll-track: #cfcfcf;
+
+
 }
 
 :root {

@@ -37,14 +37,14 @@ const routes: Routes = [
     pathMatch:'full', 
   },
   {
-    path:'user/invitation/:accessAuth',
+    path:'user/invitation/:accessAuth/:email',
     component: InvitationAppLayoutComponent
   },
   {
     path:'app',
     component:AppLayoutComponent,
-    canActivate: [KeycloakGuard],
-    data : {roles:['superadmin', 'administrator']},
+    //canActivate: [KeycloakGuard],
+    //data : {roles:['superadmin', 'administrator']},
     children:[
       {
         path:'main',

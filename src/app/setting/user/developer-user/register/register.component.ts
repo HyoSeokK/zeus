@@ -43,6 +43,8 @@ export class RegisterComponent implements OnInit {
     this.userService.invitationUser(this.accessAuth, this.email).subscribe(res => {
       if(res.status == 200){
         this.notifyservice.showSuccess("초대 메일을 발송하였습니다.","개발자 초대");
+        this.accessAuth, this.email = "";
+        
       } else {
         this.notifyservice.showError("초대 메일 발송을 실패하였습니다.","개발자 초대");
       }

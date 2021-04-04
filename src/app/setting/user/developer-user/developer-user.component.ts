@@ -13,10 +13,13 @@ import { NotificationService } from '../../../services/notification.service';
 })
 export class DeveloperUserComponent implements OnInit{
   check = true;
+  ckDisabled : boolean = false;
   adminCli : AdminInfo = new AdminInfo();
   groupsList : Groups[];
   groupInfo : Groups = new Groups();
-  userInfoList : User[];
+  userInfoTmpList : User[];
+  userInfoList : User[] = [];
+  groupId : string;
   groupName : string;
   disabled : boolean = false;
   selected : true;
@@ -42,62 +45,74 @@ export class DeveloperUserComponent implements OnInit{
           this.groupsList = tmp.filter(item => {return item.name !== "superadmin" && item.name !== "administrator"})
           console.log("grouplist" + JSON.stringify(this.groupsList))
           this.groupInfo = this.groupsList[0] as Groups;
-          this.loadUserByGroup(this.groupInfo.id)
-          this.groupName = this.groupInfo.id;
+          this.groupId = this.groupInfo.id;
+          this.groupName = this.groupInfo.name;
+          this.loadUserByGroup(this.groupId, this.groupName)
       }
     });
   }
 
-  changeValueGroup(event:any) : string {
+  changeValueGroup(event:any) {
     console.log(event)
-    this.groupName = event;
-    this.loadUserByGroup(event)
-    return this.groupName
+    let groupInfo = event.split('/')
+    this.groupId = groupInfo[0]
+    this.groupName = groupInfo[1]
+    this.loadUserByGroup(this.groupId, this.groupName)
   }
 
-  loadUserByGroup(group : string) {
+  loadUserByGroup(group : any, groupname : any) {
+    this.userInfoList = []
+    
+    this.userService.userListByGroupTmp(groupname).subscribe(res=>{
+      if(res != null) {
+        console.log("tmp res : " + JSON.stringify(res))
+        this.userInfoList = this.userInfoList.concat(res as User);
+      }
+    });
+
     this.userService.userListByGroup(this.adminCli, group).subscribe(res=> {
       if(res.status == 200) {
-        this.userInfoList = res.data as User[]
-        console.log("userInfo : " + JSON.stringify(this.userInfoList))
-        for(var i=0; i<this.userInfoList.length; i++){
-          var datetime = new Date(this.userInfoList[i].createdTimestamp)
-          this.userInfoList[i].convertcreatedTimestamp = datetime.getUTCFullYear() + "-" + ("00" + (datetime.getMonth() + 1)).slice(-2) + "-" + datetime.getDate()+ " "
+        let userListByGroup = res.data as User[]
+        console.log("userListByGroup : " + JSON.stringify(userListByGroup))
+        for(var i=0; i<userListByGroup.length; i++){
+          var datetime = new Date(userListByGroup[i].createdTimestamp)
+          userListByGroup[i].convertcreatedTimestamp = datetime.getUTCFullYear() + "-" + ("00" + (datetime.getMonth() + 1)).slice(-2) + "-" + datetime.getDate()+ " "
           + datetime.getHours() + ":" +("00" + datetime.getMinutes()).slice(-2);
-        }   
+        } 
+        this.userInfoList = this.userInfoList.concat(userListByGroup);
+
+        console.log("userInfo : " + JSON.stringify(this.userInfoList))
+         
       }
     });
   }
 
-  acceptUser(user : string) : void {
-    console.log("user:" + user)
-    this.userService.updateUserInfo(user, this.adminCli).subscribe(res=> {
-
-      if(res.status == 200) {
-        this.user = res.data as User
-        this.userAttribute = this.user.attributes;
-
-        console.log(this.userAttribute)
-
-        this.username = this.user.firstName+this.user.lastName;
-        this.user.enabled = true
-        this.updateBasicInfo()
-      } 
-    });
-  }
-
-  updateBasicInfo() : void {
-    console.log("user Update Info : " + JSON.stringify(this.user))
-    this.userService.updateUser(this.user, this.adminCli).subscribe(res=> {
-      if(res.data == "") {
-          this.notifyservice.showSuccess("등록 완료했습니다.", "개발자 등록")
-          this.loadUserByGroup(this.groupName)
+  acceptUser(user : any) : void {
+    console.log("acceptUser :" + JSON.stringify(user))
+    user.enabled = true;
+    this.userService.createAdminUser(user, this.adminCli).subscribe(res=> {
+      if(res.data == "" || res.status == 200) {
+        console.log("create dev user : " + JSON.stringify(res))
+        this.updateTmpUser(user.email)
+        
       } else {
         this.notifyservice.showError("등록 실패했습니다.", "개발자 등록")
       }
-
     });
+  }
 
+  updateTmpUser(email : string) : void  {
+    
+    this.userService.acceptDevUser(email).subscribe(res=> {
+      console.log("updateTmpUser : " + JSON.stringify(res))
+      
+      if(res.status == 200) {
+        this.notifyservice.showSuccess("등록 완료했습니다.", "개발자 등록")
+        this.loadUserByGroup(this.groupId, this.groupName)
+      } else {
+        this.notifyservice.showError("등록 실패했습니다.", "개발자 등록")
+      }
+    });
   }
 
   onClickUserInfo() : void {
@@ -132,7 +147,7 @@ export class DeveloperUserComponent implements OnInit{
     this.userService.deleteUser(userId, this.adminCli).subscribe(res => {
       console.log("res : " + res)
       if (res.status == 200) {
-        this.loadUserByGroup(this.groupName)
+        this.loadUserByGroup(this.groupId, this.groupName)
       }
 
     });

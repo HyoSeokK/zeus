@@ -13,25 +13,25 @@
         신규 등록 관리자는 이메일 주소를 통해 신규 계정을 등록 할 수 있습니다.</p>
     </div>
   
-    <form clrForm class="formBox">
-
-      <clr-combobox-container>
-        <label>접속권한</label>
-        <clr-combobox [(ngModel)]="accessAuth" name = "invitationAuth">
-          <clr-options>
-            <ng-container *ngFor = "let group of groups">
-          <clr-option clrValue="{{group.name}}">{{group.name}}</clr-option>
-        </ng-container>
-        </clr-options>
-      </clr-combobox>
-      </clr-combobox-container>
-
-      <clr-input-container>
-        <label>Email 주소</label>
-        <input clrInput placeholder="E-mail" [(ngModel)]="email" name="email" />
-      </clr-input-container>
-
-    </form>
+      <form clrForm class="formBox">
+        
+              <clr-select-container>
+                <label>접속 권한</label>
+                <select clrSelect name="options" [(ngModel)]="accessAuth"  name = "invitationAuth">
+                  <ng-container *ngFor = "let group of groups">
+                    <option value="{{group.name}}">{{group.name}}</option>
+                  </ng-container>
+                </select>
+              </clr-select-container>
+           
+            <br> 
+            
+              <clr-input-container>
+                <label>Email 주소</label>
+                <input clrInput placeholder="E-mail" [(ngModel)]="email" name="email" />
+              </clr-input-container>
+        
+      </form>
 
     <div class="btn-left">
       <button class="btn btn-primary" (click)="invitation()">

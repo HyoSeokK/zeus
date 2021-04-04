@@ -25,7 +25,7 @@
     <div class="btn-left">
       <select clrSelect name="options" [(ngModel)]="groupName" (ngModelChange)="changeValueGroup($event)">
         <ng-container *ngFor = "let group of groupsList">
-          <option value="{{group.id}}">{{group.name}}</option>
+          <option value="{{group.id}}/{{group.name}}">{{group.name}}</option>
         </ng-container>
       </select>
     </div>
@@ -55,7 +55,8 @@
         <tr *ngFor="let userList of userInfoList">
           <td>
             <clr-checkbox-wrapper>
-              <input type="checkbox" [(ngModel)]="userList.checked" (ngModelChange)="onClickUserInfo()" clrCheckbox name="options" required />
+              <input *ngIf="userList.enabled == false" type="checkbox" [(ngModel)]="userList.checked" [disabled]="true" (ngModelChange)="onClickUserInfo()" clrCheckbox name="options" required />
+              <input *ngIf="userList.enabled == true" type="checkbox" [(ngModel)]="userList.checked" [disabled]="false" (ngModelChange)="onClickUserInfo()" clrCheckbox name="options" required />
               <label>{{userList.username}}</label>
             </clr-checkbox-wrapper>
           </td>
@@ -66,7 +67,7 @@
           <td>{{userList.convertcreatedTimestamp}}</td>
           <td>2020.10.12 13:10</td>
           <td *ngIf="userList.enabled == false">
-            <button type="button" class="btn" (click)="acceptUser(userList.id)">등록</button>
+            <button type="button" class="btn" (click)="acceptUser(userList)">등록</button>
           </td>
           <td *ngIf="userList.enabled == true">등록완료</td>
         </tr>

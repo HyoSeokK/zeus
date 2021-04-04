@@ -19,6 +19,7 @@ export class InvitationAppLayoutComponent implements OnInit {
     loadingMode : string = "invitation"
     message: string;
     accessAuth : string;
+    email : string;
 
     constructor(
         public theme:ThemeService, 
@@ -26,7 +27,7 @@ export class InvitationAppLayoutComponent implements OnInit {
         private activatedRoute:ActivatedRoute, ) {
         this.activatedRoute.params.subscribe(params =>{
             this.accessAuth = params['accessAuth']
-        
+            this.email = params['email'];
         })
 
         let styleMode = 'LIGHT'
@@ -44,12 +45,16 @@ export class InvitationAppLayoutComponent implements OnInit {
         //this.userService.accessAuth.subscribe(message => this.accessAuth = message)
         this.sendMessage("Invitation")
         this.sendAccessMessage(this.accessAuth)
+        this.sendEmailMessage(this.email)
     }
     sendMessage(message : string) {
         this.userService.sendMessage(message);
     }
     sendAccessMessage(message : string) {
         this.userService.sendAccessMessage(message);
+    }
+    sendEmailMessage(message : string) {
+        this.userService.sendEmailMessage(message)
     }
     
 }

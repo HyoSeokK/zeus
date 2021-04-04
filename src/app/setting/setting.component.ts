@@ -206,17 +206,6 @@ export class SettingComponent implements OnInit {
         }
     }
     
-    goToGroupManageLink() : void {
-        this.adminCli.adminId = this.adminCliForm.controls.id.value;
-        this.adminCli.adminPw = this.adminCliForm.controls.pw.value;
-        this.adminCli.clientId = this.adminCliForm.controls.client.value;
-        this.adminCli.clientSecret = this.adminCliForm.controls.secret.value;
-        this.adminCli.tokenUrl = this.adminCliForm.controls.url.value;
-      
-        localStorage.setItem("cli", JSON.stringify(this.adminCli))
-
-    }
-
     goToDevUserManageLink() : void {
         this.router.navigateByUrl("/app/setting/user/developer")
     }

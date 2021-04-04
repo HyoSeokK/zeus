@@ -1,24 +1,34 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs/internal/BehaviorSubject';
 import { HttpClient, HttpResponse ,HttpParams } from  "@angular/common/http";
-import { USER_BASE_URL, SMTP_BASE_URL, HTTP_OPTIONS, buildHttpRequestOption } from '../../utils/utils'
+import { USER_BASE_URL, USERDEV_BASE_URL, SMTP_BASE_URL, HTTP_OPTIONS, buildHttpRequestOption } from '../../utils/utils'
 import { map } from 'rxjs/operators';
 import { User, AdminInfo } from './user';
 import { smtpInfo } from '../smtp/smtpInfo'
 
-const authInfoEndpoint = "/auth_list"
-const createUserEndpoint = USER_BASE_URL + "/register_user"
+const createDevEndpoint =  USERDEV_BASE_URL + "/register_user_dev"
+const createAdminEndpoint = USER_BASE_URL + "/register_user"
 const updateUserEndpoint = USER_BASE_URL + "/update_user"
 const updateCredentailsUserEndpoint = USER_BASE_URL + "/update_userCredentials"
 const deleteUserEndpoint = USER_BASE_URL + "/delete_user"
 const userListEndpoint = USER_BASE_URL + "/user_list"
+
+const userListByGroupTmpEndpoint = USERDEV_BASE_URL + "/userListByGroupTmp"
+const acceptDevUser = USERDEV_BASE_URL + "/acceptDev"
 const userListByGroupEndpoint = USER_BASE_URL + "/userListByGroup"
 const invitationUserEndpoint = SMTP_BASE_URL + "/invitation"
 
 class postClass {
+    // admin user info
     id : string;
     user : User = new User();
     admin : AdminInfo = new AdminInfo();
+
+    // dev user info
+    devInfo : string;
+    enabled : boolean;
+    groupName : string;
+    email : string;
 }
 
 @Injectable({
@@ -27,8 +37,10 @@ class postClass {
 export class UserService {
     private messageSource = new BehaviorSubject<string>("");
     private accessAuthSource = new BehaviorSubject<string>("");
+    private emailMessageSource = new BehaviorSubject<string>("");
     currentMessage = this.messageSource.asObservable();
     accessAuth = this.accessAuthSource.asObservable();
+    emailMessage = this.emailMessageSource.asObservable();
 
     smtpInfo : smtpInfo = new smtpInfo();
     postData : postClass = new postClass();
@@ -40,6 +52,9 @@ export class UserService {
     sendAccessMessage(message: string) {
         this.accessAuthSource.next(message);
     }
+    sendEmailMessage(message: string) {
+        this.emailMessageSource.next(message);
+    }
 
     userList(admininfo : AdminInfo) : any {
         this.postData = new postClass();
@@ -49,6 +64,21 @@ export class UserService {
         return this.httpClient
             .post<HttpResponse<any>> (
                 userListEndpoint+"/all",
+                this.postData,
+                HTTP_OPTIONS
+            ).pipe(map(res => {
+                console.log(res)
+                return res;
+            }));
+    }
+
+    userListByGroupTmp(group : string) : any {
+        this.postData = new postClass();
+        console.log("postData : " + JSON.stringify(this.postData))
+      
+        return this.httpClient
+            .post<HttpResponse<any>> (
+                userListByGroupTmpEndpoint+"/"+group,
                 this.postData,
                 HTTP_OPTIONS
             ).pipe(map(res => {
@@ -73,7 +103,38 @@ export class UserService {
             }));
     }
 
-    createUser(userinfo : User, admininfo : AdminInfo) : any {
+    acceptDevUser(email : string) : any {
+        return this.httpClient
+        .post<HttpResponse<any>> (
+            acceptDevUser+"/"+email,
+            this.postData,
+            HTTP_OPTIONS
+        ).pipe(map(res => {
+            console.log(res)
+            return res;
+        }));
+    }
+
+    createDevUser(userinfo : string, enabled : boolean, groupName : string, email : string) : any {
+        this.postData.devInfo = userinfo as string;
+        this.postData.enabled = enabled;
+        this.postData.groupName = groupName;
+        this.postData.email = email;
+
+        console.log("dev User : " + userinfo);
+
+        return this.httpClient
+            .post<HttpResponse<any>> (
+                createDevEndpoint,
+                this.postData,
+                HTTP_OPTIONS
+            ).pipe(map(res => {
+                console.log(res)
+                return res;
+            }));
+    }
+
+    createAdminUser(userinfo : User, admininfo : AdminInfo) : any {
         this.postData = new postClass();
         this.postData.user = userinfo as User;
         this.postData.admin = admininfo as AdminInfo;
@@ -82,7 +143,7 @@ export class UserService {
 
         return this.httpClient
             .post<HttpResponse<any>> (
-                createUserEndpoint,
+                createAdminEndpoint,
                 this.postData,
                 HTTP_OPTIONS
             ).pipe(map(res => {

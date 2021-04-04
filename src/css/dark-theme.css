@@ -659,6 +659,11 @@ textarea {
   --color-input-place:#616161;
   --color-nav-sub:#f0f;
   --color-nav-text:#e4e4e4;
+
+  
+  --color-scroll-bar: #111;
+  --color-scroll-thumb: #333;
+  --color-scroll-track: #666;
 }
 .clr-align-baseline {
   vertical-align: baseline !important;
@@ -16909,3 +16914,4 @@ cds-icon[status=highlight] {
 @media (min-width: 768px){
   .flex-box-item .clr-col-md-2 { flex:0 0 100% !important;}
 }
+

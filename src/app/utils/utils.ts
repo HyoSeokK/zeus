@@ -5,7 +5,8 @@ import { HttpOptionInterface, RequestQueryParams } from './RequestQueryParams'
 
 export const BASE_URL = "/api";
 export const SMTP_BASE_URL = BASE_URL+"/smtp";
-export const USER_BASE_URL = BASE_URL+"/user";
+export const USERDEV_BASE_URL = BASE_URL+"/dev";
+export const USER_BASE_URL = BASE_URL+"/admin";
 export const MENU_BASE_URL = BASE_URL+"/menu";
 export const GROUPS_BASE_URL = BASE_URL+"/groups";
 export const AUTH_BASE_URL = BASE_URL+"/auth";

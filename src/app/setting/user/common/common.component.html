@@ -1,7 +1,7 @@
-<form clrForm class="formBox" [formGroup]="userForm">
+<form clrForm class="formBox" id="userForm" [formGroup]="userForm">
     <clr-input-container>
       <label>사용자ID</label>
-      <input clrInput placeholder="User Id" formControlName="userId" required/>
+      <input clrInput placeholder="User Id" formControlName="userId" [(ngModel)]="userId" required [attr.disabled]="disabled ? '' : null"/>
       <clr-control-error>
         ID를 입력해주세요.
       </clr-control-error>
@@ -41,7 +41,7 @@
     </clr-input-container>
     <clr-input-container>
       <label>Email 주소</label>
-      <input clrInput placeholder="E-mail" formControlName="userEmail" required/>
+      <input clrInput placeholder="E-mail" formControlName="userEmail" required [(ngModel)]="userId" required [attr.disabled]="disabled ? '' : null"/>
       <clr-control-error *clrIfError="'required'">이메일을 입력해주세요.</clr-control-error>
       <clr-control-error *clrIfError="'email'">이메일형식을 확인해주세요.</clr-control-error>
     </clr-input-container>
@@ -51,9 +51,14 @@
     </clr-input-container>
   </form>
   <div class="btn-left">
-    <button class="btn btn-primary">
+
+    <button *ngIf="regiMode != 'Invitation'"  (click)="back()" class="btn btn-primary">
       <clr-icon shape="times"></clr-icon>취소
     </button>
+    <button *ngIf="regiMode == 'Invitation'"  (click)="cancel()" class="btn btn-primary">
+      <clr-icon shape="times"></clr-icon>취소
+    </button>
+
     <button class="btn btn-primary" (click)="onSubmit()">
       <clr-icon shape="check"></clr-icon>저장
     </button>

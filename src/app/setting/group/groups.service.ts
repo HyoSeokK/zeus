@@ -14,7 +14,6 @@ class postClass {
     admin : AdminInfo;
 }
 
-
 @Injectable({
     providedIn: 'root'
 })
@@ -26,7 +25,7 @@ export class GroupsService {
     groupAttrObj : GroupsAttr = new GroupsAttr("");
 
     constructor(private httpClient:HttpClient) {}
-
+    
     groupList(admininfo : AdminInfo) : any {
         console.log("groupService : " + JSON.stringify(admininfo))
         this.postData.admin = admininfo
