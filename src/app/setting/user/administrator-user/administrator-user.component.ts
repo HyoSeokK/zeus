@@ -4,6 +4,7 @@ import { UserService } from '../user.service';
 import { User, AdminInfo } from '../user';
 import { GroupsService } from '../../group/groups.service';
 import { Groups } from '../../group/groups';
+import { NotificationService } from '../../../services/notification.service';
 
 @Component({
   selector: 'app-administrator-user',
@@ -21,7 +22,8 @@ export class AdministratorUserComponent implements OnInit {
   constructor(
     private router:Router,
     public userService : UserService,
-    public groupService : GroupsService) {
+    public groupService : GroupsService,
+    private notifyservice: NotificationService,) {
       this.adminCli = JSON.parse(localStorage.getItem("cli")) as AdminInfo;
 
       // loading administrator group member
@@ -88,6 +90,7 @@ export class AdministratorUserComponent implements OnInit {
     this.userService.deleteUser(userId, this.adminCli).subscribe(res => {
       console.log("res : " + res)
       if (res.status == 200) {
+        this.notifyservice.showSuccess("관리자를 삭제했습니다.", "관리자 관리")
         this.loadUserList()
       }
 

@@ -9,8 +9,9 @@
     </div>
     <div class="textBox">
       <clr-icon shape="bell"></clr-icon>
-      <p>제우스 시스템 관리자(administrator)를 등록해 주세요.<br>
-        관리자는 파르테논 운영에 필요한 모든 권한을 가지고 있습니다.신규 사용자 등록 및 클라우드 리소스 관리 및 운영을 담당합니다.</p>
+      <p>개발자를 등록해 주세요.<br>
+        개발자는 개발에 필요한 IDE, Docker 및 POD 생성 권한이 있습니다.<br>
+        일반사용자는 단순히 시스템에 정보를 확인할 수 있는 Viewer 권한이 있습니다.</p>
     </div>
     <button class="btn btn-primary" (click)="goToRegisterUser()">
       <clr-icon shape="plus"></clr-icon>신규등록
@@ -19,15 +20,17 @@
       <clr-icon shape="sync"></clr-icon>정보변경
     </button>
     <button class="btn btn-line" [disabled] = "check" (click)="deleteUser()">
-      <clr-icon shape="ban"></clr-icon>관리자삭제
+      <clr-icon shape="ban"></clr-icon>개발자 삭제
     </button>
 
     <div class="btn-left">
-      <select clrSelect name="options" [(ngModel)]="groupName" (ngModelChange)="changeValueGroup($event)">
-        <ng-container *ngFor = "let group of groupsList">
-          <option value="{{group.id}}/{{group.name}}">{{group.name}}</option>
-        </ng-container>
-      </select>
+      <div class="clr-select-wrapper">
+        <select class="clr-select" name="groupName" [(ngModel)]="groupName" (ngModelChange)="changeValueGroup($event)">
+          <ng-container *ngFor = "let group of groupsList">
+            <option value="{{group.id}}/{{group.name}}">{{group.name}}</option>
+          </ng-container>
+        </select>
+      </div>
     </div>
     
     <table class="table custom-table">
@@ -46,7 +49,6 @@
           <th>부서명(직급)</th>
           <th>E-mail(연락처)</th>
           <th>등록일</th>
-          <th>최종 로그인</th>
           <th>계정현황</th>
         </tr>
       </thead>
@@ -65,7 +67,6 @@
           <td>{{userList.attributes.departmentNm}}({{userList.attributes.position}})</td>
           <td>{{userList.email}}</td>
           <td>{{userList.convertcreatedTimestamp}}</td>
-          <td>2020.10.12 13:10</td>
           <td *ngIf="userList.enabled == false">
             <button type="button" class="btn" (click)="acceptUser(userList)">등록</button>
           </td>

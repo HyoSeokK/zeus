@@ -127,6 +127,7 @@ export class SettingComponent implements OnInit {
             if(this.authLen < 1) {
                 this.isModalVisible = true;
                 this.url = 'setting'
+
             } else { // DB에 저장된 Auth 정보가 있다면 adminCli Obj에 Auth 정보 세팅
                 this.adminCli.adminId = this.authList[0].adminId;
                 this.adminCli.adminPw = this.authList[0].adminPw;
@@ -176,9 +177,11 @@ export class SettingComponent implements OnInit {
                 this.adminCli.tokenUrl = this.adminCliForm.controls.url.value;
 
                 this.authService.saveAuth(this.adminCli).subscribe(res=>{
-                    if(res.status == 200 && res.data.data) {
+                    console.log("RES STATUS : " + res.status)
+                    if(res.status == 200) {
                         this.authLen = res.data.len;
-                        //this.authList[0].push(this.adminCli);
+                        this.authList.push(this.adminCli)
+                        console.log("Save Auth : " + JSON.stringify(this.authList))
                     }
                 });
                 this.authLen = 1;

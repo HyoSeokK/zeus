@@ -72,6 +72,7 @@ margin: 100px 0;
 .btn-right { display:flex; justify-content: flex-start;}
 .btn-left button:last-child { margin-right:0;}
 .btn-layer { position:absolute; right:22px; top:40px; }
+.btn-center {display: flex; justify-content: center}
 
 /* FORM STYLE CSS */
 .formBox { width: 100%; background-color:var(--color-bg); padding:1.5rem 2rem; border-radius: 5px; margin: 10px 0; border:1px solid var(--color-line);}

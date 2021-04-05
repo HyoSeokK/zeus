@@ -5,6 +5,7 @@ import { GroupsService } from '../groups.service';
 import { Router } from '@angular/router';
 import { Groups } from '../groups';
 import { AdminInfo } from '../../user/user';
+import { NotificationService } from '../../../services/notification.service'
 
 @Component({
   selector: 'app-register',
@@ -25,7 +26,8 @@ export class RegisterComponent implements OnInit {
     private router:Router,
     private sanitizer: DomSanitizer,
     private activatedRoute:ActivatedRoute,
-    private groupsService:GroupsService, ) { 
+    private groupsService:GroupsService, 
+    private notifyservice: NotificationService,) { 
       this.activatedRoute.params.subscribe(params =>{
         this.id=params['key']
         console.log("key : " + this.id)
@@ -58,10 +60,10 @@ export class RegisterComponent implements OnInit {
     this.groupsService.addAttribute(this.id, this.tokenVal, this.adminCli).subscribe(res => {
       if(res.data == "") {
           console.log("Success User created")
-          alert("등록했습니다.")
+          this.notifyservice.showSuccess("권한 코드를 등록하였습니다.", "권한코드 관리")
           this.router.navigateByUrl("/app/setting/group");
       } else {
-          alert("등록 실패했습니다.")
+          this.notifyservice.showError("권한 코드를 등록을 실패하였습니다.", "권한코드 관리")
           console.log("Failed Create USer");
       }
     });

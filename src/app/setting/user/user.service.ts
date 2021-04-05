@@ -176,6 +176,7 @@ export class UserService {
         this.postData.user = userinfo as User;
         this.postData.admin = admininfo as AdminInfo;
         
+        console.log("userinfo : " + JSON.stringify(userinfo))
         console.log("postData : " + JSON.stringify(this.postData));
 
         return this.httpClient

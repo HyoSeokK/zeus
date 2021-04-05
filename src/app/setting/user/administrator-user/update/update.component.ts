@@ -20,12 +20,8 @@ export class AdminUpdateComponent implements OnInit {
   user : User = new User();
   userAttribute : UserAttribute = new UserAttribute();
   
-  username : string;
-  fitstname : string = "";
-  lastname : string = "";
   departNm : string[];
   position : string[];
-  email : string = "";
   phoneNum : string[];
 
   desc : string;
@@ -59,14 +55,8 @@ export class AdminUpdateComponent implements OnInit {
         console.log(JSON.stringify(this.user))
         console.log(JSON.stringify(this.userAttribute))
 
-        this.username = this.user.firstName+this.user.lastName;
-        
-        this.fitstname = this.user.firstName;
-        this.lastname = this.user.lastName;
-        
         this.departNm = this.userAttribute.departmentNm;
         this.position = this.userAttribute.position;
-        this.email = this.user.email;
         this.phoneNum = this.userAttribute.phoneNumber;
       } 
 
@@ -76,19 +66,13 @@ export class AdminUpdateComponent implements OnInit {
   updateBasicInfo() : void {
     console.log("user Update Info : " + JSON.stringify(this.user))
 
-    this.user.firstName = this.fitstname;
-    this.user.lastName = this.lastname;
-    
     this.userAttribute.departmentNm = this.departNm
     this.userAttribute.position = this.position; 
     this.userAttribute.phoneNumber = this.phoneNum;
 
-    
-    this.user.email = this.email;
-    
-
     this.user.attributes = this.userAttribute;
 
+    console.log("param user : " + JSON.stringify(this.user))
     this.userService.updateUser(this.user, this.adminCli).subscribe(res=> {
       if(res.data == "") {
           this.notifyservice.showSuccess("등록 완료했습니다.", "관리자 수정")

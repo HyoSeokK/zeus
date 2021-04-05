@@ -41,7 +41,8 @@
     </clr-input-container>
     <clr-input-container>
       <label>Email 주소</label>
-      <input clrInput placeholder="E-mail" formControlName="userEmail" required [(ngModel)]="userId" required [attr.disabled]="disabled ? '' : null"/>
+      <input *ngIf="regiMode == 'Invitation'" clrInput placeholder="E-mail" formControlName="userEmail" required [(ngModel)]="userId" required [attr.disabled]="disabled ? '' : null"/>
+      <input *ngIf="regiMode == 'Administrator'" clrInput placeholder="E-mail" formControlName="userEmail" required required [attr.disabled]="disabled ? '' : null"/>
       <clr-control-error *clrIfError="'required'">이메일을 입력해주세요.</clr-control-error>
       <clr-control-error *clrIfError="'email'">이메일형식을 확인해주세요.</clr-control-error>
     </clr-input-container>
@@ -52,7 +53,7 @@
   </form>
   <div class="btn-left">
 
-    <button *ngIf="regiMode != 'Invitation'"  (click)="back()" class="btn btn-primary">
+    <button *ngIf="regiMode != 'Invitation'"  (click)="back()" class="btn btn-info-outline">
       <clr-icon shape="times"></clr-icon>취소
     </button>
     <button *ngIf="regiMode == 'Invitation'"  (click)="cancel()" class="btn btn-primary">

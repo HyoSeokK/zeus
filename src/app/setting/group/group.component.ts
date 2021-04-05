@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { AdminInfo } from '../user/user';
 import { GroupsService } from './groups.service';
 import { Groups } from './groups';
+import { NotificationService } from '../../services/notification.service'
 
 @Component({
   selector: 'app-group',
@@ -11,7 +12,10 @@ import { Groups } from './groups';
 })
 export class GroupComponent implements OnInit {
 
-  constructor(private router:Router, private groupService:GroupsService) { }
+  constructor(
+    private router:Router, 
+    private groupService:GroupsService,
+    private notifyservice: NotificationService,) { }
 
   adminCli : AdminInfo = new AdminInfo();
   groups : Groups = new Groups();
@@ -24,17 +28,16 @@ export class GroupComponent implements OnInit {
     this.adminCli = JSON.parse(localStorage.getItem("cli")) as AdminInfo; 
     this.groupService.addAttribute(key, "", this.adminCli).subscribe(res => {
       if(res.data == "") {
-          console.log("Success User created")
-          alert("삭제했습니다.")
-          this.router.navigateByUrl("/app/setting/group");
+          this.notifyservice.showSuccess("권한 코드를 삭제했습니다.", "권한코드 관리")
+          this.groupList();
       } else {
-          alert("삭제를 실패했습니다.")
+        this.notifyservice.showError("권한 코드를 삭제를 실패하였습니다.", "권한코드 관리")
           console.log("Failed Create USer");
       }
     });
   }
 
-  ngOnInit(): void {
+  groupList () {
     this.adminCli = JSON.parse(localStorage.getItem("cli")) as AdminInfo; 
 
     console.log("this admincli : " + JSON.stringify(this.adminCli))
@@ -51,6 +54,9 @@ export class GroupComponent implements OnInit {
         console.log(this.groupsList)
       }
     });
+  }
+  ngOnInit(): void {
+    this.groupList();
   }
   
 }

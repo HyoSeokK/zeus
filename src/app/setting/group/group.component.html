@@ -30,27 +30,20 @@
       </thead>
       <tbody>
         <tr *ngFor="let groups of groupsList">
-          <td class="textarea-on">
+          <td class="">
               <label>{{groups.name}}</label>
           </td>
-          <td class="pd-text-box">
-            <div class="btn-right">
-                <div *ngIf="groups.attributes.token == null">
-                  <button class="btn btn-primary mg1" (click)="registerGroupKey(groups.id)">
-                    <clr-icon shape="check" ></clr-icon>등록
-                  </button>
-                </div>
+          <td class="">
+            <button *ngIf="groups.attributes.token == null" class="btn btn-primary mw10" (click)="registerGroupKey(groups.id)">
+              <clr-icon shape="check" ></clr-icon>등록
+            </button>
 
-                <div *ngIf="groups.attributes.token != null">
-                  <button *ngIf="groups.attributes.token == ''" class="btn btn-primary mg1" (click)="registerGroupKey(groups.id)">
-                    <clr-icon shape="check" ></clr-icon>등록
-                  </button>
-                  <button *ngIf="groups.attributes.token != ''" class="btn btn-primary mg1" (click)="deleteGroupKey(groups.id)">
-                    <clr-icon shape="times" ></clr-icon>삭제
-                  </button>
-                </div>
-                
-              </div>
+            <button *ngIf="groups.attributes.token != null && groups.attributes.token == ''" class="btn btn-primary mw10" (click)="registerGroupKey(groups.id)">
+              <clr-icon shape="check" ></clr-icon>등록
+            </button>
+            <button *ngIf="groups.attributes.token != null && groups.attributes.token != ''" class="btn btn-info-outline mw10" (click)="deleteGroupKey(groups.id)">
+              <clr-icon shape="times" ></clr-icon>삭제
+            </button>
           </td>
         </tr>
       </tbody>

@@ -135,7 +135,7 @@ export class DeveloperUserComponent implements OnInit{
         this.router.navigateByUrl("/app/setting/user/admin/update/"+userList.id);
     });
   }
-
+  
   deleteUser() : void {
     let userId : string;
 
