@@ -26,17 +26,15 @@ export class DeveloperUserComponent implements OnInit{
   user : User = new User();
   userAttribute : UserAttribute = new UserAttribute();
   username : string;
+  isSvcAll: boolean = false;
 
   constructor(
     private router:Router,
     private groupService:GroupsService,
     private userService:UserService,
-    private notifyservice: NotificationService,) {
-      console.log("constro")
-    }
+    private notifyservice: NotificationService,) {}
 
   ngOnInit(): void {
-    console.log("ngONInit")
     // loading administrator group member
     this.adminCli = JSON.parse(localStorage.getItem("cli")) as AdminInfo;
     this.groupService.groupList(this.adminCli).subscribe(res=> {
@@ -115,20 +113,27 @@ export class DeveloperUserComponent implements OnInit{
     });
   }
 
-  onClickUserInfo() : void {
-    
-    let cnt = 0;
-    this.userInfoList.forEach(userList => {
-      if (userList.checked)
-        cnt++;
-    });
-
-    if (cnt >= 1)
-      this.check = false;
-    if (cnt == 0) 
-      this.check = true;
+  onClickDisableUser() {
+    console.log("onClickckc")
+    this.notifyservice.showSuccess("등록된 사용자만 선택 가능합니다.", "개발자 등록")
   }
 
+  onClickUserInfo(isChecked: boolean, index: number) : void {
+    console.log(isChecked, index)
+    this.userInfoList.forEach(userList => {
+      userList.checked = false;
+    });
+
+    this.userInfoList[index].checked = isChecked;
+    this.isSvcAll = this.userInfoList.every(_v => _v.checked);
+
+    console.log("isSvcAll : " + this.isSvcAll)
+    if (isChecked == true)
+      this.check = false;
+    if (isChecked == false)
+      this.check = true;
+  }
+  
   updateUser() : void {
     this.userInfoList.forEach(userList => {
       if (userList.checked)

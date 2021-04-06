@@ -3,9 +3,6 @@
       <div>
         <h1>개발자 등록 </h1>
       </div>
-      <div>
-        <a href="#">설정 ></a><a href="#" class="link"> SMTP 설정</a>
-      </div>
     </div>
     <div class="textBox">
       <clr-icon shape="bell"></clr-icon>
@@ -54,11 +51,11 @@
       </thead>
 
       <tbody>
-        <tr *ngFor="let userList of userInfoList">
+        <tr *ngFor="let userList of userInfoList; let i = index">
           <td>
             <clr-checkbox-wrapper>
-              <input *ngIf="userList.enabled == false" type="checkbox" [(ngModel)]="userList.checked" [disabled]="true" (ngModelChange)="onClickUserInfo()" clrCheckbox name="options" required />
-              <input *ngIf="userList.enabled == true" type="checkbox" [(ngModel)]="userList.checked" [disabled]="false" (ngModelChange)="onClickUserInfo()" clrCheckbox name="options" required />
+              <input *ngIf="userList.enabled == false" type="checkbox" [disabled]="true" (click)="onClickDisableUser()" name="options" clrCheckbox required />
+              <input *ngIf="userList.enabled == true" type="checkbox" [(ngModel)]="userList.checked" (ngModelChange)="onClickUserInfo(userList.checked, i)" class="ckUser" clrCheckbox required />
               <label>{{userList.username}}</label>
             </clr-checkbox-wrapper>
           </td>
@@ -66,11 +63,14 @@
           <td>{{userList.firstName}}{{userList.lastName}}</td>
           <td>{{userList.attributes.departmentNm}}({{userList.attributes.position}})</td>
           <td>{{userList.email}}</td>
-          <td>{{userList.convertcreatedTimestamp}}</td>
-          <td *ngIf="userList.enabled == false">
-            <button type="button" class="btn" (click)="acceptUser(userList)">등록</button>
+          <td *ngIf="userList.createdTimestamp == null">-</td>
+          <td *ngIf="userList.createdTimestamp != null">{{userList.createdTimestamp | date :'yyyy-MM-dd HH:mm'}}</td>
+          
+          <td class="mt-15" *ngIf="userList.enabled == false">
+            <button type="button" class="btn btn-icon btn-line" (click)="acceptUser(userList)">등록</button>
           </td>
           <td *ngIf="userList.enabled == true">등록완료</td>
+          
         </tr>
       </tbody>
     </table>

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { DOCUMENT } from '@angular/common';
 import { UserService } from '../user.service';
 import { User, AdminInfo } from '../user';
 import { GroupsService } from '../../group/groups.service';
@@ -18,7 +19,8 @@ export class AdministratorUserComponent implements OnInit {
   adminCli : AdminInfo = new AdminInfo();
   userInfo : User = new User();
   groupsList : Groups[]
-  
+  isSvcAll: boolean = false;
+
   constructor(
     private router:Router,
     public userService : UserService,
@@ -42,12 +44,7 @@ export class AdministratorUserComponent implements OnInit {
     this.userService.userListByGroup(this.adminCli, this.groupsList[0].id).subscribe(res=> {
 
       if(res.status == 200) {
-        this.userInfoList = res.data as User[]
-        for(var i=0; i<this.userInfoList.length; i++){
-          var datetime = new Date(this.userInfoList[i].createdTimestamp)
-          this.userInfoList[i].convertcreatedTimestamp = datetime.getUTCFullYear() + "-" + ("00" + (datetime.getMonth() + 1)).slice(-2) + "-" + datetime.getDate()+ " "
-          + datetime.getHours() + ":" +("00" + datetime.getMinutes()).slice(-2);
-        }   
+        this.userInfoList = res.data as User[]   
       } else {
 
       }
@@ -58,17 +55,18 @@ export class AdministratorUserComponent implements OnInit {
     this.router.navigateByUrl("/app/setting/user/admin/register");
   }
 
-  onClickUserInfo() : void {
-    
-    let cnt = 0;
+  onClickUserInfo(isChecked: boolean, index: number) : void {
     this.userInfoList.forEach(userList => {
-      if (userList.checked)
-        cnt++;
+      userList.checked = false;
     });
 
-    if (cnt >= 1)
+    this.userInfoList[index].checked = isChecked;
+    this.isSvcAll = this.userInfoList.every(_v => _v.checked);
+
+    console.log("isSvcAll : " + this.isSvcAll)
+    if (isChecked == true)
       this.check = false;
-    if (cnt == 0) 
+    if (isChecked == false)
       this.check = true;
   }
 

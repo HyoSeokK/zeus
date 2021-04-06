@@ -1,6 +1,6 @@
 export class User {
     id : string = "";
-    checked : true;
+    checked : boolean = false;
     username : string = "";
     firstName : string = "";
     lastName : string = "";
